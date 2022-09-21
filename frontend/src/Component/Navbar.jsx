@@ -4,9 +4,8 @@ import { CgProfile } from 'react-icons/cg';
 import { BsCartCheckFill } from 'react-icons/bs';
 import { BiSearchAlt2 } from 'react-icons/bi';
 import '../Style/Navbar.css'
-import Layout from './Layout';
 
-const Navbar = (props) => {
+const Navbar = () => {
     const navigate = useNavigate();
     const menuLists = <>
         <div className="flex relative">
@@ -39,7 +38,6 @@ const Navbar = (props) => {
         </div> 
     </>
     return (
-        <Layout>
             <div className='bg-white border'>
                 <div className='max-w-7xl mx-auto px-2 '>
                     <div className=' flex items-center h-14 justify-between text-black  relative z-50'>
@@ -48,7 +46,7 @@ const Navbar = (props) => {
                         </div>
                         <div className='searchContainer'>
                             <div className='flex items-center '>
-                                <input className='searchInput' type="text" />
+                                <input className='searchInput' type="text" placeholder='KHUJ, THE SEARCH' />
                                 <button className='searchBtn'><BiSearchAlt2/></button>
                             </div>
                         </div>
@@ -59,7 +57,6 @@ const Navbar = (props) => {
                     </div>
                 </div>
             </div>
-        </Layout>
     );
 };
 

@@ -1,0 +1,26 @@
+[
+    {
+        "name":"SSD",
+        "categoryImage" :"https://ibb.co/LPfj1Kn"
+    },
+    {
+        "name":"Processor",
+        "categoryImage" :"https://ibb.co/pK9ZTHF"
+    },
+    {
+        "name":"Motherboard",
+        "categoryImage" :"https://ibb.co/23bQdVc"
+    },
+    {
+        "name":"Graphs Card",
+        "categoryImage" :"https://ibb.co/wp8tk9p"
+    },
+    {
+        "name":"Mouse",
+        "categoryImage" :"https://ibb.co/nMpx5Zz"
+    },
+    {
+        "name":"Keyboard",
+        "categoryImage" :"https://ibb.co/300kYZp"
+    }
+]
