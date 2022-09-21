@@ -1,0 +1,42 @@
+[
+    {
+        "id":"1",
+        "name":"SSD",
+        "categoryImage" :"https://res.cloudinary.com/dcmvctoz3/image/upload/v1663761449/ssd-48x48_dhwjxr.png"
+    },
+    {
+        "id":"2",
+        "name":"Processor",
+        "categoryImage" :"https://res.cloudinary.com/dcmvctoz3/image/upload/v1663761449/cpu-48x48_iwlwlv.png"
+    },
+    {
+        "id":"3",
+        "name":"Motherboard",
+        "categoryImage" :"https://res.cloudinary.com/dcmvctoz3/image/upload/v1663761571/motherboard-48x48_goxhcs.png"
+    },
+    {
+        "id":"4",
+        "name":"Graphs Card",
+        "categoryImage" :"https://res.cloudinary.com/dcmvctoz3/image/upload/v1663761449/gpu-48x48_rmtqxg.png"
+    },
+    {
+        "id":"5",
+        "name":"Mouse",
+        "categoryImage" :"https://res.cloudinary.com/dcmvctoz3/image/upload/v1663761449/mouse-48x48_gi1drp.png"
+    },
+    {
+        "id":"6",
+        "name":"Keyboard",
+        "categoryImage" :"https://res.cloudinary.com/dcmvctoz3/image/upload/v1663761449/keyboard-48x48_hk3wrf.png"
+    },
+    {
+        "id":"8",
+        "name":"Headphone",
+        "categoryImage" :"https://res.cloudinary.com/dcmvctoz3/image/upload/v1663766802/headphone-48x48_cplilv.png"
+    },
+    {
+        "id":"9",
+        "name":"Laptop",
+        "categoryImage" :"https://res.cloudinary.com/dcmvctoz3/image/upload/v1663766969/laptop-48x48_yh2msr.png"
+    }
+]
