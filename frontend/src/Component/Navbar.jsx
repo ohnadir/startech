@@ -7,6 +7,7 @@ import '../Style/Navbar.css'
 
 const Navbar = () => {
     const navigate = useNavigate();
+    const [keyword, setKeyword] = useState('')
     const menuLists = <>
         <div className="flex relative">
             <span onClick={()=>navigate('/cart')} ><BsCartCheckFill className='cursor-pointer text-2xl' /></span>
@@ -46,8 +47,8 @@ const Navbar = () => {
                         </div>
                         <div className='searchContainer'>
                             <div className='flex items-center '>
-                                <input className='searchInput' type="text" placeholder='KHUJ, THE SEARCH' />
-                                <button className='searchBtn'><BiSearchAlt2/></button>
+                                <input className='searchInput' onChange={(e)=>setKeyword(e.target.value)} type="text" placeholder='KHUJ, THE SEARCH' />
+                                <button className='searchBtn' onClick={()=>navigate(`/search/${keyword}`)}><BiSearchAlt2/></button>
                             </div>
                         </div>
                         <div className='flex gap-5 items-center'>
