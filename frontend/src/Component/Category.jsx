@@ -9,7 +9,7 @@ const Category =()=>{
         <p className='text-center mb-[25px]'>Get Your Desired Product from Featured Category!</p>
         <div className='grid grid-cols-3 gap-6 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8'>
             {
-                Categories.map((category)=> <div className='card py-4'>
+                Categories.map((category)=> <div className='card py-4' key={category.id}>
                     <div>
                         <img className='mx-auto' src={category.categoryImage} alt="" />
                         <p className='text-center'>{category.name}</p>

@@ -1,0 +1,10 @@
+.timerItem{
+    background-color: white;
+    font-size: 40px;
+    padding: 0 10px;
+}
+.timeDivider{
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0 5px;
+}
