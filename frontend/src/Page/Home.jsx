@@ -1,5 +1,6 @@
 import React from 'react'
 import Category from '../Component/Category';
+import Footer from '../Component/Footer';
 import Header from '../Component/Header';
 import Marquee from '../Component/Marquee';
 import SeoContent from '../Component/SeoContent';
@@ -13,6 +14,7 @@ const Home =()=>{
         <Category/>
         <StockTimer/>
         <SeoContent/>
+        <Footer/>
         
       </div>
     )
