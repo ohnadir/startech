@@ -4,7 +4,7 @@ import { CgProfile } from 'react-icons/cg';
 import { BsCartCheckFill } from 'react-icons/bs';
 import { BiSearchAlt2 } from 'react-icons/bi';
 import '../Style/Navbar.css'
-import logo from '../assets/logo.png'
+import logo from '../assets/logo.png';
 
 const Navbar = () => {
     const navigate = useNavigate();
@@ -21,7 +21,7 @@ const Navbar = () => {
                     <ul>
                         <li>Profile</li>
                         <li>Profile</li>
-                        <li>Profile</li>
+                        <li onClick={()=>navigate('/login')}>Login</li>
                     </ul>
                     
                         {/* {
