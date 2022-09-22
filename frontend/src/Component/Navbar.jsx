@@ -19,7 +19,7 @@ const Navbar = () => {
                 <CgProfile className='dropBtn text-white' />
                 <div className="dropdown-content">
                     <ul>
-                        <li>Profile</li>
+                        <li onClick={()=>navigate('/profile')}>Profile</li>
                         <li>Profile</li>
                         <li onClick={()=>navigate('/login')}>Login</li>
                     </ul>
