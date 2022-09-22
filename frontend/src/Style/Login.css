@@ -1,0 +1,47 @@
+.inputContainer input {
+    padding: 0 15px;
+    border: 1px solid grey;
+    outline: none;
+    width: 100%;
+    font-family: "Trebuchet MS",sans-serif;
+    border: 1px solid #ddd;
+    margin-top: 5px;
+    height: 42px;
+}
+.inputContainer label{
+    font-size: 13px;
+    font-weight: bold;
+}
+.loginBtn{
+    width: 100%;
+    background-color: #3749bb;
+    color: white;
+    display: inline-block;
+    border: 2px solid #3749bb;
+    padding: 0 20px;
+    font-size: 14px;
+    border-radius: 4px;
+    height: 42px;
+}
+ .footerContent .pText{
+    font-size: 14px;
+}
+.footerContent .hr{
+    height: 1px;
+    width: 100px;
+    background-color: #eee;
+    color: black;
+}
+.btn{
+    border: 1px solid #3749bb;
+    width: 100%;
+    padding: 0 20px;
+    font-size: 14px;
+    border-radius: 4px;
+    height: 42px;
+    transition: 0.3s ease;
+}
+.btn:hover{
+    background-color: #3749bb;
+    color: white;
+}

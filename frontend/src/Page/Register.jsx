@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../Style/Register.css';
 import { HiHome } from 'react-icons/hi';
 
-const Signup = () => {
+const Register = () => {
     const [auth, setAuth] = useState('');
+    const navigate = useNavigate()
     const handleChange = (e) => {
         setAuth(prev=>({...prev, [e.target.name]:e.target.value}))
     }
@@ -13,7 +14,7 @@ const Signup = () => {
     return (
         <div className='max-w-7xl mx-auto px-2'>
           <div className='flex items-center gap-3 text-[13px] pt-4 pb-[50px]'>
-            <HiHome className='text-[#ddd]'/> <span>/</span> <span>Account</span> <span>/</span> <span>Register</span>
+          <HiHome onClick={()=>navigate('/register')} className='text-[#666] cursor-pointer'/> <span>/</span> <span>Account</span> <span>/</span> <span>Register</span>
           </div>
             <div className='flex justify-center items-center'>
                 <div className='max-w-[400px]'>
@@ -47,12 +48,14 @@ const Signup = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='text-center pt-[30px] footer'>
-                      <div className=''>
-                        <p>Already have an account ?</p>
+                    <div className=' pt-[30px] footer'>
+                      <div className=' footerContent flex items-center gap-3'>
+                        <p className='hr'></p>
+                        <p className='text-[#666]'>Already have an account ?</p>
+                        <p className='hr'></p>
                       </div>
-                      <p>If you already have an account with us, please login at the</p>
-                      <Link to='/login'>Login page.</Link>
+                      <p className=''>If you already have an account with us, please login at the</p>
+                      <Link className='text-[#ef4a23]' to='/login'>Login page.</Link>
                     </div>
                 </div>
             </div> 
@@ -61,4 +64,4 @@ const Signup = () => {
     );
 };
 
-export default Signup;
+export default Register;

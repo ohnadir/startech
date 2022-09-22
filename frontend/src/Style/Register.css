@@ -27,3 +27,12 @@
     padding-bottom: 30px;
     font-size: 14px;
 }
+.footer .footerContent{
+    padding-bottom: 20px;
+}
+.footer .hr{
+    height: 1px;
+    width: 100px;
+    background-color: #eee;
+    color: black;
+}
