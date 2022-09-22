@@ -42,3 +42,9 @@
     font-size: 18px;
     padding: 6px 12px ;
 }
+.searchBlock{
+    overflow-x: hidden;
+    position: absolute;
+    width: 98.5%;
+    z-index: 1;
+}

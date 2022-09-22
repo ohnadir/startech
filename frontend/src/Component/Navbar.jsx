@@ -8,8 +8,10 @@ import logo from '../assets/logo.png';
 
 const Navbar = () => {
     const navigate = useNavigate();
+    const [open, setOpen] = useState(false)
     const [keyword, setKeyword] = useState('')
     const menuLists = <>
+        <button className='text-white block md:hidden' onClick={()=>setOpen(!open)}><BiSearchAlt2 className='text-2xl'/></button>
         <div className="flex relative">
             <span onClick={()=>navigate('/cart')} ><BsCartCheckFill className='cursor-pointer text-2xl text-white' /></span>
             <span className="absolute top-[-11px] left-[13px] bg-[#669900]  rounded-full w-[20px] h-[20px] flex items-center justify-center p-[3px]">1</span>
@@ -47,15 +49,27 @@ const Navbar = () => {
                             <img className='cursor-pointer w-[95px]' onClick={()=>navigate('/home')} src={logo} alt="" />
                         </div>
                         <div className='searchContainer'>
-                            <div className='flex items-center '>
-                                <input className='searchInput' onChange={(e)=>setKeyword(e.target.value)} type="text" placeholder='KHUJ, THE SEARCH' />
-                                <button className='searchBtn' onClick={()=>navigate(`/search/${keyword}`)}><BiSearchAlt2/></button>
+                            <div className='hidden md:block'>
+                                <div className='flex items-center '>
+                                    <input className='searchInput' onChange={(e)=>setKeyword(e.target.value)} type="text" placeholder='KHUJ, THE SEARCH' />
+                                    <button className='searchBtn' onClick={()=>navigate(`/search/${keyword}`)}><BiSearchAlt2/></button>
+                                </div>
                             </div>
                         </div>
                         <div className='flex gap-5 items-center'>
                             {menuLists}
                         </div>
                         
+                    </div>
+                    <div className=' searchBlock'>
+                        {
+                            open && <div className='bg-white'>
+                            <div className='flex items-center '>
+                                <input className='searchInput' onChange={(e)=>setKeyword(e.target.value)} type="text" placeholder='KHUJ, THE SEARCH' />
+                                <button className='searchBtn' onClick={()=>navigate(`/search/${keyword}`)}><BiSearchAlt2/></button>
+                            </div>
+                        </div>
+                        }
                     </div>
                 </div>
             </div>
