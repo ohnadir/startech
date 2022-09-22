@@ -44,39 +44,39 @@ const Home =()=>{
             </div>
         </div>
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
-            <div className='profileCard w-[250px] mx-auto sm:w-full'>
+            <div onClick={()=>navigate('/orders')} className='profileCard w-[250px] mx-auto sm:w-full'>
                 <CgShoppingBag className='profileIcon'/>
                 <p>Orders</p>
             </div>
-            <div className='profileCard w-[250px] mx-auto sm:w-full'>
+            <div onClick={()=>navigate('/editProfile')} className='profileCard w-[250px] mx-auto sm:w-full'>
                 <FaUser className='profileIcon'/>
                 <p>Edit Profile</p>
             </div>
-            <div className='profileCard w-[250px] mx-auto sm:w-full'>
+            <div onClick={()=>navigate('/changePassword')} className='profileCard w-[250px] mx-auto sm:w-full'>
                 <MdLock className='profileIcon'/>
                 <p>Change Password</p>
             </div>
-            <div className='profileCard w-[250px] mx-auto sm:w-full'>
+            <div onClick={()=>navigate('/address')} className='profileCard w-[250px] mx-auto sm:w-full'>
                 <FaAddressCard className='profileIcon'/>
                 <p>Address</p>
             </div>
-            <div className='profileCard w-[250px] mx-auto sm:w-full'>
+            <div onClick={()=>navigate('/wish')} className='profileCard w-[250px] mx-auto sm:w-full'>
                 <BiHeart className='profileIcon'/>
                 <p>Wish List</p>
             </div>
-            <div className='profileCard w-[250px] mx-auto sm:w-full'>
+            <div onClick={()=>navigate('/saved')} className='profileCard w-[250px] mx-auto sm:w-full'>
                 <MdOutlineImportantDevices className='profileIcon'/>
                 <p>Saved PC</p>
             </div>
-            <div className='profileCard w-[250px] mx-auto sm:w-full'>
+            <div onClick={()=>navigate('/point')} className='profileCard w-[250px] mx-auto sm:w-full'>
                 <BiStar className='profileIcon'/>
                 <p>Start Points</p>
             </div>
-            <div className='profileCard w-[250px] mx-auto sm:w-full'>
+            <div onClick={()=>navigate('/transaction')} className='profileCard w-[250px] mx-auto sm:w-full'>
                 <MdPayments className='profileIcon'/>
                 <p>Your Transactions</p>
             </div>
-            <div className='profileCard w-[250px] mx-auto sm:w-full'>
+            <div onClick={()=>navigate('/logout')} className='profileCard w-[250px] mx-auto sm:w-full'>
                 <FiLogOut className='profileIcon'/>
                 <p>Logout</p>
             </div>
