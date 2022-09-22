@@ -27,6 +27,8 @@ const StockTimer =()=>{
     time.setSeconds(time.getSeconds() + 6000); // 10 minutes timer
     return (
         <div className='pb-[30px]'>
+            <h1 className='text-center text-[25px]'>All product gets <span>10%</span> off</h1>
+            <p className='text-center text-[18px] pb-6'>Offer will end very soom</p>
             <Timer expiryTimestamp={time} />
         </div>
     );
