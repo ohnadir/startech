@@ -1,10 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../Style/ChangeAddress.css';
 import { useNavigate } from 'react-router-dom';
 import { HiHome } from 'react-icons/hi';
-
+import District from "../Districts.json";
+import Division from '../Division.json';
+import Thana from "../Thana.json";
 const ChangeAddress=()=> {
     const [auth, setAuth] = useState('');
+    const [country, setCountry] = useState([])
+    const [city, setCity] = useState([])
     const navigate = useNavigate()
     const handleChange = (e) => {
         setAuth(prev=>({...prev, [e.target.name]:e.target.value}))
@@ -50,15 +54,33 @@ const ChangeAddress=()=> {
                                 <div className='InputContainer'>
                                     <label htmlFor="Country">Country<span className='text-red-600 text-[12px]'>*</span></label>
                                     <select onChange={handleChange} name="country" id="country">
-                                        <option value="volvo">Volvo</option>
-                                        <option value="saab">Saab</option>
+                                        <option  value="Bangladesh">Bangladesh</option>
                                     </select>
                                 </div>
                                 <div className='InputContainer'>
-                                    <label htmlFor="state">Region / State<span className='text-red-600 text-[12px]'>*</span></label>
-                                    <select onChange={handleChange} name="state" id="state">
-                                        <option value="volvo">Volvo</option>
-                                        <option value="saab">Saab</option>
+                                    <label htmlFor="state">Division<span className='text-red-600 text-[12px]'>*</span></label>
+                                    <select onChange={handleChange} name="division" id="state">
+                                    {
+                                        Division.map((item)=><option  value={item.name}>{item.name}</option>)
+                                    }
+                                    </select>
+                                </div>
+                            </div>
+                            <div className='flex flex-col md:flex-row gap-5'>
+                                <div className='InputContainer'>
+                                    <label htmlFor="District">District<span className='text-red-600 text-[12px]'>*</span></label>
+                                    <select onChange={handleChange} name="country" id="country">
+                                    {
+                                        District.map((item)=><option  value={item.name}>{item.name}</option>)
+                                    }
+                                    </select>
+                                </div>
+                                <div className='InputContainer'>
+                                    <label htmlFor="Thana">Thana<span className='text-red-600 text-[12px]'>*</span></label>
+                                    <select onChange={handleChange} name="thana" id="state">
+                                    {
+                                        Thana.map((item)=><option  value={item.name}>{item.name}</option>)
+                                    }
                                     </select>
                                 </div>
                             </div>
