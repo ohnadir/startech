@@ -6,7 +6,8 @@ import Home from './Page/Home';
 import Login from './Page/Login'
 import Register from './Page/Register';
 import Profile from './Page/Profile'
-import ChangePassword from './Component/ChangePassword';
+import ChangePassword from './Page/ChangePassword';
+import Address from './Page/Address';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/register" element={<Register/>} />
         <Route path='/profile' element={<Profile/>}></Route>
         <Route path='/changePassword' element={<ChangePassword/>}></Route>
+        <Route path='/address' element={<Address/>}></Route>
         <Route path="/search/:keyword" element={<SearchResult/>} />
       </Routes>
     </div>
