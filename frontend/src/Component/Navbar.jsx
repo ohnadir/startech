@@ -1,19 +1,26 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CgProfile } from 'react-icons/cg';
-import { BsCartCheckFill } from 'react-icons/bs';
+import { BsCartCheckFill} from 'react-icons/bs';
 import { BiSearchAlt2 } from 'react-icons/bi';
 import '../Style/Navbar.css'
 import logo from '../assets/logo.png';
+import { Drawer } from 'antd';
+import { MdOutlineClose } from 'react-icons/md';
+import CartDrawer from './CartDrawer';
 
 const Navbar = () => {
     const navigate = useNavigate();
     const [open, setOpen] = useState(false)
-    const [keyword, setKeyword] = useState('')
+    const [cartOpen, setCartOpen] = useState(false)
+    const [keyword, setKeyword] = useState('');
+
     const menuLists = <>
         <button className='text-white block md:hidden' onClick={()=>setOpen(!open)}><BiSearchAlt2 className='text-2xl'/></button>
         <div className="flex relative">
-            <span onClick={()=>navigate('/cart')} ><BsCartCheckFill className='cursor-pointer text-2xl text-white' /></span>
+            <span onClick={()=>setCartOpen(true)} >
+                <BsCartCheckFill className='cursor-pointer text-2xl text-white' />
+            </span>
             <span className="absolute top-[-11px] left-[13px] bg-[#669900]  rounded-full w-[20px] h-[20px] flex items-center justify-center p-[3px]">1</span>
         </div>
         <div>
@@ -59,7 +66,6 @@ const Navbar = () => {
                         <div className='flex gap-5 items-center'>
                             {menuLists}
                         </div>
-                        
                     </div>
                     <div className=' searchBlock'>
                         {
@@ -72,6 +78,17 @@ const Navbar = () => {
                         }
                     </div>
                 </div>
+                <Drawer
+                    className='drawer'
+                    bodyStyle={{"padding": "0px"}}
+                    headerStyle={{"borderBottom": "0px ", "display": "none"}}
+                    placement="right" closeIcon={false} visible={cartOpen}>
+                        <div  className='drawerHeader'>
+                            <h1 className=' text-white'>YOUR CART</h1>
+                            <MdOutlineClose className='cartCloseBtn' onClick={()=>setCartOpen(false)} />
+                        </div>
+                        <CartDrawer/>
+                </Drawer>
             </div>
     );
 };

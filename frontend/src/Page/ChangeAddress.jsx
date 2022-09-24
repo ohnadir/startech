@@ -18,7 +18,12 @@ const ChangeAddress=()=> {
   return (
     <div className='max-w-7xl mx-auto px-2'>
         <div className='flex items-center gap-3 text-[13px] pt-4 pb-[50px]'>
-          <HiHome onClick={()=>navigate('/home')} className='text-[#666] cursor-pointer'/> <span>/</span> <span onClick={()=>navigate('/home')}>Address</span> <span>/</span> <span>Edit Address</span>
+          <HiHome onClick={()=>navigate('/home')} className='text-[#666] cursor-pointer'/> 
+          <span className='text-[#666]'>/</span> 
+          <span className='text-[#666] cursor-pointer' nClick={()=>navigate('/profile')}>Profile</span> <span>/</span> 
+          <span className='text-[#666] cursor-pointer' onClick={()=>navigate('/address')}>Address</span> 
+          <span className='text-[#666] '>/</span>
+          <span className='text-[#666] cursor-pointer'>Edit Address</span>
         </div>
         <div className='flex justify-center items-center'>
             <div className='max-w-[400px]'>

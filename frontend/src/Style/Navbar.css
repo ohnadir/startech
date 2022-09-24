@@ -48,3 +48,15 @@
     width: 98.5%;
     z-index: 1;
 }
+.drawer .cartCloseBtn{
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+}
+.drawer .drawerHeader{
+    background-color: #081621;
+    padding: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
