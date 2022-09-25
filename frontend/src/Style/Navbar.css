@@ -45,7 +45,10 @@
 .searchBlock{
     overflow-x: hidden;
     position: absolute;
-    width: 98.5%;
+    box-shadow: 0px 15px 10px -15px #111; 
+    padding: 6px ;
+    width: 100%;
+    left: 0;
     z-index: 1;
 }
 .drawer .cartCloseBtn{

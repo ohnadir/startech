@@ -19,7 +19,7 @@ const CartDrawer = () => {
             <div className='mt-5 font-bold text-xl text-[#679509] flex justify-between'>
                 <span className=''>Total:-</span> <span>$500</span>
             </div>
-            <div className="bottom-0 absolute w-[91%]">
+            <div className="bottom-0 absolute left-0 w-full px-4">
                 <div>
                     <div className='flex gap-5 items-center bg-[#ebecf8] p-[8px] '>
                         <input type="text" className='w-full h-[33px] px-2' placeholder='Promo Code' />

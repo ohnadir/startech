@@ -49,47 +49,47 @@ const Navbar = () => {
         </div> 
     </>
     return (
-            <div className='bg-[#081621] '>
-                <div className='max-w-7xl mx-auto px-2 '>
-                    <div className=' flex items-center h-14 justify-between text-black  relative z-50'>
-                        <div className=''>
-                            <img className='cursor-pointer w-[95px]' onClick={()=>navigate('/home')} src={logo} alt="" />
-                        </div>
-                        <div className='searchContainer'>
-                            <div className='hidden md:block'>
-                                <div className='flex items-center '>
-                                    <input className='searchInput' onChange={(e)=>setKeyword(e.target.value)} type="text" placeholder='KHUJ, THE SEARCH' />
-                                    <button className='searchBtn' onClick={()=>navigate(`/search/${keyword}`)}><BiSearchAlt2/></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className='flex gap-5 items-center'>
-                            {menuLists}
-                        </div>
+        <div className='bg-[#081621] '>
+            <div className='max-w-7xl mx-auto px-2 '>
+                <div className=' flex items-center h-14 justify-between text-black  relative z-50'>
+                    <div className=''>
+                        <img className='cursor-pointer w-[95px]' onClick={()=>navigate('/home')} src={logo} alt="" />
                     </div>
-                    <div className=' searchBlock'>
-                        {
-                            open && <div className='bg-white'>
+                    <div className='searchContainer'>
+                        <div className='hidden md:block'>
                             <div className='flex items-center '>
                                 <input className='searchInput' onChange={(e)=>setKeyword(e.target.value)} type="text" placeholder='KHUJ, THE SEARCH' />
                                 <button className='searchBtn' onClick={()=>navigate(`/search/${keyword}`)}><BiSearchAlt2/></button>
                             </div>
                         </div>
-                        }
+                    </div>
+                    <div className='flex gap-5 items-center'>
+                        {menuLists}
                     </div>
                 </div>
-                <Drawer
-                    className='drawer'
-                    bodyStyle={{"padding": "0px"}}
-                    headerStyle={{"borderBottom": "0px ", "display": "none"}}
-                    placement="right" closeIcon={false} visible={cartOpen}>
-                        <div  className='drawerHeader'>
-                            <h1 className=' text-white'>YOUR CART</h1>
-                            <MdOutlineClose className='cartCloseBtn' onClick={()=>setCartOpen(false)} />
+                <div className=' searchBlock'>
+                    {
+                        open && <div className='bg-white'>
+                        <div className='flex items-center '>
+                            <input className='searchInput' onChange={(e)=>setKeyword(e.target.value)} type="text" placeholder='KHUJ, THE SEARCH' />
+                            <button className='searchBtn' onClick={()=>navigate(`/search/${keyword}`)}><BiSearchAlt2/></button>
                         </div>
-                        <CartDrawer/>
-                </Drawer>
+                    </div>
+                    }
+                </div>
             </div>
+            <Drawer
+                className='drawer'
+                bodyStyle={{"padding": "0px"}}
+                headerStyle={{"borderBottom": "0px ", "display": "none"}}
+                placement="right" closeIcon={false} visible={cartOpen}>
+                    <div  className='drawerHeader'>
+                        <h1 className=' text-white'>YOUR CART</h1>
+                        <MdOutlineClose className='cartCloseBtn' onClick={()=>setCartOpen(false)} />
+                    </div>
+                    <CartDrawer/>
+            </Drawer>
+        </div>
     );
 };
 
