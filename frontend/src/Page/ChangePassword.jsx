@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../Style/ChangePassword.css'
 import { Link, useNavigate } from 'react-router-dom';
 import { HiHome } from 'react-icons/hi';
+import MetaData from '../Component/Meta';
 
 const ChangePassword=()=> {
     const [auth, setAuth] = useState('');
@@ -13,6 +14,7 @@ const ChangePassword=()=> {
     }
   return (
     <div className='max-w-7xl mx-auto px-2'>
+      <MetaData title={'Change Password'} />
           <div className='navigate'>
             <HiHome onClick={()=>navigate('/home')} className='text-[#666] cursor-pointer'/> <span>/</span> <span onClick={()=>navigate('/profile')} className="cursor-pointer">Account</span> <span>/</span> <span>Change Password</span>
           </div>

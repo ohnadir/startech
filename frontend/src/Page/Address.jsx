@@ -4,11 +4,13 @@ import { HiHome, HiPencil } from 'react-icons/hi';
 import { IoMdTrash } from 'react-icons/io';
 import { HiPlus } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
+import MetaData from '../Component/Meta';
 
 const Address=()=> {
     const navigate = useNavigate()
   return (
     <div className='max-w-7xl mx-auto px-2'>
+      <MetaData title={'Address'} />
         <div className='flex items-center gap-3 text-[13px] pt-4 pb-[50px]'>
             <HiHome onClick={()=>navigate('/home')} className='text-[#666] cursor-pointer'/> 
             <span>/</span> 

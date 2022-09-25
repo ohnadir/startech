@@ -9,6 +9,7 @@ import Profile from './Page/Profile'
 import ChangePassword from './Page/ChangePassword';
 import Address from './Page/Address';
 import ChangeAddress from './Page/ChangeAddress';
+import ProductDetails from './Page/ProductDetails';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path='/profile' element={<Profile/>}></Route>
         <Route path='/changePassword' element={<ChangePassword/>}></Route>
         <Route path='/address' element={<Address/>}></Route>
+        <Route path='/productDetails' element={<ProductDetails/>}></Route>
         <Route path='/changeAddress' element={<ChangeAddress/>}></Route>
         <Route path="/search/:keyword" element={<SearchResult/>} />
       </Routes>

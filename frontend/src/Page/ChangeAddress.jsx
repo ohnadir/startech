@@ -5,6 +5,7 @@ import { HiHome } from 'react-icons/hi';
 import District from "../Districts.json";
 import Division from '../Division.json';
 import Thana from "../Thana.json";
+import MetaData from '../Component/Meta';
 const ChangeAddress=()=> {
     const [auth, setAuth] = useState('');
     const [country, setCountry] = useState([])
@@ -17,6 +18,7 @@ const ChangeAddress=()=> {
     }
   return (
     <div className='max-w-7xl mx-auto px-2'>
+        <MetaData title={'Change Address'} />
         <div className='flex items-center gap-3 text-[13px] pt-4 pb-[50px]'>
           <HiHome onClick={()=>navigate('/home')} className='text-[#666] cursor-pointer'/> 
           <span className='text-[#666]'>/</span> 
