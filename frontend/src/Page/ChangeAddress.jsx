@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import '../Style/ChangeAddress.css';
 import { useNavigate } from 'react-router-dom';
 import { HiHome } from 'react-icons/hi';
@@ -8,8 +8,6 @@ import Thana from "../Thana.json";
 import MetaData from '../Component/Meta';
 const ChangeAddress=()=> {
     const [auth, setAuth] = useState('');
-    const [country, setCountry] = useState([])
-    const [city, setCity] = useState([])
     const navigate = useNavigate()
     const handleChange = (e) => {
         setAuth(prev=>({...prev, [e.target.name]:e.target.value}))

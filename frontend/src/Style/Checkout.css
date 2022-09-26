@@ -1,0 +1,106 @@
+.orderInformation{
+    background-color: white;
+    padding: 20px;
+}
+.serial{
+    background-color: #feeceb;
+    color: #f44336;
+    height: 35px;
+    width: 35px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 3px;
+}
+.paymentCard {
+    padding-bottom: 12px;
+    border-bottom: 1px solid #ddd;
+}
+.paymentCard .serialInfo{
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #01132d;
+}
+.orderInformation label{
+    font-size: 13px;
+    font-weight: bold;
+}
+.orderInformation input, select{
+    padding: 0 15px;
+    outline: none;
+    width: 100%;
+    font-family: "Trebuchet MS",sans-serif;
+    border: 1px solid #ddd;
+    margin-top: 5px;
+    height: 42px;
+    border-radius: 4px;
+}
+.orderInformation input:focus, select:focus{
+    outline: none !important;
+    border-color: rgb(118, 118, 118);
+}
+.promoContainer button{
+    /* width: 100%; */
+    border: 2px solid #3749bb;
+    color: #3749bb;
+    font-weight: bold;
+    height: 42px;
+    padding: 0 12px;
+    border-radius: 4px;
+    transition: 0.3s ease;
+}
+.promoContainer button:hover{
+    background-color: #3749bb;
+    color: white;
+}
+.promoContainer input{
+    width: 100%;
+    height: 42px;
+    border: 1px solid #ddd;
+    padding: 0 6px;
+    border-radius: 4px;
+}
+.promoContainer input:focus{
+    outline: none !important;
+    border-color: rgb(118, 118, 118);
+}
+.orderOverview table{
+    width: 100%;
+}
+.orderOverview th{
+    background-color: #f5f7f9;
+    padding: 12px 10px;
+    color: #666;
+    font-size: 13px;
+    font-weight: 600;
+}
+.orderOverview td{
+    padding: 12px 10px;
+    border-bottom: 1px solid #eee;
+    font-weight: bold;
+}
+.amount {
+    text-align: right;
+    font-weight: 600;
+    color: #f44336;
+}
+.checkoutContainer li {
+    color: #01132d;
+    font-size: 14px;
+}
+.confirmBtn{
+    background-color: #3749bb;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 8px 20px;
+    border-radius: 4px;
+}
+.divider{
+    margin-top: 25px;
+    width: 100%;
+    background-color: #eee;
+    height: 2px;
+}

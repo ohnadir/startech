@@ -230,7 +230,7 @@ const ProductDetails=()=> {
                         <div className='flex flex-col border p-2 w-[200px]'>
                             <div className='flex justify-between'>
                                 <span className='cartCriteria'>Cart Quantity: </span>
-                                <span className='cartValue'>0</span>
+                                <span className='cartValue'>{count}</span>
                             </div>
                             <div className='flex justify-between'>
                                 <span className='cartCriteria'>Cart Total:</span>
@@ -240,7 +240,7 @@ const ProductDetails=()=> {
                     </div>
                     <div className=' '>
                         <button className='cartBtn'>View Cart</button>
-                        <button className='orderBtn'>Confirm Order</button>
+                        <button onClick={()=>navigate('/checkout')} className='orderBtn'>Confirm Order</button>
                     </div>
                 </div>
               </Modal>

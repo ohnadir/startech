@@ -10,6 +10,7 @@ import ChangePassword from './Page/ChangePassword';
 import Address from './Page/Address';
 import ChangeAddress from './Page/ChangeAddress';
 import ProductDetails from './Page/ProductDetails';
+import Checkout from './Page/Checkout'
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path='/address' element={<Address/>}></Route>
         <Route path='/productDetails' element={<ProductDetails/>}></Route>
         <Route path='/changeAddress' element={<ChangeAddress/>}></Route>
+        <Route path='/checkout' element={<Checkout/>}></Route>
         <Route path="/search/:keyword" element={<SearchResult/>} />
       </Routes>
     </div>
