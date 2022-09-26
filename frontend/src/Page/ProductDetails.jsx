@@ -11,6 +11,10 @@ import { DiGitCompare } from 'react-icons/di';
 import { AiFillStar } from 'react-icons/ai';
 import { MdAssignment } from 'react-icons/md';
 import Rating from 'react-rating';
+import { Modal } from 'antd';
+import { AiFillCheckCircle } from "react-icons/ai";
+import { AiOutlineCloseCircle } from "react-icons/ai";
+
 
 
 const photos = [
@@ -25,7 +29,8 @@ const ProductDetails=()=> {
     const [count, setCount] = useState(1);
     const [review, setReview] = useState([]);
     const [createReview, setCreateReview] = useState(false);
-    const [auth, setAuth] = useState('')
+    const [auth, setAuth] = useState('');
+    const [modalOpen, setModalOpen] = useState(false);
 
     const handleChange = (e) => {
         setAuth(prev=>({...prev, [e.target.name]:e.target.value}))
@@ -156,7 +161,7 @@ const ProductDetails=()=> {
                                     <input className='outline-0 w-20 px-8' type="text" value={count} />
                                     <button className='plusBtn' onClick={()=>setCount(count + 1)} >+</button>
                                 </div>
-                                <button className='buyBtn'>Buy Now</button>
+                                <button onClick={() => setModalOpen(true)} className='buyBtn'>Buy Now</button>
                         </div>
                         </div>
                         
@@ -187,7 +192,7 @@ const ProductDetails=()=> {
                             <label htmlFor="review">Rating</label>  
                             <input name='rating' onChange={handleChange} disabled={auth.rating <=0}  type="number" placeholder='Write Rating' />
                         </div>
-                        <button className='max-w-fit px-5 py-2  bg-[#3749bb] text-white'>Continue</button>
+                        <button  className='max-w-fit px-5 py-2  bg-[#3749bb] text-white'>Continue</button>
                     </div>
                 </div>
             </div>
@@ -204,6 +209,42 @@ const ProductDetails=()=> {
                         <p className='pt-4'>This product has no reviews yet. Be the first one to write a review.</p>
                     </div>
                 </div>
+            }
+            {
+                modalOpen && <Modal
+                centered
+                visible={modalOpen}
+                onCancel={() => setModalOpen(false)}
+                bodyStyle={{padding:"0", margin:"0", border:"none" }}
+                width={1000}
+                footer={null}
+              >
+                <div className='p-4 '>
+                    <div className='flex flex-col md:flex-row justify-between mt-8 gap-6'>
+                        <div className=''>
+                            <div className='flex items-center gap-3 p-0 m-0'>
+                                <AiFillCheckCircle className='text-[#15b579] text-3xl'/>
+                                <span>You have added <span className='dynamicValue text-[#ef4a23]'>Razer DeathAdder Essential Gaming Mouse</span> to your shopping cart!</span>
+                            </div>
+                        </div>
+                        <div className='flex flex-col border p-2 w-[200px]'>
+                            <div className='flex justify-between'>
+                                <span className='cartCriteria'>Cart Quantity: </span>
+                                <span className='cartValue'>0</span>
+                            </div>
+                            <div className='flex justify-between'>
+                                <span className='cartCriteria'>Cart Total:</span>
+                                <span className='cartValue'>0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className=' '>
+                        <button className='cartBtn'>View Cart</button>
+                        <button className='orderBtn'>Confirm Order</button>
+                    </div>
+                </div>
+              </Modal>
+            
             }
         </div>
     </div>

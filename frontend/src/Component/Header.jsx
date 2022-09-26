@@ -38,7 +38,7 @@ const Header =()=>{
                     </div>
                 </Slider>
             </div>
-            <div className='compareContainer grid grid-cols-1 gap-6'>
+            <div className=' grid grid-cols-1 gap-6'>
                 <div className='bg-[#ffe8a1] p-4 '>
                     <h1 className='text-center mb-5'>Compare Product</h1>
                     <div className='grid grid-cols-1 gap-5'>

@@ -152,3 +152,33 @@
     border: 1px solid #ddd;
 
 }
+.orderBtn, .cartBtn{
+    width: max-content;
+    padding: 8px 14px;
+    font-weight: bold;
+    box-sizing: border-box;
+    border-radius: 4px;
+
+}
+.orderBtn{
+    border: 2px solid #3749bb;
+    color: #3749bb;
+    transition: 0.3s ease;
+}
+.orderBtn:hover{
+    background-color: #3749bb;
+    color: white;
+}
+.cartBtn{
+    background-color: #3749bb;
+    color: white;
+    margin-right: 15px;
+}
+.cartCriteria{
+    color: #888897;
+}
+.cartValue{
+    font-weight: bold;
+    color: #111;
+    font-size: 15px;
+}
