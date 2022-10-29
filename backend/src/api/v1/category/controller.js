@@ -7,9 +7,8 @@ const {
   
 exports.addCategory = async (req, res) => {
     const { status, code, message, data } = await addCategoryService({
-      
-      // _id:req.user._id,
       ...req.body,
+      body: req.body
     });
     res.status(code).json({ code, status, message, data  });
   };

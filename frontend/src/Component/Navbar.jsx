@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { CgProfile } from 'react-icons/cg';
 import { BsCartCheckFill} from 'react-icons/bs';
 import { BiSearchAlt2 } from 'react-icons/bi';
@@ -10,6 +10,16 @@ import { MdOutlineClose } from 'react-icons/md';
 import CartDrawer from './CartDrawer';
 
 const Navbar = () => {
+
+    const [navBg, setNavBg] = useState("red");
+  const location = useLocation();
+  useEffect(() => {
+    if (window.location.pathname === "/login") {
+      setNavBg("yellow");
+    } else {
+      setNavBg('#081621')
+    }
+  }, [location]);
     const navigate = useNavigate();
     const [open, setOpen] = useState(false)
     const [cartOpen, setCartOpen] = useState(false)
@@ -49,7 +59,7 @@ const Navbar = () => {
         </div> 
     </>
     return (
-        <div className='bg-[#081621] '>
+        <div className='bg-[#081621] ' style={{ backgroundColor: navBg }}>
             <div className='max-w-7xl mx-auto px-2 '>
                 <div className=' flex items-center h-14 justify-between text-black  relative z-50'>
                     <div className=''>

@@ -9,13 +9,6 @@ const categorySchema = Schema(
           required: true,
           trim: true,
         },
-        slug: {
-          type: String,
-          unique: true,
-        },
-        type: {
-          type: String,
-        },
         categoryImage: { type: String },
         createdBy: {
           type: mongoose.Schema.Types.ObjectId,
@@ -25,4 +18,4 @@ const categorySchema = Schema(
       { timestamps: true }
 );
 
-module.exports = model('category', categorySchema);
+module.exports = model('Category', categorySchema);

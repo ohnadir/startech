@@ -1,6 +1,4 @@
 const { Category } = require('../models');
-// const shortid = require("shortid");
-const slugify = require("slugify");
 
 exports.addCategoryService = async ({ name, categoryImage, createdBy, _id, body }) => {
   const response = {
@@ -8,7 +6,7 @@ exports.addCategoryService = async ({ name, categoryImage, createdBy, _id, body 
     status: 'Success',
     message: 'Category added successfully',
   };
-
+  console.log(body);
   try {
     const isNameExist = await Category.findOne({ name });
     if (isNameExist) {
@@ -20,7 +18,6 @@ exports.addCategoryService = async ({ name, categoryImage, createdBy, _id, body 
 
     const newCategory = new Category({
       name,
-      slug: slugify(name),
       categoryImage,
       createdBy
     });
@@ -30,6 +27,7 @@ exports.addCategoryService = async ({ name, categoryImage, createdBy, _id, body 
     return response;
 
   } catch (error) {
+    console.log(error);
     response.code = 500;
     response.status = 'failed';
     response.message = 'Error. Try again';
