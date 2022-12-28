@@ -1,0 +1,32 @@
+.ant-modal-header{
+    /* display: none; */
+}
+.ant-modal-close{
+}
+.cardBox{
+    position: relative;
+    width: 100%;
+    height: 52px;
+}
+.cardInput{
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    padding: 18px;
+    font-size: 14px;
+}
+
+.cardLabel{
+    position: absolute;
+    top: -11px;
+    font-weight: 700;
+    left: 18px;
+    font-size: 12px;
+    transition: 0.2s;
+    width: fit-content;
+    padding: 0 2px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}

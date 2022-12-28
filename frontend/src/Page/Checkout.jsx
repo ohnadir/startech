@@ -6,96 +6,37 @@ import District from "../Districts.json";
 import Thana from "../Thana.json";
 import MetaData from '../Component/Meta';
 import { Alert } from 'antd';
+import Payment from '../Component/Modal/Payment';
 import { useStripe, 
     useElements, CardNumberElement, 
     CardExpiryElement, CardCvcElement } from '@stripe/react-stripe-js'
 
-import axios from 'axios'
+import axios from 'axios';
+import { Modal } from 'antd';
 
 const ChangeAddress=()=> {
-    const stripe = useStripe();
-    const elements = useElements();
     const [auth, setAuth] = useState('');
+    const [modal, setModal] = useState(false)
     const navigate = useNavigate()
     const handleChange = (e) => {
         setAuth(prev=>({...prev, [e.target.name]:e.target.value}))
     }
     const onSubmit = () => {
-    }
-    console.log(auth);
-    const paymentData = {
-        // amount: Math.round(orderInfo.totalPrice * 100)
-    }
-    const submitHandler = async (e) => {
-        e.preventDefault();
-
-        document.querySelector('#pay_btn').disabled = true;
-
-        let res;
-        try {
-
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }
-
-            res = await axios.post('/api/v1/payment/process', paymentData, config)
-
-            const clientSecret = res.data.client_secret;
-
-            console.log(clientSecret);
-
-            if (!stripe || !elements) {
-                return;
-            }
-
-            const result = await stripe.confirmCardPayment(clientSecret, {
-                payment_method: {
-                    card: elements.getElement(CardNumberElement),
-                    billing_details: {
-                        // name: user.name,
-                        // email: user.email
-                    }
-                }
-            });
-
-            if (result.error) {
-                alert.error(result.error.message);
-                document.querySelector('#pay_btn').disabled = false;
-            } else {
-
-                // The payment is processed or not
-                if (result.paymentIntent.status === 'succeeded') {
-
-                    // order.paymentInfo = {
-                    //     id: result.paymentIntent.id,
-                    //     status: result.paymentIntent.status
-                    // }
-
-                    // dispatch(createOrder(order))
-
-                    // history.push('/success')
-                } else {
-                    alert.error('There is some issue while payment processing')
-                }
-            }
-
-
-        } catch (error) {
-            document.querySelector('#pay_btn').disabled = false;
-            alert.error(error.response.data.message)
+        if(auth.payment === "online" ){
+            setModal(true);
         }
     }
+    // const totalPrice = 100
+    
   return (
     <div className='bg-[#f2f4f8]'>
         <div className='max-w-7xl mx-auto px-2  checkoutContainer'>
             <MetaData title={'Checkout'} />
             <div className='flex items-center gap-3 text-[13px] pt-4 pb-[30px]'>
-            <HiHome onClick={()=>navigate('/home')} className='text-[#666] cursor-pointer'/> 
-            <span className='text-[#666]'>/</span> 
-            <span className='text-[#666] cursor-pointer' onClick={()=>navigate('/profile')}>Shopping Cart</span> <span>/</span> 
-            <span className='text-[#666] cursor-pointer' onClick={()=>navigate('/address')}>Checkout</span>
+                <HiHome onClick={()=>navigate('/home')} className='text-[#666] cursor-pointer'/> 
+                <span className='text-[#666]'>/</span> 
+                <span className='text-[#666] cursor-pointer' onClick={()=>navigate('/profile')}>Shopping Cart</span> <span>/</span> 
+                <span className='text-[#666] cursor-pointer' onClick={()=>navigate('/address')}>Checkout</span>
             </div>
             <div className=''>
                 <Alert message="ইএমআই এর ক্ষেত্রে অবশ্যই ক্রেতার নির্দিষ্ট ব্যাংক এর ক্রেডিট কার্ড থাকতে হবে।" type="info" closable />
@@ -163,7 +104,7 @@ const ChangeAddress=()=> {
                                 <h4>Select Payment Method</h4>
                                 <ul>
                                     <li className='flex items-center gap-3'><input type="radio" onChange={handleChange} name='payment' value="cashOn" /> Cash on Delivery</li>
-                                    <li className='flex items-center gap-3'><input type="radio" onChange={handleChange} name='payment' value="posOn" /> POS on Delivery</li>
+                                    
                                     <li className='flex items-center gap-3'><input type="radio" onChange={handleChange} name='payment' value="online" /> Online Payment</li>
                                 </ul>
                                 <div>
@@ -239,9 +180,16 @@ const ChangeAddress=()=> {
                     <input onChange={handleChange} name='checkbox' value="checked" type="checkbox" />
                     <label htmlFor="">I have read and agree to the <span className='text-[#ef4a23]'>Terms and Conditions</span>, Privacy Policy and <span className='text-[#ef4a23]'>Refund and Return Policy</span></label>
                 </div>
-                <button disabled={auth?.checkbox==null} className='confirmBtn w-full md:max-w-fit '>Confirm Order</button>
+                <button onClick={onSubmit} disabled={auth?.checkbox==null} className='confirmBtn w-full md:max-w-fit '>Confirm Order</button>
             </div>
         </div>
+        <Modal title="Payment options" 
+            open={modal}
+            footer={null}
+            centered 
+            onCancel={()=>setModal(false)}>
+                <Payment/>
+      </Modal>
     </div>
   )
 }
