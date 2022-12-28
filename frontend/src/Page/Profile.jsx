@@ -27,20 +27,20 @@ const Home =()=>{
                 <div className='flex  items-center gap-3 '>
                     <img className='w-[50px]' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&usqp=CAU" alt="" />
                     <div>
-                        <p>Hello,</p>
-                        <h2>Nadir Ahmed</h2>
+                        <p className='m-0'>Hello,</p>
+                        <h2 className='m-0'>Nadir Ahmed</h2>
                     </div>
                 </div>
                 <div className='flex gap-6 coinContent'>
                     <p className='hrBorder hidden sm:block'></p>
                     <div>
-                        <p>Star Credit</p>
-                        <h1>0</h1>
+                        <p className='m-0'>Star Credit</p>
+                        <h1 className='m-0'>0</h1>
                     </div>
                     <p className='hrBorder'></p>
                     <div className=''>
-                        <p>Store Credit</p>
-                        <h1>0</h1>
+                        <p className='m-0'>Store Credit</p>
+                        <h1 className='m-0'>0</h1>
                     </div>
                 </div>
             </div>

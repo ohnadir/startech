@@ -6,8 +6,15 @@ import District from "../Districts.json";
 import Thana from "../Thana.json";
 import MetaData from '../Component/Meta';
 import { Alert } from 'antd';
+import { useStripe, 
+    useElements, CardNumberElement, 
+    CardExpiryElement, CardCvcElement } from '@stripe/react-stripe-js'
+
+import axios from 'axios'
 
 const ChangeAddress=()=> {
+    const stripe = useStripe();
+    const elements = useElements();
     const [auth, setAuth] = useState('');
     const navigate = useNavigate()
     const handleChange = (e) => {
@@ -16,6 +23,70 @@ const ChangeAddress=()=> {
     const onSubmit = () => {
     }
     console.log(auth);
+    const paymentData = {
+        // amount: Math.round(orderInfo.totalPrice * 100)
+    }
+    const submitHandler = async (e) => {
+        e.preventDefault();
+
+        document.querySelector('#pay_btn').disabled = true;
+
+        let res;
+        try {
+
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+
+            res = await axios.post('/api/v1/payment/process', paymentData, config)
+
+            const clientSecret = res.data.client_secret;
+
+            console.log(clientSecret);
+
+            if (!stripe || !elements) {
+                return;
+            }
+
+            const result = await stripe.confirmCardPayment(clientSecret, {
+                payment_method: {
+                    card: elements.getElement(CardNumberElement),
+                    billing_details: {
+                        // name: user.name,
+                        // email: user.email
+                    }
+                }
+            });
+
+            if (result.error) {
+                alert.error(result.error.message);
+                document.querySelector('#pay_btn').disabled = false;
+            } else {
+
+                // The payment is processed or not
+                if (result.paymentIntent.status === 'succeeded') {
+
+                    // order.paymentInfo = {
+                    //     id: result.paymentIntent.id,
+                    //     status: result.paymentIntent.status
+                    // }
+
+                    // dispatch(createOrder(order))
+
+                    // history.push('/success')
+                } else {
+                    alert.error('There is some issue while payment processing')
+                }
+            }
+
+
+        } catch (error) {
+            document.querySelector('#pay_btn').disabled = false;
+            alert.error(error.response.data.message)
+        }
+    }
   return (
     <div className='bg-[#f2f4f8]'>
         <div className='max-w-7xl mx-auto px-2  checkoutContainer'>

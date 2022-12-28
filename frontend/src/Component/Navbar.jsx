@@ -15,7 +15,7 @@ const Navbar = () => {
   const location = useLocation();
   useEffect(() => {
     if (window.location.pathname === "/login") {
-      setNavBg("yellow");
+      setNavBg("#081621");
     } else {
       setNavBg('#081621')
     }
