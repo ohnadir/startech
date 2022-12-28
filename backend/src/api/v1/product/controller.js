@@ -27,29 +27,13 @@ exports.addProduct = catchAsyncErrors(async (req, res, next) => {
   })
 });
 
-exports.updateProductService = async ({
-  id,
-  name,
-  price,
-  desc
-}) => {
-  const response = {
-    code: 200,
-    status: 'Success',
-    message: 'Product updated successfully',
-    data: {},
-  };
+exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
+  const id = req.params.id;
+  const { name, price, desc } = req.body;
 
-  try {
-    const product = await Product.findOne({
-      _id: id,
-      isDelete: false,
-    }).exec();
+    const product = await Product.findOne({ _id: id }).exec();
     if (!product) {
-      response.code = 422;
-      response.status = 'failed';
-      response.message = 'No product data found';
-      return response;
+      return next(new ErrorHandler('No Product Found', 422))
     }
 
     const isNameExist = await Product.findOne({ name });
@@ -58,10 +42,7 @@ exports.updateProductService = async ({
       name === isNameExist.name &&
       String(product._id) !== String(isNameExist._id)
     ) {
-      response.code = 422;
-      response.status = 'failed';
-      response.message = 'Phone number already taken';
-      return response;
+      return next(new ErrorHandler('Already taken this name', 422))
     }
 
     product.name = name ? name : product.name;
@@ -69,198 +50,71 @@ exports.updateProductService = async ({
     product.desc = desc ? desc : product.desc;
 
     await product.save();
-
-    response.data.product = product;
-    return response;
-    
-  } catch (error) {
-    response.code = 500;
-    response.status = 'failed';
-    response.message = 'Error. Try again';
-    return response;
-  }
-};
-
-exports.deleteProductService = async ({ id }) => {
-  const response = {
-    code: 200,
-    status: 'success',
-    message: 'Delete product successfully',
-  };
-
-  try {
-    const product = await Product.findOne({
-      _id: id,
-      isDelete: false,
-    });
-    if (!product) {
-      response.code = 404;
-      response.status = 'failed';
-      response.message = 'No product data found';
-      return response;
-    }
-
-    product.isDelete = true;
-    product.deletedAt = Date.now();
-    await product.save();
-
-    return response;
-  } catch (error) {
-    response.code = 500;
-    response.status = 'failed';
-    response.message = 'Error. Try again';
-    return response;
-  }
-};
-
-exports.getProductsService = async ({ page, size }) => {
-  const response = {
-    code: 200,
-    status: 'Success',
-    message: 'Fetch product list successfully',
-    data: {},
-  };
-
-  try {
-    const pageNumber = parseInt(page) || 1;
-    const limit = parseInt(size) || 10;
-
-    const totalDocuments = await Product.countDocuments({
-      isDelete: false,
-    });
-    const totalPage = Math.ceil(totalDocuments / limit);
-
-    const products = await Product.find({ isDelete: false }).limit(10)
-      /* .select('-__v -isDelete')
-      .sort({ _id: -1 })
-      .skip((pageNumber - 1) * limit)
-      .limit(limit)
-      .lean(); */
-
-    if (products.length === 0) {
-      response.code = 404;
-      response.status = 'Failed';
-      response.message = 'No product data found';
-      return response;
-    }
-
-    response.data = {
-      products,
-      currentPage: pageNumber,
-      totalDocuments,
-      totalPage,
-    };
-
-    return response;
-  } catch (error) {
-    response.code = 500;
-    response.status = 'failed';
-    response.message = 'Error. Try again';
-    return response;
-  }
-};
-
-exports.searchProductService = async ({ q }) => {
-  const response = {
-    code: 200,
-    status: 'success',
-    message: 'Product data found successfully',
-    data: {},
-  };
-
-  try {
-    let query = { isDelete: false };
-    if (q !== 'undefined' || q !== undefined || q) {
-      let regex = new RegExp(q, 'i');
-      query = {
-        ...query,
-        $or: [{ name: regex }],
-      };
-    }
-
-    const products = await Product.find(query)
-      .select('-__v -isDelete')
-      .sort({ _id: -1 });
-
-    if (products.length === 0) {
-      response.code = 404;
-      response.status = 'failed';
-      response.message = 'No product data found';
-    }
-    response.data.products = products;
-    return response;
-  } catch (error) {
-    response.code = 500;
-    response.status = 'failed';
-    response.message = 'Error. Try again';
-    return response;
-  }
-};
-
-exports.getProductService = async ({ id }) => {
-  const response = {
-    code: 200,
-    status: 'success',
-    message: 'Fetch deatiled product successfully',
-    data: {},
-  };
-
-  try {
-    const product = await Product.findOne({
-      _id: id,
-      isDelete: false,
+    res.status(200).json({
+      status: true,
+      statusCode: 200,
+      message:"updated Product Successfully"
     })
-      .select('-__v -isDelete')
-    if (!product) {
-      response.code = 404;
-      response.status = 'failed';
-      response.message = 'No product found';
-      return response;
-    }
-    response.data.product = product;
-    return response;
-  } catch (error) {
-    response.code = 500;
-    response.status = 'failed';
-    response.message = 'Error. Try again';
-    return response;
-  }
-};
-
-exports.filterProductService = async ({ q }) => {
-  const response = {
-    code: 200,
-    status: 'Success',
-    message: 'Product data found successfully',
-    data: {},
-  };
-
-  try {
-
-    const apiFeatures  = new APIFeatures( Product.find().select('-__v -isDelete'), q).filter()
-
-    let products = await apiFeatures.query;
-    let filteredProductsCount = products.length;
-
-    if (products.length === 0) {
-      response.code = 404;
-      response.status = 'Failed';
-      response.message = 'No product data found';
-    }
-
-    response.data.products = products;
-    response.data.filteredProductsCount = filteredProductsCount;
-    return response;
-
-  } catch (error) {
-
-    response.code = 500;
-    response.status = 'failed';
-    response.message = 'Error. Try again';
-    return response;
     
+ 
+});
+
+exports.deleteProduct = catchAsyncErrors(async (req, res, next)=> {
+  const id = req.params.id;
+  const product = await Product.findOne({ _id: id });
+  if (!product) {
+    return next(new ErrorHandler('No Product found by this id', 404))
   }
-};
+
+  product.isDelete = true;
+  product.deletedAt = Date.now();
+  await product.save();
+  res.status(200).json({
+    status: true,
+    statusCode: 200,
+    message:"Delete Product Successfully"
+  })
+  
+});
+
+exports.getProducts = catchAsyncErrors(async (req, res, next) => {
+  const resPerPage = 4;
+  const productsCount = await Product.countDocuments();
+
+  const apiFeatures = new APIFeatures(Product.find(), req.query)
+    .search()
+    .filter()
+
+  let products = await apiFeatures.query;
+  let filteredProductsCount = products.length;
+
+  apiFeatures.pagination(resPerPage)
+  products = await apiFeatures.query;
+
+
+  res.status(200).json({
+    success: true,
+    statusCode: 200,
+    message:"Fetch Product Successfully",
+    productsCount,
+    resPerPage,
+    filteredProductsCount,
+    products
+  })
+});
+
+exports.getProduct = catchAsyncErrors(async (req, res, next) => {
+  const id = req.params.id;
+  const product = await Product.findById({_id:id});
+
+  if (!product) {
+    return next(new ErrorHandler('Product not found', 404));
+  }
+  res.status(200).json({
+    success: true,
+    product
+  })
+});
 
 // Create new review   =>   /api/v1/review
 exports.createProductReview = async ({body, req}) => {

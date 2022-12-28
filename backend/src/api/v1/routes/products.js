@@ -1,6 +1,10 @@
 const router = require('express').Router();
 const {
-  addProduct
+  addProduct,
+  updateProduct,
+  deleteProduct,
+  getProducts,
+  getProduct
 } = require('../product/controller');
 
 
@@ -26,8 +30,6 @@ router.patch(
 router.delete('/:id', idValidator, validationResult, deleteProduct);
 
 router.get('/', getProducts);
-
-router.get('/search', searchProduct);
 
 router.get('/:id', idValidator, validationResult, getProduct);
 
