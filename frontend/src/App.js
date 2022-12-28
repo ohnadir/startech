@@ -12,14 +12,8 @@ import ChangeAddress from './Page/ChangeAddress';
 import ProductDetails from './Page/ProductDetails';
 import Checkout from './Page/Checkout';
 import Payment from './Component/Modal/Payment';
-import axios from 'axios'
-import { useEffect, useState } from 'react';
 
-// Payment
-import { Elements } from '@stripe/react-stripe-js'
-import { loadStripe } from '@stripe/stripe-js'
 function App() {
-  const stripeApiKey = 'pk_test_51MJynOHzN4rqAg27o1nDk5hQeHaX8cuaBkInxAzGMEnEqee4QMyeztVLqyeuAhzgK9ZRdwPAF8uWFrRX2Qj8iuQ9005XC9m0sA'
   return (
     <div className="App ">
       <Navbar/>

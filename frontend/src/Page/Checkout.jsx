@@ -7,11 +7,8 @@ import Thana from "../Thana.json";
 import MetaData from '../Component/Meta';
 import { Alert } from 'antd';
 import Payment from '../Component/Modal/Payment';
-import { useStripe, 
-    useElements, CardNumberElement, 
-    CardExpiryElement, CardCvcElement } from '@stripe/react-stripe-js'
 
-import axios from 'axios';
+// import axios from 'axios';
 import { Modal } from 'antd';
 
 const ChangeAddress=()=> {
@@ -26,7 +23,7 @@ const ChangeAddress=()=> {
             setModal(true);
         }
     }
-    // const totalPrice = 100
+    const totalPrice = 100
     
   return (
     <div className='bg-[#f2f4f8]'>
@@ -188,7 +185,7 @@ const ChangeAddress=()=> {
             footer={null}
             centered 
             onCancel={()=>setModal(false)}>
-                <Payment/>
+                <Payment totalPrice={totalPrice} auth={auth} />
       </Modal>
     </div>
   )

@@ -6,7 +6,7 @@ import { useStripe,
 
 import axios from 'axios';
 import '../../Style/Payment.css'
-import { FaLock, FaStar } from 'react-icons/fa';
+import { FaLock } from 'react-icons/fa';
 const options = {
     style: {
         base: {
@@ -17,8 +17,9 @@ const options = {
         }
     }
 }
-const Payment = ({ auth }) => {
+const Payment = ({ totalPrice, auth }) => {
     console.log(auth);
+    console.log(totalPrice)
     const stripe = useStripe();
     const elements = useElements();
     const paymentData = {
