@@ -163,7 +163,7 @@ exports.getUser = catchAsyncErrors(async (req, res, next)=> {
   
 });
 
-exports.userLogoutService = catchAsyncErrors(async (req, res, next) => {
+exports.logout = catchAsyncErrors(async (req, res, next) => {
   res.cookie('token', null, {
     expires: new Date(Date.now()),
     httpOnly: true
@@ -176,7 +176,7 @@ exports.userLogoutService = catchAsyncErrors(async (req, res, next) => {
 });
 
 // Forgot Password
-exports.forgotPasswordService = async ({ email, req }) => {
+exports.forgotPassword = async ({ email, req }) => {
   const response = {
     code: 201,
     status: 'Success',
@@ -219,7 +219,7 @@ exports.forgotPasswordService = async ({ email, req }) => {
   }
 };
 
-exports.resetPasswordService = async ({ token, body, res }) => {
+exports.resetPassword = async ({ token, body, res }) => {
   const response = {
     code: 201,
     status: 'Success',
@@ -265,7 +265,7 @@ exports.resetPasswordService = async ({ token, body, res }) => {
   
 }
 
-exports.updatePasswordService = async ({ id, body, res }) => {
+exports.updatePassword = async ({ id, body, res }) => {
   const response = {
     code: 201,
     status: 'Success',
@@ -296,7 +296,7 @@ exports.updatePasswordService = async ({ id, body, res }) => {
   sendToken(user, res)
 }
 
-exports.updateProfileService = async ({ id, body }) => {
+exports.updateProfile = async ({ id, body }) => {
   const response = {
     code: 201,
     status: 'Success',
