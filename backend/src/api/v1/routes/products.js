@@ -1,11 +1,6 @@
 const router = require('express').Router();
 const {
-  addProduct,
-  updateProduct,
-  deleteProduct,
-  getProducts,
-  searchProduct,
-  getProduct,
+  addProduct
 } = require('../product/controller');
 
 
