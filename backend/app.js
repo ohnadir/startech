@@ -35,6 +35,8 @@ app.use(errorMiddleware)
 app.get('/api/csrf-token', (req, res) => {
   res.json({ csrfToken: req.csrfToken() });
 });
-
+app.get('/', (req, res) => {
+  res.json("server started");
+});
 
 module.exports = app;
