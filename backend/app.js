@@ -35,11 +35,6 @@ app.use(errorMiddleware)
 app.get('/api/csrf-token', (req, res) => {
   res.json({ csrfToken: req.csrfToken() });
 });
-app.get('/', (req, res) => {
-  res.json("server started");
-});
-/* app.listen(PORT, HOST, () => {
-  console.log(`Server started on ${HOST}:${PORT}, url http://${HOST}:${PORT}`);
-}); */
+
 
 module.exports = app;

@@ -92,7 +92,6 @@ exports.getProducts = catchAsyncErrors(async (req, res, next) => {
   // products = await apiFeatures.query;
 
   const products = await Product.find();
-  console.log(products)
   res.status(200).json({
     success: true,
     statusCode: 200,
