@@ -78,27 +78,26 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next)=> {
 });
 
 exports.getProducts = catchAsyncErrors(async (req, res, next) => {
-  const resPerPage = 4;
-  const productsCount = await Product.countDocuments();
+  // const resPerPage = 4;
+  // const productsCount = await Product.countDocuments();
 
-  const apiFeatures = new APIFeatures(Product.find(), req.query)
-    .search()
-    .filter()
+  // const apiFeatures = new APIFeatures(Product.find(), req.query)
+  //   .search()
+  //   .filter()
 
-  let products = await apiFeatures.query;
-  let filteredProductsCount = products.length;
+  // // let products = await apiFeatures.query;
+  // let filteredProductsCount = products.length;
 
-  apiFeatures.pagination(resPerPage)
-  products = await apiFeatures.query;
+  // apiFeatures.pagination(resPerPage)
+  // products = await apiFeatures.query;
 
-
+  const products = await Product.find();
+  console.log(products)
   res.status(200).json({
     success: true,
     statusCode: 200,
     message:"Fetch Product Successfully",
-    productsCount,
-    resPerPage,
-    filteredProductsCount,
+    // products
     products
   })
 });

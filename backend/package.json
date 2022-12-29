@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
-    "dev": "set NODE_ENV=dev&& nodemon index.js",
-    "prod": "set NODE_ENV=prod&& node index.js"
+    "dev": "set NODE_ENV=dev&& nodemon index.js"
   },
   "keywords": [],
   "author": "",
@@ -31,6 +33,7 @@
     "nodemailer": "^6.7.8",
     "nodemon": "^2.0.19",
     "shortid": "^2.2.16",
-    "slugify": "^1.6.5"
+    "slugify": "^1.6.5",
+    "stripe": "^11.5.0"
   }
 }

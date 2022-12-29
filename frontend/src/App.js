@@ -12,7 +12,7 @@ import ChangeAddress from './Page/ChangeAddress';
 import ProductDetails from './Page/ProductDetails';
 import Checkout from './Page/Checkout';
 import Payment from './Component/Modal/Payment';
-
+import { ToastContainer } from 'react-toastify';
 function App() {
   return (
     <div className="App ">
@@ -28,11 +28,10 @@ function App() {
         <Route path='/productDetails' element={<ProductDetails/>}></Route>
         <Route path='/changeAddress' element={<ChangeAddress/>}></Route>
         <Route path='/payment' element={<Payment/>}></Route>
-        
-        <Route path='/checkout' element={<Checkout/>}></Route>
         <Route path='/checkout' element={<Checkout/>}></Route>
         <Route path="/search/:keyword" element={<SearchResult/>} />
       </Routes>
+        <ToastContainer/>
     </div>
   );
 }

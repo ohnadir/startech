@@ -6,7 +6,11 @@ const {
   deleteUser,
   getUsers,
   getUser,
-  logout
+  logout,
+  searchUser,
+  forgotPassword,
+  resetPassword,
+  updatePassword
 
 } = require('../user/controller');
 
