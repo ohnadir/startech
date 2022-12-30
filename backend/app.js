@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require("body-parser");
 const morgan = require('morgan');
 const { readdirSync } = require('fs');
+const path = require('path');
 const { PORT, HOST } = require('./src/api/v1/config');
 const errorMiddleware = require('./src/api/v1/middleware/errors')
 

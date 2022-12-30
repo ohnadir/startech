@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../Style/ProductDetails.css';
 import { HiHome } from 'react-icons/hi'
 import { useNavigate } from 'react-router-dom'
@@ -31,6 +31,13 @@ const ProductDetails=()=> {
     const [createReview, setCreateReview] = useState(false);
     const [auth, setAuth] = useState('');
     const [modalOpen, setModalOpen] = useState(false);
+    const [products, setProducts] = useState([]);
+    
+    useEffect(() => {
+        fetch('http://localhost:5001/api/v1/products/id')
+        .then((response) => response.json())
+        .then((data) => setProducts(data.products));
+    }, []);
 
     const handleChange = (e) => {
         setAuth(prev=>({...prev, [e.target.name]:e.target.value}))
