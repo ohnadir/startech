@@ -175,7 +175,7 @@ exports.logout = catchAsyncErrors(async (req, res, next) => {
 })
 });
 
-// Forgot Password
+/* // Forgot Password
 exports.forgotPassword = async ({ email, req }) => {
   const response = {
     code: 201,
@@ -322,4 +322,4 @@ exports.updateProfile = async ({ id, body }) => {
   user.password = body.password;
   await user.save();
   sendToken(user, 200, res)
-}
+} */

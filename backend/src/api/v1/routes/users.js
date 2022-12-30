@@ -43,10 +43,10 @@ router.delete('/:id', idValidator, validationResult, deleteUser);
 router.get('/', getUsers);
 
 router.get('/search', searchUser);
-router.get('/logout', logout);
+/* router.get('/logout', logout);
 router.post('/password/forgot', forgotPassword);
 router.put('/password/reset/:token', resetPassword);
 
-router.get('/:id', isAuthenticatedUser, authorizeRoles('admin'), idValidator, validationResult, getUser);
+router.get('/:id', isAuthenticatedUser, authorizeRoles('admin'), idValidator, validationResult, getUser); */
 
 module.exports = router;
