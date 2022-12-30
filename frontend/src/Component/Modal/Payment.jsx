@@ -2,10 +2,6 @@ import React, { useEffect, useState } from 'react'
 import {CardElement, useStripe, useElements} from '@stripe/react-stripe-js';
 import axios from 'axios';
 import '../../Style/Payment.css'
-import { FaLock } from 'react-icons/fa';
-import {  toast } from 'react-toastify';
-import { Elements } from '@stripe/react-stripe-js'
-import { loadStripe } from '@stripe/stripe-js'
 const options = {
     style: {
         base: {
@@ -16,8 +12,7 @@ const options = {
         }
     }
 }
-const stripePromise = loadStripe('pk_test_51MJynOHzN4rqAg27o1nDk5hQeHaX8cuaBkInxAzGMEnEqee4QMyeztVLqyeuAhzgK9ZRdwPAF8uWFrRX2Qj8iuQ9005XC9m0sA');
-const Payment = ({ totalPrice, auth }) => {
+const Payment = ({ auth }) => {
     const [cardError, setCardError] = useState('');
     const [success, setSuccess] = useState('');
     const [processing, setProcessing] = useState(false);
@@ -37,23 +32,17 @@ const Payment = ({ totalPrice, auth }) => {
                 }
             }
             const {data} = await axios.post('http://localhost:5001/api/v1/payment/process', paymentData, config)
-            return data.client_secret
+            setClientSecret(data.client_secret)
         }
         getItem();
         
-    }, [paymentData]);
-    // console.log(clientSecret);
-        
+    }, []);
+    const orderInfo = JSON.parse(sessionStorage.getItem('orderInfo'));
     const handleSubmit = async(event) => {
         event.preventDefault();
-        
-
-
         if (!stripe || !elements) {
             return;
         }
-
-
         const card = elements.getElement(CardElement);
 
         if (card == null) {
@@ -61,7 +50,6 @@ const Payment = ({ totalPrice, auth }) => {
         }
 
         const { error, paymentMethod } = await stripe.createPaymentMethod(
-            // clientSecret,
             {
             type: 'card',
             card
@@ -84,8 +72,10 @@ const Payment = ({ totalPrice, auth }) => {
               payment_method: {
                 card: card,
                 billing_details: {
-                    name: "Nadir",
-                    email: "nadirhossain336@gmail.com"
+                    name: auth.name,
+                    email: auth.email,
+                    phone: auth.phone,
+                    zipCode : 1219
                 },
               },
             },
@@ -99,17 +89,31 @@ const Payment = ({ totalPrice, auth }) => {
             setSuccess('Your Payment is Completed');
             setTransactionId(paymentIntent.id);
 
-            /* // store on data base
-            const payment = {
-                purchase: _id,
-                transactionId : paymentIntent.id
+             // store on data base
+            const order = {
+                productInfo : {
+                    name: orderInfo.name,
+                    price: orderInfo.price,
+                    quantity: orderInfo.quantity,
+                    image: orderInfo.image
+                },
+                user :{
+                    name: auth.name,
+                    email: auth.email,
+                    phone: auth.phone,
+                    address: auth.address
+                },
+                paymentInfo : {
+                    id: paymentIntent.id,
+                    status: paymentIntent.status
+                }
+
             }
-            fetch(`https://sleepy-hollows-57490.herokuapp.com/purchase/${_id}`, {
-                method: 'PATCH',
-                body: JSON.stringify(payment),
+            fetch("http://localhost:5001/api/v1/order", {
+                method: 'POST',
+                body: JSON.stringify(order),
                 headers: {
-                    'content-type': 'application/json',
-                    'authorization' : `Bearer ${localStorage.getItem('accessToken')}`
+                    'content-type': 'application/json'
                     
                 }
             })
@@ -117,7 +121,7 @@ const Payment = ({ totalPrice, auth }) => {
                 .then(data => {
                     setProcessing(false)
                     console.log(data);
-                }) */
+                }) 
         }
 
 

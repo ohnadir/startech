@@ -39,14 +39,16 @@
 
 .productContainer .priceContainer{
     background: rgba(55,73,187,.05);
+
     border-radius: 30px;
-    padding: 6px 8px;
+    padding: 4px 8px;
     font-size: 14px;
+    width: fit-content !important;
     text-align: center;
-    max-width: max-content;
 }
 .productContainer .priceContainer .criteria{
     font-size: 12px;
+    width: fit-content !important;
     color: #666;
 }
 .productContainer .priceContainer .value{

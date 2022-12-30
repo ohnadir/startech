@@ -8,7 +8,6 @@ import MetaData from '../Component/Meta';
 import { Alert } from 'antd';
 import Payment from '../Component/Modal/Payment';
 
-// import axios from 'axios';
 import { Modal } from 'antd';
 
 const ChangeAddress=()=> {
@@ -185,7 +184,7 @@ const ChangeAddress=()=> {
             footer={null}
             centered 
             onCancel={()=>setModal(false)}>
-                <Payment totalPrice={totalPrice} auth={auth} />
+                <Payment auth={auth} />
       </Modal>
     </div>
   )

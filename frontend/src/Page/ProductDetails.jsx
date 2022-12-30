@@ -8,12 +8,10 @@ import { FaPinterestP } from 'react-icons/fa';
 import { FaStar } from 'react-icons/fa';
 import { CgBookmark } from 'react-icons/cg';
 import { DiGitCompare } from 'react-icons/di';
-import { AiFillStar } from 'react-icons/ai';
 import { MdAssignment } from 'react-icons/md';
-import Rating from 'react-rating';
 import { Modal } from 'antd';
-import { AiFillCheckCircle } from "react-icons/ai";
-import { AiOutlineCloseCircle } from "react-icons/ai";
+import { AiFillCheckCircle } from "react-icons/ai"
+import { useParams  } from 'react-router-dom';
 
 
 
@@ -31,16 +29,28 @@ const ProductDetails=()=> {
     const [createReview, setCreateReview] = useState(false);
     const [auth, setAuth] = useState('');
     const [modalOpen, setModalOpen] = useState(false);
-    const [products, setProducts] = useState([]);
+    const [product, setProduct] = useState([]);
+    const { id } = useParams()
     
     useEffect(() => {
-        fetch('http://localhost:5001/api/v1/products/id')
+        fetch(`http://localhost:5001/api/v1/products/${id}`)
         .then((response) => response.json())
-        .then((data) => setProducts(data.products));
-    }, []);
+        .then((data) => setProduct(data.product));
+    }, [ id]);
 
     const handleChange = (e) => {
         setAuth(prev=>({...prev, [e.target.name]:e.target.value}))
+    }
+    const handleSubmit=()=>{
+        const data = {
+            name: product.name,
+            id:product._id,
+            price: product.price,
+            quantity : count,
+            image : product?.productPictures[0]
+        }
+        sessionStorage.setItem('orderInfo', JSON.stringify(data))
+        navigate('/checkout')
     }
   return (
     <div className='max-w-7xl mx-auto px-2'>
@@ -52,7 +62,7 @@ const ProductDetails=()=> {
           <span>/</span>
           <span className='headerLocation'>Product Brand Name</span>
           <span>/</span>
-          <span className='headerLocation'>Product Name</span>
+          <span className='headerLocation'>{product.name}</span>
         </div>
         <div className='shareContainer'>
             <div className='flex items-center justify-between'>
@@ -88,46 +98,34 @@ const ProductDetails=()=> {
                     </div>
                 </div>
                 <div className='w-full md:w-[60%] p-2'>
-                    {/* <Rating
-                        initialRating={3.5}
-                        emptySymbol={<AiFillStar/>}
-                        fullSymbol={<AiFillStar style={{color: 'goldenrod'}}  />}
-                        readonly
-                    ></Rating> */}
-                    <h1 className='text-lg font-bold'>Apple MacBook Air (2022) Apple M2 Chip 13.6-Inch Liquid Retina Display 8GB RAM 256GB SSD Space Gray #MLXW3LL/A / MLXW3ZP/A </h1>
-                    <div className='pt-[15px]  flex gap-3'>
+                    
+                    <h1 className='text-lg font-bold'>{product.name}</h1>
+                    <div className='pt-[15px]  flex gap-3 flex-wrap'>
                         <div className='priceContainer'>
                             <span className='criteria'>Price: </span>
-                            <span className='value'>165,000৳</span>
+                            <span className='value'>{product.price}৳</span>
                         </div>
                         <div className='priceContainer'>
                             <span className='criteria'>Regular Price: </span>
-                            <span className='value'>165,000৳</span>
+                            <span className='value'>{parseInt(product.price) + 200 }৳</span>
                         </div>
                         <div className='priceContainer'>
                             <span className='criteria'>Status: </span>
-                            <span className='value'>165,000৳</span>
+                            <span className='value'>In Stock</span>
                         </div>
                         <div className='priceContainer'>
-                            <span className='criteria'>Product Code</span>
-                            <span className='value'>165,000৳</span>
+                            <span className='criteria'>Product Code: </span>
+                            <span className='value'>252525</span>
                         </div>
                         <div className='priceContainer'>
                             <span className='criteria'>Brand: </span>
-                            <span className='value'>Apple</span>
+                            <span className='value'>Logitech</span>
                         </div>
                         
                     </div>
                     <div className='details'>
                         <h3 className='text-black text-[16px]'>Key Features</h3>
-                        <ul>
-                            <li>MPN: </li>
-                            <li>Model: </li>
-                            <li>Processor: </li>
-                            <li>RAM: </li>
-                            <li>Display: </li>
-                            <li>Features: </li>
-                        </ul>
+                        <p>{product.desc}</p>
                     </div>
                     <div>
                         <div className='pointContainer'>
@@ -139,42 +137,15 @@ const ProductDetails=()=> {
                         </div>
                     </div>
                     <div className='paymentOption '>
-                    <h3 className='text-[18px] text-black'>Payment Options</h3>
-                        <div className='grid grid-cols-1 gap-5'>
-                            
-                            <div className='paymentItem'>
-                                <div className='input'>
-                                    <input type="radio" name="" id="" />
-                                </div>
-                                <div className='flex flex-col py-[8px]'>
-                                    <span className='text-[20px] font-semibold'>10, 500৳</span>
-                                    <span className='text-black '>Cash Discount PRice</span>
-                                    <span> Online / Cash Payment</span>
-                                </div>
+                        <div className='flex gap-5 '>
+                            <div className='countContainer flex'>
+                                <button className='minusBtn' disabled={count <= 1} onClick={()=>setCount(count - 1)}  >-</button>
+                                <input className='outline-0 w-20 px-8' type="text" value={count} />
+                                <button className='plusBtn' onClick={()=>setCount(count + 1)} >+</button>
                             </div>
-                            <div className='paymentItem'>
-                                <div className='input'>
-                                    <input type="radio" name="" id="" />
-                                </div>
-                                <div className='flex flex-col py-[8px]'>
-                                    <span className='text-[20px] font-semibold'>10, 500৳</span>
-                                    <span className='text-black '>Cash Discount PRice</span>
-                                    <span> Online / Cash Payment</span>
-                                </div>
-                            </div>
-                            <div className='flex gap-5 '>
-                                <div className='countContainer flex'>
-                                    <button className='minusBtn' disabled={count <= 1} onClick={()=>setCount(count - 1)}  >-</button>
-                                    <input className='outline-0 w-20 px-8' type="text" value={count} />
-                                    <button className='plusBtn' onClick={()=>setCount(count + 1)} >+</button>
-                                </div>
-                                <button onClick={() => setModalOpen(true)} className='buyBtn'>Buy Now</button>
+                            <button onClick={() => setModalOpen(true)} className='buyBtn'>Buy Now</button>
                         </div>
-                        </div>
-                        
                     </div>
-                    
-                    
                 </div>
             </div>
         </div>
@@ -220,7 +191,7 @@ const ProductDetails=()=> {
             {
                 modalOpen && <Modal
                 centered
-                visible={modalOpen}
+                open={modalOpen}
                 onCancel={() => setModalOpen(false)}
                 bodyStyle={{padding:"0", margin:"0", border:"none" }}
                 width={1000}
@@ -241,13 +212,13 @@ const ProductDetails=()=> {
                             </div>
                             <div className='flex justify-between'>
                                 <span className='cartCriteria'>Cart Total:</span>
-                                <span className='cartValue'>0</span>
+                                <span className='cartValue'>{count}</span>
                             </div>
                         </div>
                     </div>
                     <div className=' '>
                         <button className='cartBtn'>View Cart</button>
-                        <button onClick={()=>navigate('/checkout')} className='orderBtn'>Confirm Order</button>
+                        <button onClick={handleSubmit} className='orderBtn'>Confirm Order</button>
                     </div>
                 </div>
               </Modal>
