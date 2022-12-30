@@ -60,7 +60,7 @@ const ChangeAddress=()=> {
                             </div>
                             <div className=''>
                                 <label htmlFor="Email">Email</label>
-                                <input onChange={handleChange} name='Email'  type="text" placeholder='Email' />
+                                <input onChange={handleChange} name='email'  type="text" placeholder='Email' />
                             </div>
                             <div className=''>
                                 <label htmlFor="Phone">Phone</label>
@@ -184,7 +184,7 @@ const ChangeAddress=()=> {
             footer={null}
             centered 
             onCancel={()=>setModal(false)}>
-                <Payment auth={auth} />
+                <Payment auth={auth} setModal={setModal} />
       </Modal>
     </div>
   )

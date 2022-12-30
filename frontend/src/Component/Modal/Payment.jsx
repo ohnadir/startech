@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {CardElement, useStripe, useElements} from '@stripe/react-stripe-js';
 import axios from 'axios';
 import '../../Style/Payment.css'
+import { useNavigate } from 'react-router-dom';
 const options = {
     style: {
         base: {
@@ -12,7 +13,7 @@ const options = {
         }
     }
 }
-const Payment = ({ auth }) => {
+const Payment = ({ auth, setModal }) => {
     const [cardError, setCardError] = useState('');
     const [success, setSuccess] = useState('');
     const [processing, setProcessing] = useState(false);
@@ -20,10 +21,11 @@ const Payment = ({ auth }) => {
     const [clientSecret, setClientSecret] = useState('');
     const stripe = useStripe();
     const elements = useElements();
+    const navigate = useNavigate();
+    const orderInfo = JSON.parse(sessionStorage.getItem('orderInfo'));
     const paymentData = {
-        amount: Math.round(100 * 100)
+        amount: Math.round(orderInfo.price * 100)
     }
-    
     useEffect(() => {
         const getItem =async()=>{
             const config = {
@@ -37,7 +39,7 @@ const Payment = ({ auth }) => {
         getItem();
         
     }, []);
-    const orderInfo = JSON.parse(sessionStorage.getItem('orderInfo'));
+    
     const handleSubmit = async(event) => {
         event.preventDefault();
         if (!stripe || !elements) {
@@ -54,19 +56,9 @@ const Payment = ({ auth }) => {
             type: 'card',
             card
         });
-        
-        if (error) {
-            setCardError(error.message);
-        } else {
-            setCardError('')
-            console.log('[PaymentMethod]', paymentMethod);
-        }
-
-        setCardError(error?.message || '')
-        setSuccess('')
-        setProcessing(true)
+        console.log(paymentMethod);
         // confirm payment 
-        const {paymentIntent, error: intentError} = await stripe.confirmCardPayment(
+        const result = await stripe.confirmCardPayment(
             clientSecret,
             {
               payment_method: {
@@ -75,59 +67,50 @@ const Payment = ({ auth }) => {
                     name: auth.name,
                     email: auth.email,
                     phone: auth.phone,
-                    zipCode : 1219
+                    address: auth.address
                 },
+                
               },
             },
           );
-        if (intentError) {
-            setCardError(intentError?.message);
-            setProcessing(false);
-        }
-        else {
-            setCardError('');
-            setSuccess('Your Payment is Completed');
-            setTransactionId(paymentIntent.id);
-
-             // store on data base
-            const order = {
-                productInfo : {
-                    name: orderInfo.name,
-                    price: orderInfo.price,
-                    quantity: orderInfo.quantity,
-                    image: orderInfo.image
-                },
-                user :{
-                    name: auth.name,
-                    email: auth.email,
-                    phone: auth.phone,
-                    address: auth.address
-                },
-                paymentInfo : {
-                    id: paymentIntent.id,
-                    status: paymentIntent.status
-                }
-
+        
+        if(result.paymentIntent.status === "succeeded"){
+            const productInfo = {
+                name: orderInfo.name,
+                price: orderInfo.price,
+                quantity: orderInfo.quantity,
+                image: orderInfo.image
             }
-            fetch("http://localhost:5001/api/v1/order", {
-                method: 'POST',
-                body: JSON.stringify(order),
-                headers: {
-                    'content-type': 'application/json'
-                    
-                }
+            const shippingInfo ={
+                name: auth.firstName + auth.lastName,
+                email: auth.email,
+                phone: auth.phone,
+                address: auth.address
+            }
+            const paymentInfo = {
+                id: result.paymentIntent.id,
+                status: result.paymentIntent.status
+            }
+
+        
+        fetch("http://localhost:5001/api/v1/order", {
+            method: 'POST',
+            body: JSON.stringify({productInfo, shippingInfo, paymentInfo}),
+            headers: {
+                'content-type': 'application/json'
+                
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                event.target.reset();
+                setModal(false)
+                localStorage.setItem('transactionId', JSON.stringify(result.paymentIntent.id));
+                localStorage.setItem('orderNumber', JSON.stringify(data.result.orderNumber));
+                navigate('/confirmPayment')
+                console.log(data);
             })
-                .then(res => res.json())
-                .then(data => {
-                    setProcessing(false)
-                    console.log(data);
-                }) 
         }
-
-
-
-
-
     };
     return (
         <div>

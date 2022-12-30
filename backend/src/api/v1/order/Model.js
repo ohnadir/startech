@@ -58,6 +58,10 @@ const orderSchema = mongoose.Schema({
         type: Date,
         default: Date.now()
     },
+    orderNumber:{
+        type: Number,
+        default: Math.floor(Math.random() * 1000000)
+    },
     deliveryStatus: {
         type: String,
         required: true,

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Product = () => {
     const [products, setProducts] = useState([]);
-    const navigate = useNavigate()
     
     useEffect(() => {
         fetch('http://localhost:5001/api/v1/products')
@@ -18,7 +17,7 @@ const Product = () => {
             {
                 products?.map((product)=>
                     <Link to={`/productDetail/${product._id}`}>
-                        <div className='bg-white shadow-lg w-fit rounded-[6px]'>
+                        <div className='bg-white shadow-lg w-fit mx-auto rounded-[6px]'>
                             <div className='px-5 pt-5'>
                                 <img src={product?.productPictures[0]} alt="" />
                             </div>
