@@ -7,7 +7,7 @@ const SearchResult = () => {
 
     const [searchProduct, setSearchProduct] = useState([]);
     useEffect(() => {
-        axios.get(`/api/v1/products/search?q=${keyword}`)
+        axios.get(`/products/search?q=${keyword}`)
             .then(function (response) {
                 setSearchProduct(response.data.data?.products)
     

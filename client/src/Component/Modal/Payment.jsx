@@ -33,7 +33,7 @@ const Payment = ({ auth, setModal }) => {
                     'Content-Type': 'application/json'
                 }
             }
-            const {data} = await axios.post('/api/v1/payment/process', paymentData, config)
+            const {data} = await axios.post('/payment/process', paymentData, config)
             setClientSecret(data.client_secret)
         }
         getItem();

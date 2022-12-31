@@ -35,7 +35,7 @@ const ProductDetails=()=> {
     const { id } = useParams()
     
     useEffect(() => {
-        fetch(`/api/v1/products/${id}`)
+        fetch(`/products/${id}`)
         .then((response) => response.json())
         .then((data) => setProduct(data.product));
     }, [ id]);
