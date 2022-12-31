@@ -38,9 +38,9 @@ app.get("*", function (req, res) {
  */
 //port
 const PORT =  process.env.PORT;
-/* app.get('/', (req, res) => {
+app.get('/', (req, res) => {
   res.send('Testing connection')
-}) */
+})
 //listen server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
