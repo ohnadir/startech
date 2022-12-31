@@ -37,9 +37,9 @@ app.get("*", function (req, res) {
 });
 
 //port
-// const PORT = 8080 || process.env.PORT;
+const PORT =  process.env.PORT;
 
 //listen server
-app.listen(process.env.PORT, () => {
-  console.log(`Server running on port ${process.env.PORT}`);
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
