@@ -30,15 +30,17 @@ app.use("/api/v1/orders", orderRoute);
 app.use("/api/v1/payments", paymentRoute);
 
 //static files
-app.use(express.static(path.join(__dirname, "./client/build")));
+/* app.use(express.static(path.join(__dirname, "./client/build")));
 
 app.get("*", function (req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
-
+ */
 //port
 const PORT =  process.env.PORT;
-
+app.get('/', (req, res) => {
+  res.send('Testing connection')
+})
 //listen server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
