@@ -208,7 +208,7 @@ const CategoryProduct = () => {
                         </div>
                 </Drawer>
             </section>
-    </div>
+        </div>
     )
 }
 
