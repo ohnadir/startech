@@ -12,7 +12,7 @@ const Category =()=>{
                 Categories.map((category)=> <div className='card py-4' key={category.id}>
                     <div>
                         <img className='mx-auto' src={category.categoryImage} alt="" />
-                        <p className='text-center'>{category.name}</p>
+                        <p className='cardHeader'>{category.name}</p>
                     </div>
                 </div>)
             }

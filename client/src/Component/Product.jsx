@@ -6,7 +6,7 @@ const Product = () => {
     const [products, setProducts] = useState([]);
     
     useEffect(() => {
-        fetch('api/v1/products')
+        fetch('https://startech-server.vercel.app/api/v1/products')
         .then((response) => response.json())
         .then((data) => setProducts(data.products));
     }, []);

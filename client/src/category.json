@@ -38,5 +38,21 @@
         "id":"9",
         "name":"Laptop",
         "categoryImage" :"https://res.cloudinary.com/dcmvctoz3/image/upload/v1663766969/laptop-48x48_yh2msr.png"
+    },
+    {
+        "id":"10",
+        "name":"Monitor",
+        "categoryImage" :"https://res.cloudinary.com/ddqovbzxy/image/upload/v1672551059/monitor-48x48_eqsqm0.png"
+    },
+    {
+        "id":"11",
+        "name":"Watch",
+        "categoryImage" :"https://res.cloudinary.com/ddqovbzxy/image/upload/v1672551059/smart-watch-48x48_odwuhq.png"
+    },
+    {
+        "id":"12",
+        "name":"Router",
+        "categoryImage" :"https://res.cloudinary.com/ddqovbzxy/image/upload/v1672551059/router-48x48_mukm0r.png"
     }
+
 ]
