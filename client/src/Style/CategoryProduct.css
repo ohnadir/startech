@@ -18,7 +18,7 @@
 }
 .brandName{
     background-color: white;
-    border-radius: 10px;
+    border-radius: 6px;
     box-shadow:  0 1px 1px rgb(0 0 0 / 10%);
     padding: 10px;
 }
@@ -38,7 +38,7 @@
 }
 .filter{
     background-color: white;
-    border-radius: 10px;
+    border-radius: 6px;
     box-shadow:  0 1px 1px rgb(0 0 0 / 10%);
     padding: 10px;
     margin-bottom: 20px;
@@ -54,4 +54,48 @@
 }
 .drawer{
     background-color: #f2f4f8;
+}
+.filterDivider{
+    margin-top: 15px;
+    width: 100%;
+    background-color: #eee;
+    height: 2px;
+}
+.rangeContainer{
+    background-color: white;
+}
+.ant-slider-track{
+    background-color: #EF4A23 !important;
+    height: 10px !important;
+}
+.ant-slider-rail{
+    height: 10px !important;
+}
+.ant-slider-handle{
+    position: absolute;
+    width: 20px !important;
+    height: 20px !important;
+    background-color: #EF4A23 !important;
+    border: 2px solid #91d5ff !important;
+    border-radius: 50%;
+    box-shadow: 0;
+    cursor: pointer;
+    transition: border-color .3s,box-shadow .6s,transform .3s cubic-bezier(.18,.89,.32,1.28);
+}
+.availability{
+    background-color: white;
+    border-radius: 6px;
+    box-shadow:  0 1px 1px rgb(0 0 0 / 10%);
+}
+.sortCard{
+    position: absolute;
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    width: 150px;
+    height: fit-content;
+    top: 28px;
+    border: 1px solid #ddd;
+    padding: 5px;
+    right: -10px;
 }
