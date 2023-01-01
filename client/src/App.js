@@ -14,6 +14,7 @@ import Checkout from './Page/Checkout';
 import Payment from './Component/Modal/Payment';
 import { ToastContainer } from 'react-toastify';
 import ConfirmPayment from './Component/ConfirmPayment';
+import CategoryProduct from './Page/CategoryProduct';
 function App() {
   return (
     <div className="App ">
@@ -32,6 +33,7 @@ function App() {
         <Route path='/confirmPayment' element={<ConfirmPayment/>}></Route>
         <Route path='/checkout' element={<Checkout/>}></Route>
         <Route path="/search/:keyword" element={<SearchResult/>} />
+        <Route path="/categoryProduct/:keyword" element={<CategoryProduct/>} />
       </Routes>
         <ToastContainer/>
     </div>
