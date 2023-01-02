@@ -78,27 +78,26 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next)=> {
 });
 
 exports.getProducts = catchAsyncErrors(async (req, res, next) => {
-  const { page, size} = req.query;
+  const { page, size} = req.query;/* 
   const pageNumber = parseInt(page) || 1;
-  const limit = parseInt(size) || 10;
+  const limit = parseInt(size) ||;
 
   const totalDocuments = await Product.countDocuments({});
-  const totalPage = Math.ceil(totalDocuments / limit);
+  const totalPage = Math.ceil(totalDocuments / limit); */
 
   const products = await Product.find({ isDelete: false })
     .select('-__v -isDelete')
     .sort({ _id: -1 })
-    .skip((pageNumber - 1) * limit)
-    .limit(limit)
+    .skip(page * size)
+    .limit(size)
     .lean();
+    const count = await Product.estimatedDocumentCount();
   res.status(200).json({
     success: true,
     statusCode: 200,
     message:"Fetch Product Successfully",
     products,
-    currentPage: pageNumber,
-    totalDocuments,
-    totalPage,
+    count
   })
 });
 

@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import '../Style/Product.css';
 
 const Product = () => {
     const [products, setProducts] = useState([]);
+    const [count, setCount] = useState(0);
+    const [page, setPage] = useState(0);
+    const [size, setSize] = useState(8);
     
     useEffect(() => {
-        fetch('https://startech-server.vercel.app/api/v1/products')
+        fetch(`https://startech-server.vercel.app/api/v1/products?page=${page}&size=${size}`)
         .then((response) => response.json())
-        .then((data) => setProducts(data.products));
-    }, []);
+        .then((data) => {
+            setCount(data.count);
+            setProducts(data.products)
+        });
+    }, [page, size]);
+    const pages = Math.ceil(count / size);
 
   return (
     <div className='max-w-7xl mx-auto px-5 py-[40px]'>
@@ -31,7 +39,16 @@ const Product = () => {
                 )
             }
         </div>
-            
+        <section className="pagination">
+        {
+                    [...Array(pages).keys()].map(number => <button
+                        key={number}
+                        className={page === number ? 'selected' : ''}
+                        onClick={() => setPage(number)}>
+                        {number + 1}
+                    </button>)
+                }
+        </section>
     </div>
   )
 }
