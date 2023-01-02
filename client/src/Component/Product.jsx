@@ -39,7 +39,7 @@ const Product = () => {
                 )
             }
         </div>
-        <section className="pagination mt-10">
+        <section className="pagination mt-10 flex items-center justify-center" >
         {
                     [...Array(pages).keys()].map(number => <button
                         key={number}

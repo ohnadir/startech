@@ -78,12 +78,7 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next)=> {
 });
 
 exports.getProducts = catchAsyncErrors(async (req, res, next) => {
-  const { page, size} = req.query;/* 
-  const pageNumber = parseInt(page) || 1;
-  const limit = parseInt(size) ||;
-
-  const totalDocuments = await Product.countDocuments({});
-  const totalPage = Math.ceil(totalDocuments / limit); */
+  const { page, size} = req.query;
 
   const products = await Product.find({ isDelete: false })
     .select('-__v -isDelete')
@@ -91,7 +86,7 @@ exports.getProducts = catchAsyncErrors(async (req, res, next) => {
     .skip(page * size)
     .limit(size)
     .lean();
-    const count = await Product.estimatedDocumentCount();
+  const count = await Product.estimatedDocumentCount();
   res.status(200).json({
     success: true,
     statusCode: 200,
