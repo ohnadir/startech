@@ -11,3 +11,10 @@
     color: wheat;
     font-weight: bold;
 }
+.sizeContainer{
+    width: fit-content;
+    height: 28px;
+    border: none;
+    padding: 2px 16px !important;
+    box-shadow:  0 1px 1px rgb(0 0 0 / 10%);
+}

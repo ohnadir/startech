@@ -40,14 +40,20 @@ const Product = () => {
             }
         </div>
         <section className="pagination mt-10 flex items-center justify-center" >
-        {
-                    [...Array(pages).keys()].map(number => <button
-                        key={number}
-                        className={page === number ? 'selected' : ''}
-                        onClick={() => setPage(number)}>
-                        {number + 1}
-                    </button>)
-                }
+            {
+                [...Array(pages).keys()].map(number => <button
+                    key={number}
+                    className={page === number ? 'selected' : ''}
+                    onClick={() => setPage(number)}>
+                    {number + 1}
+                </button>)
+            }
+            <select className='sizeContainer' onChange={event => setSize(event.target.value)}>
+                    <option value="5">5</option>
+                    <option value="10" selected>10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
         </section>
     </div>
   )
