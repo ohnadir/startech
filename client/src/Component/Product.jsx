@@ -39,7 +39,7 @@ const Product = () => {
                 )
             }
         </div>
-        <section className="pagination">
+        <section className="pagination mt-10">
         {
                     [...Array(pages).keys()].map(number => <button
                         key={number}
