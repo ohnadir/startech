@@ -4,10 +4,9 @@ import { useParams } from 'react-router-dom';
 
 const SearchResult = () => {
     const { keyword } = useParams()
-
     const [searchProduct, setSearchProduct] = useState([]);
     useEffect(() => {
-        axios.get(`/products/search?q=${keyword}`)
+        axios.get(`https://startech-server.vercel.app/api/v1/products/products/search?q=${keyword}`)
             .then(function (response) {
                 setSearchProduct(response.data.data?.products)
     

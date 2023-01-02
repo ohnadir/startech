@@ -108,6 +108,27 @@ exports.getProduct = catchAsyncErrors(async (req, res, next) => {
     product
   })
 });
+exports.searchProduct = catchAsyncErrors(async (req, res, next) => {
+  const q = req.query.q;
+  let query = { isDelete: false };
+  if (q !== 'undefined' || q !== undefined || q) {
+    let regex = new RegExp(q, 'i');
+    query = {
+      ...query,
+      $or: [{ name: regex }]
+    };
+  }
+  const products = await Product.find(query)
+  if (!products) {
+    return next(new ErrorHandler('Product not found', 404));
+  }
+
+  res.status(200).json({
+    status: true,
+    statusCode:200,
+    products
+  })
+});
 
 // Create new review   =>   /api/v1/review
 exports.createProductReview = async ({body, req}) => {

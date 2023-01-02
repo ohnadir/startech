@@ -32,6 +32,11 @@ const Navbar = () => {
         }
     },[])
     
+    const handleSearch=()=>{
+        if(keyword){
+            navigate(`/search/${keyword}`)
+        }
+    }
 
     const menuLists = <>
         <button className='text-white block md:hidden' onClick={()=>setOpen(!open)}><BiSearchAlt2 className='text-2xl'/></button>
@@ -77,7 +82,7 @@ const Navbar = () => {
                         <div className='hidden md:block'>
                             <div className='flex items-center '>
                                 <input className='searchInput' onChange={(e)=>setKeyword(e.target.value)} type="text" placeholder='KHUJ, THE SEARCH' />
-                                <button className='searchBtn' onClick={()=>navigate(`/search/${keyword}`)}><BiSearchAlt2/></button>
+                                <button className='searchBtn' onClick={handleSearch}><BiSearchAlt2/></button>
                             </div>
                         </div>
                     </div>
@@ -90,7 +95,7 @@ const Navbar = () => {
                         open && <div className='bg-white'>
                         <div className='flex items-center '>
                             <input className='searchInput' onChange={(e)=>setKeyword(e.target.value)} type="text" placeholder='KHUJ, THE SEARCH' />
-                            <button className='searchBtn' onClick={()=>navigate(`/search/${keyword}`)}><BiSearchAlt2/></button>
+                            <button className='searchBtn' onClick={handleSearch}><BiSearchAlt2/></button>
                         </div>
                     </div>
                     }

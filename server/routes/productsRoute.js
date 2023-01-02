@@ -4,7 +4,8 @@ const {
   updateProduct,
   deleteProduct,
   getProducts,
-  getProduct
+  getProduct,
+  searchProduct
 } = require('../controller/product');
 
 
@@ -17,7 +18,7 @@ const {
 const { isAuthenticatedUser, authorizeRoles } = require('../middleware/auth')
 const validationResult = require('../validators');
 
-router.post('/', addProduct);
+router.post('/', addProductValidator, validationResult,  addProduct);
 
 router.patch(
   '/:id',
@@ -30,6 +31,7 @@ router.patch(
 router.delete('/:id', idValidator, validationResult, deleteProduct);
 
 router.get('/', getProducts);
+router.get('/search', searchProduct);
 
 router.get('/:id', idValidator, validationResult, getProduct);
 
