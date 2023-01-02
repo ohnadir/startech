@@ -16,26 +16,6 @@
     padding: 25px 0 ;
 
 }
-.brandName{
-    background-color: white;
-    border-radius: 6px;
-    box-shadow:  0 1px 1px rgb(0 0 0 / 10%);
-    padding: 10px;
-}
-.brandName ul li {
-    border: 1px solid #ddd;
-    padding: 0 10px;
-    border-radius: 30px;
-    font-size: 14px;
-    cursor: pointer;
-    color: #111;
-    background-color: transparent;
-    transition: all 0.1s ease;
-}
-.brandName ul li:hover{
-    color: white;
-    background-color: #3749bb;;
-}
 .filter{
     background-color: white;
     border-radius: 6px;

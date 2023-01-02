@@ -17,7 +17,7 @@ const {
 const { isAuthenticatedUser, authorizeRoles } = require('../middleware/auth')
 const validationResult = require('../validators');
 
-router.post('/', addProductValidator, validationResult, addProduct);
+router.post('/', addProduct);
 
 router.patch(
   '/:id',

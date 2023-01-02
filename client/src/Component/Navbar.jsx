@@ -45,7 +45,7 @@ const Navbar = () => {
             <div className="dropdown">
                 <CgProfile className='dropBtn text-white' />
                 <div className="dropdown-content">
-                    <ul>
+                    <ul className='m-0'>
                         <li onClick={()=>navigate('/profile')}>Profile</li>
                         <li>Profile</li>
                         <li onClick={()=>navigate('/login')}>Login</li>

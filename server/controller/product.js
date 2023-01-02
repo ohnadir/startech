@@ -1,7 +1,7 @@
 const Product = require('../models/product');
 const ErrorHandler = require('../middleware/errors');
 const  catchAsyncErrors = require('../middleware/catchAsyncErrors');
-const APIFeatures = require('../utils/APIFeatures')
+// const APIFeatures = require('../utils/APIFeatures');
 
 exports.addProduct = catchAsyncErrors(async (req, res, next) => {
   const { name, price, quantity, desc, productPictures, category }= req.body;
@@ -78,12 +78,27 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next)=> {
 });
 
 exports.getProducts = catchAsyncErrors(async (req, res, next) => {
-  const products = await Product.find();
+  const { page, size} = req.query;
+  const pageNumber = parseInt(page) || 1;
+  const limit = parseInt(size) || 10;
+
+  const totalDocuments = await Product.countDocuments({});
+  const totalPage = Math.ceil(totalDocuments / limit);
+
+  const products = await Product.find({ isDelete: false })
+    .select('-__v -isDelete')
+    .sort({ _id: -1 })
+    .skip((pageNumber - 1) * limit)
+    .limit(limit)
+    .lean();
   res.status(200).json({
     success: true,
     statusCode: 200,
     message:"Fetch Product Successfully",
-    products
+    products,
+    currentPage: pageNumber,
+    totalDocuments,
+    totalPage,
   })
 });
 

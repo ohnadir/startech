@@ -37,15 +37,6 @@ const BrandProduct = () => {
                     <HiHome onClick={()=>navigate('/home')} className='text-[#666] cursor-pointer'/> <span>/</span><span>Monitor { keyword }</span>
                 </div>
             </header>
-            <section className='brandName mb-5'>
-                <ul className='flex items-center gap-5 w-fit flex-wrap m-0'>
-                    <li>Dell</li>
-                    <li>Hp</li>
-                    <li>LG</li>
-                    <li>Acer</li>
-                    <li>GIGABYTE</li>
-                </ul>
-            </section>
             <section className="filter lg:hidden">
                 <div className='flex items-center justify-between'>
                     <div className='filterContainer' onClick={()=> setOpen(true)}>
