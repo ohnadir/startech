@@ -1,0 +1,19 @@
+.searchResult{
+    background: rgba(55,73,187,.05);
+}
+.searchHeader{
+    background-color: white;
+    
+}
+.searchProduct{
+    background-color: white;
+    box-shadow: 5px 5px 5px rgb(0 0 0 / 3%);
+    border-radius: 5px;
+}
+.navigate{
+    background-color: white;
+    box-shadow: 5px 5px 5px rgb(0 0 0 / 3%);
+    border-radius: 5px;
+    margin: 0 !important; 
+    padding: 16px !important;
+}
