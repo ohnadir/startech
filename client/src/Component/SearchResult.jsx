@@ -8,9 +8,19 @@ const SearchResult = () => {
     useEffect(() => {
         axios.get(`https://startech-server.vercel.app/api/v1/products/products/search?q=${keyword}`)
             .then(function (response) {
-                setSearchProduct(response.data.data?.products)
+                // setSearchProduct(response.data.data?.products)
+                console.log(response)
     
             })
+    }, [keyword]);
+
+    useEffect(() => {
+        fetch(`https://startech-server.vercel.app/api/v1/products/products/search?q=${keyword}`)
+        .then((response) => response.json())
+        .then((data) => {
+            // setSearchProduct(response.data.data?.products)
+            console.log(data)
+        });
     }, [keyword]);
     return (
         <div className='max-w-7xl mx-auto px-4'>
