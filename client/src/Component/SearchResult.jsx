@@ -15,7 +15,7 @@ const SearchResult = () => {
     }, [keyword]);
 
     useEffect(() => {
-        fetch(`https://startech-server.vercel.app/api/v1/products/products/search?q=${keyword}`)
+        fetch(`https://startech-server.vercel.app/api/v1/products/search?q=${keyword}`)
         .then((response) => response.json())
         .then((data) => {
             // setSearchProduct(response.data.data?.products)
