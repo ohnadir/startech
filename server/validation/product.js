@@ -15,17 +15,6 @@ exports.addProductValidator = [
           throw "Price is must Numeric Value"
         }
       }
-    }),
-    check('quantity')
-    .trim()
-    .notEmpty()
-    .withMessage('Quantity is required')
-    .custom(async (quantity) => {
-      if (quantity) {
-        if (isNaN(quantity)) {
-          throw "Quantity is must Numeric Value"
-        }
-      }
     })
 ];
 
@@ -38,14 +27,6 @@ exports.updateProductValidator = [
       if (price) {
         if (isNaN(price)) {
           throw "Price is must Numeric Value"
-        }
-      }
-    }),
-    check('quantity')
-    .custom(async (quantity) => {
-      if (quantity) {
-        if (isNaN(quantity)) {
-          throw "Quantity is must Numeric Value"
         }
       }
     })

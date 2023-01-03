@@ -4,7 +4,14 @@ const  catchAsyncErrors = require('../middleware/catchAsyncErrors');
 const APIFeatures = require('../utils/APIFeatures');
 
 exports.addProduct = catchAsyncErrors(async (req, res, next) => {
-  const { name, price, quantity, desc, productPictures, category }= req.body;
+  const { 
+    name, 
+    price,
+    desc, 
+    productPictures, 
+    category,
+    brand
+  }= req.body;
 
   const isNameExist = await Product.findOne({ name });
   if (isNameExist) {
@@ -14,10 +21,10 @@ exports.addProduct = catchAsyncErrors(async (req, res, next) => {
   const newProduct = new Product({
     name,
     price,
-    quantity,
     desc,
     productPictures,
-    category
+    category,
+    brand
   });
   await newProduct.save();
   res.status(200).json({
