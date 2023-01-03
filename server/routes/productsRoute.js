@@ -5,7 +5,8 @@ const {
   deleteProduct,
   getProducts,
   getProduct,
-  searchProduct
+  searchProduct,
+  filterProduct
 } = require('../controller/product');
 
 

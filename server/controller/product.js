@@ -1,7 +1,7 @@
 const Product = require('../models/product');
 const ErrorHandler = require('../middleware/errors');
 const  catchAsyncErrors = require('../middleware/catchAsyncErrors');
-// const APIFeatures = require('../utils/APIFeatures');
+const APIFeatures = require('../utils/APIFeatures');
 
 exports.addProduct = catchAsyncErrors(async (req, res, next) => {
   const { name, price, quantity, desc, productPictures, category }= req.body;
@@ -109,16 +109,12 @@ exports.getProduct = catchAsyncErrors(async (req, res, next) => {
   })
 });
 exports.searchProduct = catchAsyncErrors(async (req, res, next) => {
-  const q = req.query.q;
-  let query = { isDelete: false };
-  if (q !== 'undefined' || q !== undefined || q) {
-    let regex = new RegExp(q, 'i');
-    query = {
-      ...query,
-      $or: [{ name: regex }]
-    };
-  }
-  const products = await Product.find(query)
+
+  const apiFeatures = new APIFeatures(Product.find(), req.query)
+  .search()
+  .filter()
+
+  let products = await apiFeatures.query;
   if (!products) {
     return next(new ErrorHandler('Product not found', 404));
   }

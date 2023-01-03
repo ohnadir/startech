@@ -1,25 +1,27 @@
 class APIFeatures {
-    constructor(query, queryStr) {
+    constructor(query, queryString) {
         this.query = query;
-        this.queryStr = queryStr;
+        this.queryString = queryString;
     }
     search() {
-        const keyword = this.queryStr.keyword ? {
-            name: {
-                $regex: this.queryStr.keyword,
-                $options: 'i'
-            }
-        } : {}
-
-        this.query = this.query.find({ ...keyword });
+        const q = this.queryString.keyword;
+        let query = {};
+        if (q !== 'undefined' || q !== undefined || q) {
+            let regex = new RegExp(q, 'i');
+            query = {
+            ...query,
+            $or: [{ name: regex }]
+            };
+        }
+        this.query = this.query.find(query);
         return this;
-    }
+    } 
     filter() {
 
-        const queryCopy = { ...this.queryStr };
+        const queryCopy = { ...this.queryString };
 
         // Removing fields from the query
-        const removeFields = ['keyword', 'limit', 'page']
+        const removeFields = ['keyword']
         removeFields.forEach(el => delete queryCopy[el]);
 
         // Advance filter for price, ratings etc
@@ -30,12 +32,12 @@ class APIFeatures {
         this.query = this.query.find(JSON.parse(queryStr));
         return this;
     }
-    pagination(resPerPage) {
+    /* pagination(resPerPage) {
         const currentPage = Number(this.queryStr.page) || 1;
         const skip = resPerPage * (currentPage - 1);
 
         this.query = this.query.limit(resPerPage).skip(skip);
         return this;
-    }
+    } */
 }
 module.exports = APIFeatures
