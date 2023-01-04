@@ -16,6 +16,7 @@ const Product = () => {
         .then((data) => {
             setCount(data.count);
             setProducts(data.products)
+            console.log(data.products)
         });
     }, [page, size]);
     const pages = Math.ceil(count / size);
@@ -33,7 +34,7 @@ const Product = () => {
                         <Link to={`/productDetail/${product._id}`}>
                             <div key={product.id} className='bg-white shadow-lg w-[300px] md:w-fit mx-auto rounded-[6px]'>
                                 <div className='px-5 pt-5'>
-                                    <img src={product?.productPictures[0]} alt="" />
+                                    <img src={product?.productPictures[0].img} alt="" />
                                 </div>
                                 <div className='divider'></div>
                                 <div className='p-5 flex flex-col justify-between'>
