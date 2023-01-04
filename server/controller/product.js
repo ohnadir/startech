@@ -87,8 +87,7 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next)=> {
 exports.getProducts = catchAsyncErrors(async (req, res, next) => {
   const { page, size} = req.query;
 
-  const products = await Product.find({ isDelete: false })
-    .select('-__v -isDelete')
+  const products = await Product.find()
     .sort({ _id: -1 })
     .skip(page * size)
     .limit(size)
