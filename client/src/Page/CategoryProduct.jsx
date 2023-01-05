@@ -21,6 +21,9 @@ const CategoryProduct = () => {
     const onAfterChange = (value) => {
         setValue(value);
     };
+    const handleBrandName = (name)=>{
+        navigate(`/brandProduct/${name}`)
+    }
 
     useEffect(() => {
         axios.get(`https://startech-server.vercel.app/api/v1/products/search?category=${keyword}`)
@@ -43,7 +46,7 @@ const CategoryProduct = () => {
             <section className='brandName my-5'>
                 <ul className='flex items-center gap-5 w-fit flex-wrap m-0'>
                     {
-                        newBrandName?.map((item)=> <li>{item}</li>)
+                        newBrandName?.map((item)=> <li onClick={()=>handleBrandName(item)}>{item}</li>)
                     }
                 </ul>
             </section>

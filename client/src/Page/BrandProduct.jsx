@@ -23,18 +23,16 @@ const BrandProduct = () => {
     };
 
     useEffect(() => {
-        // axios.get(`https://startech-server.vercel.app/search?q=${keyword}`)
-        // axios.get(`/products/search?q=${keyword}`)
-        axios.get("https://startech-server.vercel.app/api/v1/products")
+        axios.get(`https://startech-server.vercel.app/api/v1/products/search?brand=${keyword}`)
             .then(function (response) {
                 setSearchProduct(response.data.products)
             })
     }, [keyword]);
     return (
         <div className='max-w-7xl mx-auto categoryProductContainer'>
-            <header>
+            <header className='py-5'>
                 <div className='navigate'>
-                    <HiHome onClick={()=>navigate('/home')} className='text-[#666] cursor-pointer'/> <span>/</span><span>Monitor { keyword }</span>
+                    <HiHome onClick={()=>navigate('/home')} className='text-[#666] cursor-pointer'/> <span>/</span><span>{ keyword }</span>
                 </div>
             </header>
             <section className="filter lg:hidden">
@@ -123,7 +121,7 @@ const BrandProduct = () => {
                             <Link to={`/productDetail/${product._id}` }>
                                 <div key={product._id}  className='w-[300px] md:w-fit mx-auto singleProduct'>
                                     <div className='px-5 pt-5'>
-                                        <img src={product?.productPictures[0]} alt="" />
+                                        <img src={product?.productPictures[0].img} alt="" />
                                     </div>
                                     <div className='divider'></div>
                                     <div className='p-5 flex flex-col justify-between'>
