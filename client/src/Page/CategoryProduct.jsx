@@ -28,6 +28,11 @@ const CategoryProduct = () => {
                 setSearchProduct(response.data.products)
             })
     }, [keyword]);
+    //  function for duplicate brand name filtering 
+    const name = [];
+    const brandName = searchProduct.filter( (item)=> name.push(item.brand));
+    const newBrandName = name.filter((el, index) => name.indexOf(el) === index);
+    
     return (
         <div className='max-w-7xl mx-auto categoryProductContainer'>
             <header>
@@ -38,7 +43,7 @@ const CategoryProduct = () => {
             <section className='brandName my-5'>
                 <ul className='flex items-center gap-5 w-fit flex-wrap m-0'>
                     {
-                        searchProduct?.map((item)=> <li>{item}</li>)
+                        newBrandName?.map((item)=> <li>{item}</li>)
                     }
                 </ul>
             </section>
