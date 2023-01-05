@@ -23,9 +23,7 @@ const CategoryProduct = () => {
     };
 
     useEffect(() => {
-        // axios.get(`https://startech-server.vercel.app/search?q=${keyword}`)
-        // axios.get(`/products/search?q=${keyword}`)
-        axios.get("https://startech-server.vercel.app/api/v1/products")
+        axios.get(`https://startech-server.vercel.app/api/v1/products/search?category=${keyword}`)
             .then(function (response) {
                 setSearchProduct(response.data.products)
             })
@@ -34,16 +32,14 @@ const CategoryProduct = () => {
         <div className='max-w-7xl mx-auto categoryProductContainer'>
             <header>
                 <div className='navigate'>
-                    <HiHome onClick={()=>navigate('/home')} className='text-[#666] cursor-pointer'/> <span>/</span><span>Monitor { keyword }</span>
+                    <HiHome onClick={()=>navigate('/home')} className='text-[#666] cursor-pointer'/> <span>/</span><span>{ keyword }</span>
                 </div>
             </header>
-            <section className='brandName mb-5'>
+            <section className='brandName my-5'>
                 <ul className='flex items-center gap-5 w-fit flex-wrap m-0'>
-                    <li>Dell</li>
-                    <li>Hp</li>
-                    <li>LG</li>
-                    <li>Acer</li>
-                    <li>GIGABYTE</li>
+                    {
+                        searchProduct?.map((item)=> <li>{item}</li>)
+                    }
                 </ul>
             </section>
             <section className="filter lg:hidden">
@@ -132,7 +128,7 @@ const CategoryProduct = () => {
                             <Link to={`/productDetail/${product._id}` }>
                                 <div key={product._id}  className='w-[300px] md:w-fit mx-auto singleProduct'>
                                     <div className='px-5 pt-5'>
-                                        <img src={product?.productPictures[0]} alt="" />
+                                        <img src={product?.productPictures[0].img} alt="" />
                                     </div>
                                     <div className='divider'></div>
                                     <div className='p-5 flex flex-col justify-between'>

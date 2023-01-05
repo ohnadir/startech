@@ -16,7 +16,6 @@ const Product = () => {
         .then((data) => {
             setCount(data.count);
             setProducts(data.products)
-            console.log(data.products)
         });
     }, [page, size]);
     const pages = Math.ceil(count / size);
