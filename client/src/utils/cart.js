@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 // use local storage to manage cart data
 const addToCart = (data) =>{
     let shoppingCart = [];
@@ -9,7 +7,6 @@ const addToCart = (data) =>{
     if(storedCart){
         shoppingCart = JSON.parse(storedCart);
     }
-    console.log(shoppingCart)
     shoppingCart.push(data)
     
     localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart));
@@ -26,22 +23,16 @@ const getStoredCart = () => {
     } 
     return shoppingCart;
 }
-const RemoveFromCart = id =>{
+const RemoveFromCart = (item)=>{
+    // console.log(name);
     const storedCart = localStorage.getItem('shopping-cart');
     const shoppingCart = JSON.parse(storedCart);
-    useEffect(()=>{
-        const data = shoppingCart.forEach(item=> item.id === id);
-        console.log(data);
-    },[id])
-    let nadir ={};
-    console.log(id);
-    
-        
-        /* if(id in shoppingCart){
-            console.log(shoppingCart);
-            // delete shoppingCart[id];
-            localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart));
-        } */
+    // console.log(shoppingCart);
+    const data = shoppingCart.filter((items)=> items.name !== item.name);
+    console.log(data);
+    if(data){
+        localStorage.setItem('shopping-cart', JSON.stringify(data));
+    }
     
 }
 

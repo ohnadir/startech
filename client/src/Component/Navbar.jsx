@@ -8,6 +8,7 @@ import logo from '../assets/logo.png';
 import { Drawer } from 'antd';
 import { MdOutlineClose } from 'react-icons/md';
 import CartDrawer from './CartDrawer';
+import { getStoredCart } from '../utils/cart';
 
 const Navbar = () => {
 
@@ -24,13 +25,7 @@ const Navbar = () => {
     const [open, setOpen] = useState(false)
     const [cartOpen, setCartOpen] = useState(false)
     const [keyword, setKeyword] = useState('');
-    const [count, setCount] = useState(0);
-    const storedCart = JSON.parse(localStorage.getItem('shopping-cart'));
-    useEffect(()=>{
-        if(storedCart){
-            setCount(storedCart.length);
-        }
-    },[])
+    const storedCart = getStoredCart();
     
     const handleSearch=()=>{
         if(keyword){
@@ -44,7 +39,7 @@ const Navbar = () => {
             <span onClick={()=>setCartOpen(true)} >
                 <BsCartCheckFill className='cursor-pointer text-2xl text-white' />
             </span>
-            <span className="absolute top-[-7px] left-[16px] bg-[#669900]  rounded-full w-[16px] h-[16px] flex items-center justify-center p-[2px]">{count}</span>
+            <span className="absolute top-[-7px] left-[16px] bg-[#669900]  rounded-full w-[16px] h-[16px] flex items-center justify-center p-[2px]">{ storedCart ? storedCart?.length : 0}</span>
         </div>
         <div>
             <div className="dropdown">
@@ -110,7 +105,7 @@ const Navbar = () => {
                         <h1 className=' text-white'>YOUR CART</h1>
                         <MdOutlineClose className='cartCloseBtn' onClick={()=>setCartOpen(false)} />
                     </div>
-                    <CartDrawer storedCart={storedCart} />
+                    <CartDrawer />
             </Drawer>
         </div>
     );

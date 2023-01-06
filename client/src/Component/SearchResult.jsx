@@ -11,11 +11,9 @@ const SearchResult = () => {
     const navigate = useNavigate()
     const [searchProduct, setSearchProduct] = useState([]);
     useEffect(() => {
-        axios.get(`https://startech-server.vercel.app/api/v1/products/products/search?q=${keyword}`)
+        axios.get(`https://startech-server.vercel.app/api/v1/products/search?q=${keyword}`)
             .then(function (response) {
-                // setSearchProduct(response.data.data?.products)
-                console.log(response)
-    
+                setSearchProduct(response.data.data?.products)
             })
     }, [keyword]);
 
@@ -41,7 +39,7 @@ const SearchResult = () => {
                             <h1 className='p-4 font-semibold searchHeader m-0 my-5'>Search - {keyword}</h1>
                             <div className='grid grid-flow-col-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5'>
                                 {
-                                    searchProduct.map(product =>
+                                    searchProduct?.map(product =>
                                         <Link to={`/productDetail/${product._id}`}>
                                             <div key={product._id} className="searchProduct">
                                                 <div className='p-4'>

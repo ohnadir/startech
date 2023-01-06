@@ -5,26 +5,25 @@ import { Link } from 'react-router-dom'
 import { getStoredCart, RemoveFromCart } from '../utils/cart';
 
 
-const CartDrawer = ({storedCart}) => {
-    const HandleRemove=(id)=>{
-        useEffect(()=>{
-            RemoveFromCart(id);
-        },[id])
+const CartDrawer = () => {
+    const storedCart = getStoredCart();
+    const HandleRemove=(item)=>{
+        RemoveFromCart(item);
     }
 
     return (
         <div className='p-4'>
             <div className='flex flex-col'>
                 {
-                    storedCart.map((item)=> 
+                    storedCart?.map((item)=> 
                         <div key={item.id}>
                             <div className='flex justify-between items-center border-b-[1px]'>
-                                <img className='w-[50px]' src={item.image} alt="" />
+                                <img className='w-[50px]' src={item.img} alt="" />
                                 <div>
-                                    <h1 className='text-[16px]'>{item.name}</h1>
-                                    <h1>৳ {item.price} X {item.quantity}</h1>
+                                    <h1 className='text-[16px]'>{item?.name}</h1>
+                                    <h1>৳ {item?.price} X {item?.quantity}</h1>
                                 </div>
-                                <button onClick={HandleRemove(item.id)}><AiOutlineClose className='text-[18px]' /></button>
+                                <button onClick={()=>HandleRemove(item)}><AiOutlineClose className='text-[18px]' /></button>
                             </div>
                             
                         </div>

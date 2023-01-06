@@ -13,32 +13,28 @@ import { AiFillCheckCircle } from "react-icons/ai"
 import { BsCart } from "react-icons/bs"
 import { useParams  } from 'react-router-dom';
 import { addToCart } from '../utils/cart';
+import axios from 'axios';
 
 
 
-const photos = [
-    "https://i.ibb.co/jJgD3CF/1.webp",
-    "https://i.ibb.co/TTcdMvP/2-2.webp",
-    "https://i.ibb.co/B32Btjx/3.webp",
-    "https://i.ibb.co/dksqrfX/4.webp"
-]
+
 const ProductDetails=()=> {
+    const [product, setProduct] = useState({});
     const navigate = useNavigate();
-    const [selectedImg, setSelectedImg] = useState(photos[0]);
     const [count, setCount] = useState(1);
     const [review, setReview] = useState([]);
     const [createReview, setCreateReview] = useState(false);
     const [auth, setAuth] = useState('');
     const [modalOpen, setModalOpen] = useState(false);
-    const [product, setProduct] = useState({});
+    const [selectedImg, setSelectedImg] = useState();
     const { id } = useParams()
     
     useEffect(() => {
-        fetch(`https://startech-server.vercel.app/api/v1/products/${id}`)
-        .then((response) => response.json())
-        .then((data) => setProduct(data.product));
-    }, [ id]);
-
+        axios.get(`https://startech-server.vercel.app/api/v1/products/${id}`)
+            .then(function (response) {
+                setProduct(response.data.product);
+            })
+    }, [id]);
     const handleChange = (e) => {
         setAuth(prev=>({...prev, [e.target.name]:e.target.value}))
     }
@@ -75,7 +71,7 @@ const ProductDetails=()=> {
                         <span>/</span> 
                         <span className='headerLocation'>Product Details</span> 
                         <span>/</span>
-                        <span className='headerLocation'>Product Brand Name</span>
+                        <span className='headerLocation'>{product.brand}</span>
                         <span>/</span>
                         <span className='headerLocation'>{product.name}</span>
                     </div>
@@ -98,15 +94,15 @@ const ProductDetails=()=> {
                                 <img className='mx-auto w-[450px]' src={selectedImg} alt="" />
                                 <div className='flex '>
                                     {
-                                        photos.map((img, index) => <div
-                                            style={{border :selectedImg === img ? "1px solid #679509" : "1px solid transparent" }}
+                                        product?.productPictures?.map((item) => <div
+                                            style={{border :selectedImg === item.img ? "1px solid #ef4a23" : "1px solid transparent" }}
                                             className='mx-auto'>
                                             <img
                                                 className=' w-[106px]'
-                                                key={index}
-                                                src={img}
+                                                key={item.id}
+                                                src={item.img}
                                                 alt="fruits"
-                                                onClick={()=>setSelectedImg(img)}
+                                                onClick={()=>setSelectedImg(item.img)}
                                             />    
                                         </div>)
                                     }
