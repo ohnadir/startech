@@ -20,13 +20,16 @@ app.use(cors());
 const userRoute = require("./routes/usersRoute");
 const productRoute = require("./routes/productsRoute");  
 const orderRoute = require("./routes/orderRoute");
-const paymentRoute = require("./routes/paymentRoute")  
+const paymentRoute = require("./routes/paymentRoute");
+const errorMiddleware = require('./middleware/errors')  
 
 // user route 
 app.use("/api/v1/users", userRoute);
 app.use("/api/v1/products", productRoute);
 app.use("/api/v1/orders", orderRoute);
 app.use("/api/v1/payments", paymentRoute);
+// Middleware to handle errors
+app.use(errorMiddleware);
 
 //port
 const PORT =  process.env.PORT;
