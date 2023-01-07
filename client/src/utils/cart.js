@@ -23,15 +23,12 @@ const getStoredCart = () => {
     } 
     return shoppingCart;
 }
-const RemoveFromCart = (item)=>{
-    // console.log(name);
+const RemoveFromCart = async(item)=>{
     const storedCart = localStorage.getItem('shopping-cart');
     const shoppingCart = JSON.parse(storedCart);
-    // console.log(shoppingCart);
-    const data = shoppingCart.filter((items)=> items.name !== item.name);
-    console.log(data);
+    const data = await shoppingCart.filter((items)=> items.name !== item.name);
     if(data){
-        localStorage.setItem('shopping-cart', JSON.stringify(data));
+        await localStorage.setItem('shopping-cart', JSON.stringify(data));
     }
     
 }
