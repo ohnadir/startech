@@ -5,8 +5,7 @@ const  catchAsyncErrors = require('../middleware/catchAsyncErrors');
 const ErrorHandler = require('../utils/errorHandler');
 
 exports.register = catchAsyncErrors(async (req, res, next) => {
-  const { firstName, lastName, password, email, phone, role } = req.body;
-
+  const { firstName, lastName, password, email, phone } = req.body;
   const isPhoneExist = await User.findOne({ phone });
   if (isPhoneExist) {
     return next(new ErrorHandler('Phone Number already taken', 422))
@@ -24,8 +23,7 @@ exports.register = catchAsyncErrors(async (req, res, next) => {
     lastName,
     email,
     password,
-    phone, 
-    role
+    phone
   });
   await newUser.save();
   sendToken(newUser, res)
@@ -34,7 +32,7 @@ exports.register = catchAsyncErrors(async (req, res, next) => {
     statusCode: 200,
     message: "Registration successful",
     token : newUser.getJwtToken()
-})
+  })
 });
 exports.login = catchAsyncErrors(async (req, res, next) => {
   const { email, password } = req.body;

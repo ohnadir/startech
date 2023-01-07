@@ -27,7 +27,7 @@ const { isAuthenticatedUser, authorizeRoles } = require('../middleware/auth')
 // authorizeRoles('user');
 // authorizeRoles('admin');
 
-router.post('/signup', addUserValidator, validationResult, register);
+router.post('/signup',  register);
 router.post('/login', login);
 
 router.patch(

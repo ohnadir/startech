@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(cors());
 
 // all routes
-const userRoute = require("./routes/orderRoute");
+const userRoute = require("./routes/usersRoute");
 const productRoute = require("./routes/productsRoute");  
 const orderRoute = require("./routes/orderRoute");
 const paymentRoute = require("./routes/paymentRoute")  

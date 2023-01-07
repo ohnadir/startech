@@ -10,14 +10,13 @@ const userSchema = Schema(
     phone: { type: String, required: true, trim: true, unique: true },
     email: { type: String, required: true, trim: true, unique: true },
     password: { type: String, required: true, trim: true },
-    updatedBy: String,
+    updatedBy: Date,
     avatar: String,
     role: {
       type: String,
       enum: ["user", "admin"],
       default: "user",
     },
-    isDelete: { type: Boolean, default: false },
     resetPasswordToken: String,
     resetPasswordExpire: Date
   },
