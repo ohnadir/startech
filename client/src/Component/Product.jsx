@@ -11,12 +11,22 @@ const Product = () => {
     const [size, setSize] = useState(8);
     
     useEffect(() => {
-        fetch(`https://startech-server.vercel.app/api/v1/products?page=${page}&size=${size}`, {mode: 'no-cors'})
-        .then((response) => response.json())
-        .then((data) => {
-            setCount(data.count);
-            setProducts(data.products)
-        });
+        axios(`https://startech-server.vercel.app/api/v1/products?page=${page}&size=${size}`, {
+		method: 'HEAD',
+		mode: 'no-cors',
+		headers: {
+			'Access-Control-Allow-Origin': '*',
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+		},
+		withCredentials: true,
+		credentials: 'same-origin',
+		crossdomain: true,
+	}).then((response) => {
+		console.log(response);
+	}).catch((e) => {
+		console.log(e);
+	});
     }, [page, size]);
     const pages = Math.ceil(count / size);
 
