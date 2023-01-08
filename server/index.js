@@ -15,10 +15,7 @@ const app = express();
 app.use(morgan("dev"));
 app.use(express.json());
 
-var corsOptions = {
-  origin: "http://localhost:3000"
-};
-app.use(cors(corsOptions));
+app.use(cors());
 
 // all routes
 const userRoute = require("./routes/usersRoute");
