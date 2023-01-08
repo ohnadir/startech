@@ -15,9 +15,9 @@ const Product = () => {
         method: 'HEAD',
 		mode: 'no-cors',
     }
-    const myRequest = new Request(URL, myInit);
+    // const myRequest = new Request(URL, myInit);
     useEffect(() => {
-        fetch(myRequest)
+        fetch(URL, myInit)
         .then((response) => response.json())
         .then((data) => {
             setCount(data.count);
