@@ -10,8 +10,14 @@ const Product = () => {
     const [page, setPage] = useState(0);
     const [size, setSize] = useState(8);
     
+    const URL = `https://startech-server.vercel.app/api/v1/products?page=${page}&size=${size}`
+    const myInit = {
+        method: 'HEAD',
+		mode: 'no-cors',
+    }
+    const myRequest = new Request(URL, myInit);
     useEffect(() => {
-        fetch(`https://startech-server.vercel.app/api/v1/products?page=${page}&size=${size}`)
+        fetch(myRequest)
         .then((response) => response.json())
         .then((data) => {
             setCount(data.count);
