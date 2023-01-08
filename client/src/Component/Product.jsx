@@ -11,12 +11,18 @@ const Product = () => {
     const [size, setSize] = useState(8);
     
     useEffect(() => {
-        fetch(`https://startech-server.vercel.app/api/v1/products?page=${page}&size=${size}`)
-        .then((response) => response.json())
-        .then((data) => {
-            setCount(data.count);
-            setProducts(data.products)
-        });
+        fetch(`https://startech-server.vercel.app/api/v1/products?page=${page}&size=${size}`,
+            {   headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+              },
+              mode: "no-cors"
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                setCount(data.count);
+                setProducts(data.products)
+            });
     }, [page, size]);
     const pages = Math.ceil(count / size);
 
