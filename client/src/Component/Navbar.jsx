@@ -12,15 +12,17 @@ import { getStoredCart } from '../utils/cart';
 
 const Navbar = () => {
 
-    const [navBg, setNavBg] = useState("red");
-  const location = useLocation();
-  useEffect(() => {
-    if (window.location.pathname === "/login") {
-      setNavBg("#081621");
-    } else {
-      setNavBg('#081621')
-    }
-  }, [location]);
+    // const [navBg, setNavBg] = useState("red");
+//   const location = useLocation();
+//   useEffect(() => {
+//     if (window.location.pathname === "/login") {
+//       setNavBg("#081621");
+//     } else {
+//       setNavBg('#081621')
+//     }
+// style={{ backgroundColor: navBg }}
+//   }, [location]);
+
     const navigate = useNavigate();
     const [open, setOpen] = useState(false)
     const [cartOpen, setCartOpen] = useState(false)
@@ -67,7 +69,7 @@ const Navbar = () => {
         </div> 
     </>
     return (
-        <div className='bg-[#081621] ' style={{ backgroundColor: navBg }}>
+        <div className='bg-[#081621] ' >
             <div className='max-w-7xl mx-auto px-2 '>
                 <div className=' flex items-center h-14 justify-between text-black  relative z-50'>
                     <div className=''>
@@ -96,17 +98,22 @@ const Navbar = () => {
                     }
                 </div>
             </div>
-            <Drawer
-                className='drawer'
+            {
+                cartOpen && 
+                <Drawer 
+                // className='drawer'
                 bodyStyle={{"padding": "0px"}}
-                headerStyle={{"borderBottom": "0px ", "display": "none"}}
-                placement="right" closeIcon={false} open={cartOpen}>
+                headerStyle={{"borderBottom": "0px ", "display": "none"}} 
+                placement="right" 
+                onClose={()=>setCartOpen(false)}  open={cartOpen}>
                     <div  className='drawerHeader'>
                         <h1 className=' text-white'>YOUR CART</h1>
                         <MdOutlineClose className='cartCloseBtn' onClick={()=>setCartOpen(false)} />
                     </div>
                     <CartDrawer />
-            </Drawer>
+                </Drawer>
+            }
+            
         </div>
     );
 };

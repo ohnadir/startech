@@ -51,12 +51,12 @@
     left: 0;
     z-index: 1;
 }
-.drawer .cartCloseBtn{
+.cartCloseBtn{
     color: white;
     font-size: 25px;
     cursor: pointer;
 }
-.drawer .drawerHeader{
+.drawerHeader{
     background-color: #081621;
     padding: 13.7px;
     display: flex;

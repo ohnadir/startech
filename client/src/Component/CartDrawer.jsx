@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 // import { Link } from 'react-router-dom'
 import { getStoredCart, RemoveFromCart } from '../utils/cart';
@@ -16,7 +16,6 @@ const CartDrawer = () => {
                 {
                     storedCart?.map((item)=> 
                         <div key={item.id}>
-                            {console.log(item)}
                             <div className='flex justify-between items-center border-b-[1px] py-2'>
                                 <img className='w-[50px]' src={item.image.img} alt="" />
                                 <div className='ml-3'>
@@ -25,7 +24,6 @@ const CartDrawer = () => {
                                 </div>
                                 <button onClick={()=>HandleRemove(item)}><AiOutlineClose className='w-7 h-7 ml-3 text-red-600 rounded-full p-2 bg-red-100' /></button>
                             </div>
-                            
                         </div>
 
                     )
