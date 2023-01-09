@@ -14,6 +14,7 @@ import Checkout from './Page/Checkout';
 import Payment from './Component/Modal/Payment';
 import { ToastContainer } from 'react-toastify';
 import ConfirmPayment from './Component/ConfirmPayment';
+import ProtectedRoute from './Component/ProtectedRoute'
 import CategoryProduct from './Page/CategoryProduct';
 import BrandProduct from './Page/BrandProduct';
 function App() {
@@ -25,14 +26,51 @@ function App() {
         <Route path="/home" element={<Home/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register/>} />
-        <Route path='/profile' element={<Profile/>}></Route>
-        <Route path='/changePassword' element={<ChangePassword/>}></Route>
-        <Route path='/address' element={<Address/>}></Route>
+
+        <Route path='/profile' element={
+          <ProtectedRoute >
+            <Profile/>
+          </ProtectedRoute>
+        }></Route>
+
+        <Route path='/changePassword' element={
+          <ProtectedRoute >
+            <ChangePassword/>
+          </ProtectedRoute>
+        }></Route>
+
+        <Route path='/address' element={
+          <ProtectedRoute >
+            <Address/>
+          </ProtectedRoute>
+        }></Route>
+
         <Route path='/productDetail/:id' element={<ProductDetails/>}></Route>
-        <Route path='/changeAddress' element={<ChangeAddress/>}></Route>
-        <Route path='/payment' element={<Payment/>}></Route>
-        <Route path='/confirmPayment' element={<ConfirmPayment/>}></Route>
-        <Route path='/checkout' element={<Checkout/>}></Route>
+
+        <Route path='/changeAddress' element={
+          <ProtectedRoute >
+            <ChangeAddress/>
+          </ProtectedRoute>
+        }></Route>
+
+        <Route path='/payment' element={
+          <ProtectedRoute >
+            <Payment/>
+          </ProtectedRoute>
+        }></Route>
+
+        <Route path='/confirmPayment' element={
+          <ProtectedRoute >
+            <ConfirmPayment/>
+          </ProtectedRoute>
+        }></Route>
+
+        <Route path='/checkout' element={
+          <ProtectedRoute >
+            <Checkout/>
+          </ProtectedRoute>
+        }></Route>
+
         <Route path="/search/:keyword" element={<SearchResult/>} />
         <Route path="/categoryProduct/:keyword" element={<CategoryProduct/>} />
         <Route path="/brandProduct/:keyword" element={<BrandProduct/>} />
