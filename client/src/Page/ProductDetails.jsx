@@ -95,6 +95,7 @@ const ProductDetails=()=> {
                                 <div className='flex '>
                                     {
                                         product?.productPictures?.map((item) => <div
+                                            key={item.id}
                                             style={{border :selectedImg === item.img ? "1px solid #ef4a23" : "1px solid transparent" }}
                                             className='mx-auto'>
                                             <img

@@ -4,6 +4,7 @@ import '../Style/Register.css';
 import { HiHome } from 'react-icons/hi';
 import MetaData from '../Component/Meta';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 
 const initialAuth = {
@@ -70,11 +71,14 @@ const Register = () => {
     }
 
     if(!tempErrors.firstName && !tempErrors.lastName && !tempErrors.email && !tempErrors.password && !tempErrors.phone){
-      try{
+      
         const {data, status} = await axios.post('https://startech-server.vercel.app/api/v1/users/signup', auth)
-        console.log(data);
-    }
-    catch(errors){}
+        console.log(data.statusCode , status);
+        if(data.statusCode === 200){
+          console.log("aya");
+        }
+    
+    
     }
   }
     return (

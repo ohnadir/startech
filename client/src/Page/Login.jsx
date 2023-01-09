@@ -3,15 +3,50 @@ import { Link, useNavigate } from 'react-router-dom';
 import '../Style/Login.css';
 import { HiHome } from 'react-icons/hi';
 import MetaData from '../Component/Meta';
+import axios from 'axios';
 
-
+const initialAuth = {
+  email: '',
+  password: ''
+}
+const initialAuthErrors = {
+  email: '',
+  phone:''
+}
 const Register = () => {
-    const [auth, setAuth] = useState('');
+    const [auth, setAuth] = useState(initialAuth);
+    const [errors, setErrors] = useState(initialAuthErrors);
     const navigate = useNavigate()
     const handleChange = (e) => {
         setAuth(prev=>({...prev, [e.target.name]:e.target.value}))
     }
-    const onSubmit = () => {
+    const onSubmit = async(e) => {
+      e.preventDefault()
+      
+      let tempErrors = {};
+      if(!auth?.email){
+          setErrors((prev)=> ({...prev, email: 'Email is Required'}))
+          tempErrors= {...tempErrors, email: 'Email is Required'}
+      }else{
+          setErrors((prev)=> ({...prev, email: ''}))
+          tempErrors= {...tempErrors, email: ''}
+      }
+      if(!auth?.password){
+        setErrors((prev)=> ({...prev, password: 'Password is Required'}))
+        tempErrors= {...tempErrors, password: 'Password is Required'}
+      }else{
+        setErrors((prev)=> ({...prev, password: ''}))
+        tempErrors= {...tempErrors, password: ''}
+      }
+  
+      if(!tempErrors.email && !tempErrors.password){
+          const {data, status} = await axios.post('https://startech-server.vercel.app/api/v1/users/login', auth)
+          console.log(data, status);
+          if(status === 200){
+            navigate('/home')
+          }
+
+      }
     }
     return (
         <div className='max-w-7xl mx-auto px-2'>
@@ -27,10 +62,12 @@ const Register = () => {
                             <div className='inputContainer'>
                               <label htmlFor="Email">E-Mail <span className='text-red-600 text-[12px]'>*</span></label>
                               <input onChange={handleChange} name='email'  type="text" placeholder='Email Address' />
+                              {errors?.email ? <p className='text-red-600 m-0'>{errors.email}</p> : null }
                             </div>
                             <div className='inputContainer'>
                               <label htmlFor="password">Password <span className='text-red-600 text-[12px]'>*</span></label>
                               <input onChange={handleChange} name='password' type="text" placeholder='Password' />
+                              {errors?.password ? <p className='text-red-600 m-0'>{errors.password}</p> : null }
                             </div>
                             <div className=''>
                                 <button onClick={onSubmit} className='loginBtn'>Continue</button>

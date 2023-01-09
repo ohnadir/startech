@@ -11,13 +11,7 @@ const Product = () => {
     const [size, setSize] = useState(8);
     
     useEffect(() => {
-        fetch(`https://startech-server.vercel.app/api/v1/products?page=${page}&size=${size}`,
-            {   headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-              },
-              mode: "no-cors"
-            })
+        fetch(`https://startech-server.vercel.app/api/v1/products?page=${page}&size=${size}`)
             .then((response) => response.json())
             .then((data) => {
                 setCount(data.count);
@@ -25,6 +19,7 @@ const Product = () => {
             });
     }, [page, size]);
     const pages = Math.ceil(count / size);
+
 
   return (
     <>
@@ -37,7 +32,7 @@ const Product = () => {
                 {
                     products?.map((product)=>
                         <Link to={`/productDetail/${product._id}`}>
-                            <div key={product.id} className='bg-white shadow-lg w-[300px] md:w-fit mx-auto rounded-[6px]'>
+                            <div key={product._id} className='bg-white shadow-lg w-[300px] md:w-fit mx-auto rounded-[6px]'>
                                 <div className='px-5 pt-5'>
                                     <img src={product?.productPictures[0].img} alt="" />
                                 </div>
