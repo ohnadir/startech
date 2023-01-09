@@ -9,7 +9,7 @@ const addToCart = async(data) =>{
     }
 
     // when duplicate data come for stored then quantity increase
-    const data1= JSON.parse(storedCart).find((items)=> items.name === data.name);
+    const data1= JSON.parse(storedCart)?.find((items)=> items.name === data.name);
     if(data1){
         const newData = JSON.parse(storedCart).filter((items)=> items.name !== data.name);
         if(newData){
