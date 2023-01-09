@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import { getStoredCart, RemoveFromCart } from '../utils/cart';
 
 
 const CartDrawer = () => {
     const storedCart = getStoredCart();
-    console.log(storedCart)
     const HandleRemove= (item)=>{
         RemoveFromCart(item);
     }

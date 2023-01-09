@@ -1,5 +1,5 @@
 // use local storage to manage cart data
-const addToCart = (data) =>{
+const addToCart = async(data) =>{
     let shoppingCart = [];
 
     //get the shopping cart from local storage
@@ -7,8 +7,27 @@ const addToCart = (data) =>{
     if(storedCart){
         shoppingCart = JSON.parse(storedCart);
     }
-    shoppingCart.push(data)
-    
+
+    // when duplicate data come for stored then quantity increase
+    const data1= JSON.parse(storedCart).find((items)=> items.name === data.name);
+    if(data1){
+        const newData = JSON.parse(storedCart).filter((items)=> items.name !== data.name);
+        if(newData){
+            shoppingCart = newData;
+        }
+        const object = {
+            name : data1.name,
+            image : data1.image,
+            price : data1.price,
+            id: data1.id,
+            quantity : data1.quantity + 1
+
+        } 
+        shoppingCart.push(object);
+        localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart));
+    } else{
+        shoppingCart.push(data)
+    }
     localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart));
 
     
