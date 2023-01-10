@@ -16,7 +16,7 @@ const ChangePassword=()=> {
     <div className='max-w-7xl mx-auto px-2'>
       <MetaData title={'Change Password'} />
           <div className='navigate'>
-            <HiHome onClick={()=>navigate('/home')} className='text-[#666] cursor-pointer'/> <span>/</span> <span onClick={()=>navigate('/profile')} className="cursor-pointer">Account</span> <span>/</span> <span>Change Password</span>
+            <HiHome onClick={()=>navigate('/')} className='text-[#666] cursor-pointer'/> <span>/</span> <span onClick={()=>navigate('/profile')} className="cursor-pointer">Account</span> <span>/</span> <span>Change Password</span>
           </div>
             <div className='flex justify-center items-center'>
                 <div className='max-w-[430px]'>

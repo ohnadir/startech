@@ -32,7 +32,7 @@ const BrandProduct = () => {
         <div className='max-w-7xl mx-auto categoryProductContainer'>
             <header className='py-5'>
                 <div className='navigate'>
-                    <HiHome onClick={()=>navigate('/home')} className='text-[#666] cursor-pointer'/> <span>/</span><span>{ keyword }</span>
+                    <HiHome onClick={()=>navigate('/')} className='text-[#666] cursor-pointer'/> <span>/</span><span>{ keyword }</span>
                 </div>
             </header>
             <section className="filter lg:hidden">

@@ -67,7 +67,7 @@ const ProductDetails=()=> {
                 <div className='max-w-7xl mx-auto px-2'>
                     <MetaData title={'Product Details'} />
                     <div className='headerContainer'>
-                        <HiHome onClick={()=>navigate('/home')} className='headerLocation'/> 
+                        <HiHome onClick={()=>navigate('/')} className='headerLocation'/> 
                         <span>/</span> 
                         <span className='headerLocation'>Product Details</span> 
                         <span>/</span>

@@ -43,7 +43,7 @@ const Register = () => {
           const {data, status} = await axios.post('https://startech-server.vercel.app/api/v1/users/login', auth)
           console.log(data, status);
           if(status === 200){
-            navigate('/home')
+            navigate('/')
           }
 
       }

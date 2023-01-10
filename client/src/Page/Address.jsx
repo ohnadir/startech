@@ -12,7 +12,7 @@ const Address=()=> {
     <div className='max-w-7xl mx-auto px-2'>
       <MetaData title={'Address'} />
         <div className='flex items-center gap-3 text-[13px] pt-4 pb-[50px]'>
-            <HiHome onClick={()=>navigate('/home')} className='text-[#666] cursor-pointer'/> 
+            <HiHome onClick={()=>navigate('/')} className='text-[#666] cursor-pointer'/> 
             <span>/</span> 
             <span onClick={()=>navigate('/profile')} className='text-[#666] cursor-pointer'>Profile</span> 
             <span>/</span>

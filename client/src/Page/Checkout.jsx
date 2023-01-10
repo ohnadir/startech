@@ -29,7 +29,7 @@ const ChangeAddress=()=> {
         <div className='max-w-7xl mx-auto px-2  checkoutContainer'>
             <MetaData title={'Checkout'} />
             <div className='flex items-center gap-3 text-[13px] pt-4 pb-[30px]'>
-                <HiHome onClick={()=>navigate('/home')} className='text-[#666] cursor-pointer'/> 
+                <HiHome onClick={()=>navigate('/')} className='text-[#666] cursor-pointer'/> 
                 <span className='text-[#666]'>/</span> 
                 <span className='text-[#666] cursor-pointer' onClick={()=>navigate('/profile')}>Shopping Cart</span> <span>/</span> 
                 <span className='text-[#666] cursor-pointer' onClick={()=>navigate('/address')}>Checkout</span>

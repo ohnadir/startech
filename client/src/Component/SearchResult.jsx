@@ -26,7 +26,7 @@ const SearchResult = () => {
                     <div className='max-w-7xl mx-auto  searchResult'>
                         <div className='p-5'>
                             <div className='navigate'>
-                                <HiHome onClick={()=>navigate('/home')} className='text-[#666] cursor-pointer'/> <span>/</span> 
+                                <HiHome onClick={()=>navigate('/')} className='text-[#666] cursor-pointer'/> <span>/</span> 
                                 <span className="cursor-pointer">Search</span> 
                             </div>
                             <h1 className='p-4 font-semibold searchHeader m-0 my-5'>Search - {keyword}</h1>

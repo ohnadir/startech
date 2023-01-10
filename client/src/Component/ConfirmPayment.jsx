@@ -12,7 +12,7 @@ const ConfirmPayment = () => (
     title={`Successfully Payment for ${orderInfo.name}`}
     subTitle={`Order number: ${orderNumber} and TransactionId: ${transactionId} . Delivery takes 1-2 days, please wait. Thank you`}
     extra={
-      <Link to='/home'>
+      <Link to='/'>
           <button className='border px-5 py-[2px] rounded-[6px]'>Buy Again</button>
       </Link>
       }

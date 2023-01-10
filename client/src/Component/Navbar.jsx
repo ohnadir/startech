@@ -73,7 +73,7 @@ const Navbar = () => {
             <div className='max-w-7xl mx-auto px-2 '>
                 <div className=' flex items-center h-14 justify-between text-black  relative z-50'>
                     <div className=''>
-                        <img className='cursor-pointer w-[95px]' onClick={()=>navigate('/home')} src={logo} alt="" />
+                        <img className='cursor-pointer w-[95px]' onClick={()=>navigate('/')} src={logo} alt="" />
                     </div>
                     <div className='searchContainer'>
                         <div className='hidden md:block'>
@@ -89,7 +89,7 @@ const Navbar = () => {
                 </div>
                 <div className=' searchBlock'>
                     {
-                        open && <div className='bg-white'>
+                        open && <div className='bg-white md:hidden'>
                         <div className='flex items-center '>
                             <input className='searchInput' onChange={(e)=>setKeyword(e.target.value)} type="text" placeholder='KHUJ, THE SEARCH' />
                             <button className='searchBtn' onClick={handleSearch}><BiSearchAlt2/></button>

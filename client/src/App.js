@@ -15,6 +15,7 @@ import Payment from './Component/Modal/Payment';
 import { ToastContainer } from 'react-toastify';
 import ConfirmPayment from './Component/ConfirmPayment';
 import ProtectedRoute from './Component/ProtectedRoute'
+import CompareProduct from './Component/CompareProduct'
 import CategoryProduct from './Page/CategoryProduct';
 import BrandProduct from './Page/BrandProduct';
 function App() {
@@ -23,7 +24,6 @@ function App() {
       <Navbar/>
       <Routes>
         <Route path="/" exact  element={<Home/>} />
-        <Route path="/home" element={<Home/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register/>} />
 
@@ -72,6 +72,7 @@ function App() {
         }></Route>
 
         <Route path="/search/:keyword" element={<SearchResult/>} />
+        <Route path="/compareProduct" element={<CompareProduct/>} />
         <Route path="/categoryProduct/:keyword" element={<CategoryProduct/>} />
         <Route path="/brandProduct/:keyword" element={<BrandProduct/>} />
       </Routes>
