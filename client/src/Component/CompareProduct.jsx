@@ -1,7 +1,14 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const CompareProduct = () => {
+    const navigate = useNavigate();
     const compare = JSON.parse(localStorage.getItem('compareCart'));
+    setTimeout(() => {
+        localStorage.removeItem('compareCart');
+        console.log("Delayed for 1 minutes.");
+        navigate('/')
+      }, 3 * 60 * 1000)
     
     return (
         <div className='bg-[#f2f4f8] h-[93.6vh]'>
