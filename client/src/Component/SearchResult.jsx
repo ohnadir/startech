@@ -11,14 +11,7 @@ const SearchResult = () => {
     const navigate = useNavigate()
     const [searchProduct, setSearchProduct] = useState([]);
     useEffect(() => {
-        axios.get(`https://startech-server.vercel.app/api/v1/products/search?q=${keyword}`)
-            .then(function (response) {
-                setSearchProduct(response.data.data?.products)
-            })
-    }, [keyword]);
-
-    useEffect(() => {
-        fetch(`https://startech-server.vercel.app/api/v1/products/search?q=${keyword}`)
+        fetch(`https://startech-server.vercel.app/api/v1/products/search?keyword=${keyword}`)
         .then((response) => response.json())
         .then((data) => {
             setSearchProduct(data?.products)
@@ -43,7 +36,7 @@ const SearchResult = () => {
                                         <Link to={`/productDetail/${product._id}`}>
                                             <div key={product._id} className="searchProduct">
                                                 <div className='p-4'>
-                                                    <img className='w-[150px] mx-auto' src={product?.productPictures[0]} alt="" />
+                                                    <img className='w-[150px] mx-auto' src={product?.productPictures[0].img} alt="" />
                                                     <h1 className='text-black font-semibold text-[13px] pt-5'>{product?.name}</h1>
                                                     <p className='text-[14px] m-0 pb-2 text-[#666]'>{product?.desc}</p>
                                                     <h1 className='text-[#ef4a23] text-[16px] font-semibold'>{product?.price}৳</h1>
