@@ -5,6 +5,8 @@ import { HiHome } from 'react-icons/hi';
 import MetaData from '../Component/Meta';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
+import { register, clearErrors } from '../actions/userActions';
 
 
 const initialAuth = {
@@ -26,11 +28,23 @@ const Register = () => {
   const [auth, setAuth] = useState(initialAuth);
   const [errors, setErrors] = useState(initialAuthErrors);
   const [success, setSuccess] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { isAuthenticated, error, loading } = useSelector(state => state.auth);
   const handleChange = (e) => {
     setAuth(prev=>({...prev, [e.target.name]:e.target.value}))
   }
-  const onSubmit = async(e) => {
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/')
+    }
+    if (error) {
+      dispatch(clearErrors());
+  }
+
+}, [dispatch, isAuthenticated, error])
+  const OnSubmit = async(e) => {
     e.preventDefault()
     
     let tempErrors = {};
@@ -69,16 +83,9 @@ const Register = () => {
       setErrors((prev)=> ({...prev, phone: ''}))
       tempErrors= {...tempErrors, phone: ''}
     }
-
+    
     if(!tempErrors.firstName && !tempErrors.lastName && !tempErrors.email && !tempErrors.password && !tempErrors.phone){
-      
-        const {data, status} = await axios.post('https://startech-server.vercel.app/api/v1/users/signup', auth)
-        console.log(data.statusCode , status);
-        if(data.statusCode === 200){
-          console.log("aya");
-        }
-    
-    
+      dispatch(register(auth))
     }
   }
     return (
@@ -121,7 +128,7 @@ const Register = () => {
                                 {errors?.phone ? <p className='text-red-600 m-0'>{errors.phone}</p> : null }
                               </div>
                               <div className=''>
-                                  <button onClick={onSubmit} type="submit" className='registerBtn'>Continue</button>
+                                  <button onClick={OnSubmit} disabled={loading ? true : false} type="submit" className='registerBtn'>Continue</button>
                               </div>
                           </div>
                         </form>

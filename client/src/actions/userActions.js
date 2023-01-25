@@ -10,6 +10,7 @@ import {
     LOGOUT_FAIL,
     CLEAR_ERRORS
 } from '../constants/userConstants';
+
 // Login
 export const login = (email, password) => async (dispatch) => {
     try {
@@ -39,7 +40,6 @@ export const login = (email, password) => async (dispatch) => {
 // Register user
 export const register = (userData) => async (dispatch) => {
     try {
-
         dispatch({ type: REGISTER_USER_REQUEST })
 
         const config = {
@@ -48,8 +48,8 @@ export const register = (userData) => async (dispatch) => {
             }
         }
 
-        const { data } = await axios.post('http://localhost:5000/api/v1/users/signup', userData, config)
-        console.log(data);
+        const { data } = await axios.post('https://startech-server.vercel.app/api/v1/users/signup', userData, config)
+        
         dispatch({
             type: REGISTER_USER_SUCCESS,
             payload: data
