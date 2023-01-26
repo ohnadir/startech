@@ -35,10 +35,11 @@ app.use(errorMiddleware);
 
 //port
 const PORT =  process.env.PORT;
+const HOST = process.env.HOST
 app.get('/', (req, res) => {
   res.send('Testing connection')
 })
 //listen server
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.listen(PORT, HOST, () => {
+  console.log(`Server started on ${HOST}:${PORT}, url http://${HOST}:${PORT}`);
 });
