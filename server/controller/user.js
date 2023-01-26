@@ -18,21 +18,15 @@ exports.register = catchAsyncErrors(async (req, res, next) => {
     }
   }
 
-  const newUser = new User({
+  const user = new User({
     firstName,
     lastName,
     email,
     password,
     phone
   });
-  await newUser.save();
-  sendToken(newUser, res)
-  res.status(200).json({
-    success: true,
-    statusCode: 200,
-    message: "Registration successful",
-    token : newUser.getJwtToken()
-  })
+  await user.save();
+  sendToken(user, 200, res)
 });
 exports.login = catchAsyncErrors(async (req, res, next) => {
   const { email, password } = req.body;

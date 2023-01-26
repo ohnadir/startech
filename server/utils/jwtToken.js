@@ -8,6 +8,10 @@ const sendToken = (user, res) => {
         ),
         httpOnly: true
     }
-    res.status(200).cookie('token', token, options);
+    res.status(200).cookie('token', token, options).json({
+        success: true,
+        token,
+        user
+    });
 }
 module.exports = sendToken;
