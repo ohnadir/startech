@@ -1,4 +1,4 @@
-const sendToken = (user, res) => {
+const sendToken = (user, statusCode, res) => {
     
     // Create JWT Token  
     const token = user.getJwtToken();
@@ -8,7 +8,7 @@ const sendToken = (user, res) => {
         ),
         httpOnly: true
     }
-    res.status(200).cookie('token', token, options).json({
+    res.status(statusCode).cookie('token', token, options).json({
         success: true,
         token,
         user
