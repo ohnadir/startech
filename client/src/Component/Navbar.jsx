@@ -9,6 +9,7 @@ import { Drawer } from 'antd';
 import { MdOutlineClose } from 'react-icons/md';
 import CartDrawer from './CartDrawer';
 import { getStoredCart } from '../utils/cart';
+import { useDispatch, useSelector } from 'react-redux'
 
 const Navbar = () => {
 
@@ -28,6 +29,8 @@ const Navbar = () => {
     const [cartOpen, setCartOpen] = useState(false)
     const [keyword, setKeyword] = useState('');
     const storedCart = getStoredCart();
+    const { user, loading } = useSelector(state => state.auth);
+    console.log(user);
     
     const handleSearch=()=>{
         if(keyword){

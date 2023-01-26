@@ -160,6 +160,15 @@ exports.getUser = catchAsyncErrors(async (req, res, next)=> {
   
 });
 
+exports.getUserProfile = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findById(req.user.id);
+
+  res.status(200).json({
+      success: true,
+      user
+  })
+})
+
 exports.logout = catchAsyncErrors(async (req, res, next) => {
   res.cookie('token', null, {
     expires: new Date(Date.now()),
@@ -171,152 +180,3 @@ exports.logout = catchAsyncErrors(async (req, res, next) => {
     message: "Logout Successfully"
 })
 });
-
-/* // Forgot Password
-exports.forgotPassword = async ({ email, req }) => {
-  const response = {
-    code: 201,
-    status: 'Success',
-    message: 'Forgot Password token set Successfully',
-  };
-
-  try {
-
-    const user = await User.findOne({ email });
-    if (!user) {
-      response.code = 422;
-      response.status = 'Failed';
-      response.message = 'User not Found';
-      return response;
-    }
-
-    // Get reset token
-    const resetToken = user.getResetPasswordToken();
-    await user.save();
-
-    // Create reset password URL 
-    const resetUrl = `${req.protocol}://${req.get('host')}/api/v1/users/password/reset/${resetToken}`
-    const message = `Your password reset token is as follow:\n\n${resetUrl}\n\nif you have not request this email, then ignore it.`
-    if (user) {
-      await sendEmail({
-        email: user.email,
-        subject: 'Fruits Password Recovery',
-        message
-      })
-    }
-
-    return response;
-
-  }
-  catch (error) {
-    response.code = 500;
-    response.status = 'Failed';
-    response.message = 'Error. Try again';
-    return response;
-  }
-};
-
-exports.resetPassword = async ({ token, body, res }) => {
-  const response = {
-    code: 201,
-    status: 'Success',
-    message: 'Password reset Successfully',
-  };
-
-  try {
-
-  //  Hash URL Token 
-  const resetPasswordToken = crypto.createHash('sha256').update(token).digest('hex')
-  const user = await User.findOne({
-    resetPasswordToken,
-    resetPasswordExpire: { $gt: Date.now() }
-})
-  console.log(user);
-  if (!user) {
-    response.code = 400;
-    response.status = 'Failed';
-    response.message = 'Password reset token is invalid or has been expired';
-    return response;
-  }
-
-  if (body.password !== body.confirmPassword) {
-    response.code = 400;
-    response.status = 'Failed';
-    response.message = 'Password does not match';
-    return response;
-  }
-
-  // Setup new password
-  user.password = body.password;
-  await user.save();
-  sendToken(user, res);
-  return response;
-    
-  }
-  catch (error) {
-    response.code = 500;
-    response.status = 'Failed';
-    response.message = 'Error. Try again';
-    return response;
-  }
-  
-}
-
-exports.updatePassword = async ({ id, body, res }) => {
-  const response = {
-    code: 201,
-    status: 'Success',
-    message: 'Password update  successfully',
-  };
-
-  const user = await User.findById({
-    _id: id,
-    isDelete: false,
-  }).select('+password');
-
-  if (!user) {
-    response.code = 400;
-    response.status = 'Failed';
-    response.message = 'User is not Fount';
-    return response;
-  }
-
-  const isMatched = await user.comparePassword(body.oldPassword)
-  if (!isMatched) {
-    response.code = 400;
-    response.status = 'Failed';
-    response.message = 'Old password is incorrect';
-    return response;
-  }
-  user.password = body.password;
-  await user.save();
-  sendToken(user, res)
-}
-
-exports.updateProfile = async ({ id, body }) => {
-  const response = {
-    code: 201,
-    status: 'Success',
-    message: 'Password update  successfully',
-  };
-
-  const user = await User.findById({_id: id});
-
-  if (!user) {
-    response.code = 400;
-    response.status = 'Failed';
-    response.message = 'User is not Fount';
-    return response;
-  }
-
-  const isMatched = await user.comparePassword(body.oldPassword)
-  if (!isMatched) {
-    response.code = 400;
-    response.status = 'Failed';
-    response.message = 'Old password is incorrect';
-    return response;
-  }
-  user.password = body.password;
-  await user.save();
-  sendToken(user, 200, res)
-} */
