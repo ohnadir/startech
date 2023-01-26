@@ -27,6 +27,12 @@ exports.register = catchAsyncErrors(async (req, res, next) => {
   });
   await user.save();
   sendToken(user, 200, res)
+  res.status(200).json({
+    success: true,
+    statusCode: 200,
+    message: "Registration successful",
+    user
+  })
 });
 exports.login = catchAsyncErrors(async (req, res, next) => {
   const { email, password } = req.body;
