@@ -37,7 +37,7 @@ app.use(errorMiddleware);
 const PORT =  process.env.PORT;
 const HOST = process.env.HOST
 app.get('/', (req, res) => {
-  res.send('Testing connection')
+  res.send('Startech Testing connection')
 })
 //listen server
 app.listen(PORT, HOST, () => {
