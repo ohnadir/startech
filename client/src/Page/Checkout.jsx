@@ -22,8 +22,7 @@ const ChangeAddress=()=> {
             setModal(true);
         }
     }
-    const totalPrice = 100
-    
+    const orderInfo = JSON.parse(sessionStorage.getItem('orderInfo'));
   return (
     <div className='bg-[#f2f4f8]'>
         <div className='max-w-7xl mx-auto px-2  checkoutContainer'>
@@ -144,24 +143,14 @@ const ChangeAddress=()=> {
                                     <th className='text-right'>Total</th>
                                 </tr>
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td className=''></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td className='text-right font-bold'>Sub-Total: </td>
-                                    <td className='amount'>$100</td>
+                                    <td>{orderInfo.name}</td>
+                                    <td>{orderInfo.price} </td>
+                                    <td className='amount w-fit'>$ {orderInfo.price}</td>
                                 </tr>
                                 <tr>
                                     <td></td>
                                     <td className='text-right font-bold'>Home Delivery:</td>
-                                    <td className='amount'>$100</td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td className='text-right font-bold'>Total:</td>
-                                    <td className='amount'>$100</td>
+                                    <td className='amount'>$0</td>
                                 </tr>
                             </table>
                         </div>

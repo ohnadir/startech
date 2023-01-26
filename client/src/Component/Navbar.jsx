@@ -28,15 +28,16 @@ const Navbar = () => {
     const [open, setOpen] = useState(false)
     const [cartOpen, setCartOpen] = useState(false)
     const [keyword, setKeyword] = useState('');
-    const storedCart = getStoredCart();
     const { user, loading } = useSelector(state => state.auth);
-    console.log(user);
-    
     const handleSearch=()=>{
         if(keyword){
             navigate(`/search/${keyword}`)
         }
     }
+    const storedCart = getStoredCart();
+    useEffect(()=>{
+        
+    }, [])
 
     const menuLists = <>
         <button className='text-white block md:hidden' onClick={()=>setOpen(!open)}><BiSearchAlt2 className='text-2xl'/></button>

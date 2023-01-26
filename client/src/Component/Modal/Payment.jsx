@@ -108,7 +108,6 @@ const Payment = ({ auth, setModal }) => {
                 localStorage.setItem('transactionId', JSON.stringify(result.paymentIntent.id));
                 localStorage.setItem('orderNumber', JSON.stringify(data.result.orderNumber));
                 navigate('/confirmPayment')
-                console.log(data);
             })
         }
     };

@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import { Navigate, useLocation } from 'react-router-dom';
-import Spinner from "./Spinner"
+import Spinner from "./Spinner";
+import { useSelector } from 'react-redux'
 
 const ProtectedRoute = ({ children }) => {
-    let [user, setUser] = useState('');
     let location = useLocation();
-    // let { isAuthenticated, loading, user } = useSelector(state => state.auth)
-    /* if (loading) {
+    let { loading, user } = useSelector(state => state.auth)
+    if (loading) {
         return <Spinner/>
-    } */
+    }
     if (!user) {
         return <Navigate to="/login" state={{ from: location }} replace />;
     }

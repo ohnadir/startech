@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 // import { Link } from 'react-router-dom'
 import { getStoredCart, RemoveFromCart } from '../utils/cart';
 
 
 const CartDrawer = () => {
-    const storedCart = getStoredCart();
+    const [storedCart, setStoredCart] = useState([])
+    const data = getStoredCart();
+    useEffect(()=>{
+        setStoredCart(data);
+    }, [])
     const HandleRemove= (item)=>{
         RemoveFromCart(item);
     }
-
+    const total = storedCart?.reduce((n, {price, quantity}) => n + parseInt(price) * parseInt(quantity), 0)
     return (
         <div className='p-4'>
             <div className='flex flex-col'>
@@ -30,24 +35,12 @@ const CartDrawer = () => {
                 }
             </div>
             <div className='mt-5 font-bold text-xl text-[#679509] flex justify-between'>
-                                <span className=''>Total:-</span> <span>$500</span>
-                            </div>
+                <span className='text-[16px]'>Total:-</span> <span className='text-[16px]'>$ {total}</span>
+            </div>
             <div className="bottom-0 absolute left-0 w-full px-4">
-                <div>
-                    <div className='flex gap-5 items-center bg-[#ebecf8] p-[8px] '>
-                        <input type="text" className='w-full h-[33px] px-2' placeholder='Promo Code' />
-                        <button className='bg-[#3749bb] h-[33px] px-4 text-white'>Apply</button>
-                    </div>
-                    <div className='py-10'>
-                        <div className='flex justify-end gap-16'>
-                            <h2>Sub-Total</h2>
-                            <h2>12220</h2>
-                        </div>
-                        <div className='flex justify-end gap-16'>
-                            <h2>Total</h2>
-                            <h2>42220</h2>
-                        </div>
-                    </div>
+                <div className='flex gap-5 items-center bg-[#ebecf8] p-[8px] '>
+                    <input type="text" className='w-full h-[33px] px-2' placeholder='Promo Code' />
+                    <button className='bg-[#3749bb] h-[33px] px-4 text-white'>Apply</button>
                 </div>
             </div>
         </div>
