@@ -13,36 +13,39 @@ import { AiFillCheckCircle } from "react-icons/ai"
 import { BsCart } from "react-icons/bs"
 import { useParams  } from 'react-router-dom';
 import { addToCart } from '../utils/cart';
-import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux'
+import { getProductDetails, clearErrors } from '../actions/productActions'
 
 
 
 
 const ProductDetails=()=> {
-    const [product, setProduct] = useState({});
     const navigate = useNavigate();
     const [count, setCount] = useState(1);
     const [review, setReview] = useState([]);
     const [createReview, setCreateReview] = useState(false);
     const [auth, setAuth] = useState('');
     const [modalOpen, setModalOpen] = useState(false);
+    const { id } = useParams();
+    const dispatch = useDispatch();
+    const { loading, error, product } = useSelector(state => state.productDetails);
     const [selectedImg, setSelectedImg] = useState();
-    const { id } = useParams()
     
     useEffect(() => {
-        axios.get(`https://startech-server.vercel.app/api/v1/products/${id}`)
-            .then(function (response) {
-                setProduct(response.data.product);
-            })
-    }, [id]);
+        dispatch(getProductDetails(id))
+        if (error) {
+            dispatch(clearErrors())
+        }
+    }, []);
     const handleChange = (e) => {
         setAuth(prev=>({...prev, [e.target.name]:e.target.value}))
     }
+    
     const handleSubmit=()=>{
         const data = {
-            name: product.name,
-            id:product._id,
-            price: product.price,
+            name: product?.name,
+            id:product?._id,
+            price: product?.price,
             quantity : count,
             image : product?.productPictures[0]
         }
@@ -51,9 +54,9 @@ const ProductDetails=()=> {
     }
     const handleCart=()=>{
         const data = {
-            name: product.name,
-            id:product._id,
-            price: product.price,
+            name: product?.name,
+            id:product?._id,
+            price: product?.price,
             quantity : count,
             image : product?.productPictures[0]
         }
@@ -62,7 +65,7 @@ const ProductDetails=()=> {
     return (
         <>
             {
-                product === {} ? <div className='w-full h-screen flex items-center justify-center'><Spin/></div>
+                loading ? <div className='w-full h-screen flex items-center justify-center'><Spin/></div>
                 :
                 <div className='max-w-7xl mx-auto px-2'>
                     <MetaData title={'Product Details'} />
@@ -71,9 +74,9 @@ const ProductDetails=()=> {
                         <span>/</span> 
                         <span className='headerLocation'>Product Details</span> 
                         <span>/</span>
-                        <span className='headerLocation'>{product.brand}</span>
+                        <span className='headerLocation'>{product?.brand}</span>
                         <span>/</span>
-                        <span className='headerLocation'>{product.name}</span>
+                        <span className='headerLocation'>{product?.name}</span>
                     </div>
                     <div className='shareContainer'>
                         <div className='flex items-center justify-between'>
@@ -103,7 +106,7 @@ const ProductDetails=()=> {
                                                 key={item.id}
                                                 src={item.img}
                                                 alt="fruits"
-                                                onClick={()=>setSelectedImg(item.img)}
+                                                onClick={()=>setSelectedImg(item?.img)}
                                             />    
                                         </div>)
                                     }
@@ -111,15 +114,15 @@ const ProductDetails=()=> {
                             </div>
                             <div className='w-full md:w-[60%] p-2'>
                                 
-                                <h1 className='text-lg font-bold'>{product.name}</h1>
+                                <h1 className='text-lg font-bold'>{product?.name}</h1>
                                 <div className='pt-[15px]  flex gap-3 flex-wrap'>
                                     <div className='priceContainer'>
                                         <span className='criteria'>Price: </span>
-                                        <span className='value'>{product.price}৳</span>
+                                        <span className='value'>{product?.price}৳</span>
                                     </div>
                                     <div className='priceContainer'>
                                         <span className='criteria'>Regular Price: </span>
-                                        <span className='value'>{parseInt(product.price) + 200 }৳</span>
+                                        <span className='value'>{parseInt(product?.price) + 200 }৳</span>
                                     </div>
                                     <div className='priceContainer'>
                                         <span className='criteria'>Status: </span>
@@ -137,7 +140,7 @@ const ProductDetails=()=> {
                                 </div>
                                 <div className='details'>
                                     <h3 className='text-black text-[16px]'>Key Features</h3>
-                                    <p>{product.desc}</p>
+                                    <p>{product?.desc}</p>
                                 </div>
                                 <div>
                                     <div className='pointContainer'>

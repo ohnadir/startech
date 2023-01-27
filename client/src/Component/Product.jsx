@@ -17,9 +17,8 @@ const Product = () => {
     useEffect(() => {
         dispatch(getProducts(page, size));
         setCounts(count);
-    }, []);
+    }, [dispatch]);
     const pages = Math.ceil(counts / size);
-    console.log(products);
 
     return (
         <>

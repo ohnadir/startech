@@ -17,12 +17,13 @@ const ChangeAddress=()=> {
     const handleChange = (e) => {
         setAuth(prev=>({...prev, [e.target.name]:e.target.value}))
     }
+    const orderInfo = JSON.parse(sessionStorage.getItem('orderInfo'));
+    const total = parseInt(orderInfo.price) + parseInt(auth.delivery === "homeDelivery" ? 60 : 0)
     const onSubmit = () => {
         if(auth.payment === "online" ){
             setModal(true);
         }
     }
-    const orderInfo = JSON.parse(sessionStorage.getItem('orderInfo'));
   return (
     <div className='bg-[#f2f4f8]'>
         <div className='max-w-7xl mx-auto px-2  checkoutContainer'>
@@ -149,8 +150,13 @@ const ChangeAddress=()=> {
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td className='text-right font-bold'>Home Delivery:</td>
-                                    <td className='amount'>$0</td>
+                                    <td className='text-right font-bold'>{auth.delivery === "homeDelivery" ? "Home Delivery" : ""} {auth.delivery === "pickup" ? "Store Pickup" : ""}</td>
+                                    <td className='amount'>{auth.delivery === "homeDelivery" ? 60 : ""} {auth.delivery === "pickup" ? 0 : ""}</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td className='text-right font-bold'>Total</td>
+                                    <td className='amount'>{total}</td>
                                 </tr>
                             </table>
                         </div>
@@ -173,7 +179,7 @@ const ChangeAddress=()=> {
             footer={null}
             centered 
             onCancel={()=>setModal(false)}>
-                <Payment auth={auth} setModal={setModal} />
+                <Payment auth={auth} total={total} setModal={setModal} />
       </Modal>
     </div>
   )

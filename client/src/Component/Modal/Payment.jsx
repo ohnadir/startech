@@ -13,7 +13,7 @@ const options = {
         }
     }
 }
-const Payment = ({ auth, setModal }) => {
+const Payment = ({ auth, setModal, total }) => {
     const [cardError, setCardError] = useState('');
     const [success, setSuccess] = useState('');
     const [processing, setProcessing] = useState(false);
@@ -24,7 +24,7 @@ const Payment = ({ auth, setModal }) => {
     const navigate = useNavigate();
     const orderInfo = JSON.parse(sessionStorage.getItem('orderInfo'));
     const paymentData = {
-        amount: Math.round(orderInfo.price * 100)
+        amount: Math.round(total * 100)
     }
     useEffect(() => {
         const getItem =async()=>{
@@ -77,7 +77,7 @@ const Payment = ({ auth, setModal }) => {
         if(result.paymentIntent.status === "succeeded"){
             const productInfo = {
                 name: orderInfo.name,
-                price: orderInfo.price,
+                price: total,
                 quantity: orderInfo.quantity,
                 image: orderInfo.image
             }
