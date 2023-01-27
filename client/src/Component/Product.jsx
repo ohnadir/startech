@@ -12,57 +12,61 @@ const Product = () => {
     const [page, setPage] = useState(0);
     const [size, setSize] = useState(8);
     const dispatch = useDispatch();
-    const { loading, products, error, count } = useSelector(state => state.products)
+    const { loading, products, error, count } = useSelector(state => state?.products)
     
     useEffect(() => {
         dispatch(getProducts(page, size));
         setCounts(count);
-    }, [page, size]);
+    }, []);
     const pages = Math.ceil(counts / size);
     console.log(products);
 
     return (
         <>
         {
-            products ?    
-            <div className='max-w-7xl mx-auto px-5 py-[40px]'>
-                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5'>
-                    {
-                        products?.map((product)=>
-                            <Link to={`/productDetail/${product._id}`}>
-                                <div key={product._id} className='bg-white shadow-lg w-[300px] md:w-fit mx-auto rounded-[6px]'>
-                                    <div className='px-5 pt-5'>
-                                        <img src={product?.productPictures[0].img} alt="" />
+            loading ?    
+                <div className='w-full h-screen flex items-center justify-center'><Spin/></div> 
+                :
+                <div className='max-w-7xl mx-auto px-5 py-[40px]'>
+                    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5'>
+                        {
+                            products?.map((product)=>
+                                <Link to={`/productDetail/${product._id}`}>
+                                    <div key={product._id} className='bg-white shadow-lg w-[300px] md:w-fit mx-auto rounded-[6px]'>
+                                        <div className='px-5 pt-5'>
+                                            <img src={product?.productPictures[0]?.img} alt="" />
+                                        </div>
+                                        <div className='divider'></div>
+                                        <div className='p-5 flex flex-col justify-between'>
+                                            <h3 className='text-[15px] font-[400]'>{product?.name}</h3>
+                                            <p className='text-[#ef4a23] text-[17px] font-[600]'>{product?.price} ৳</p>
+                                        </div>
                                     </div>
-                                    <div className='divider'></div>
-                                    <div className='p-5 flex flex-col justify-between'>
-                                        <h3 className='text-[15px] font-[400]'>{product.name}</h3>
-                                        <p className='text-[#ef4a23] text-[17px] font-[600]'>{product?.price} ৳</p>
-                                    </div>
-                                </div>
-                            </Link>
-                        )
-                    }
+                                </Link>
+                            )
+                        }
+                    </div>
+                    {/* <section className="pagination mt-10 flex items-center justify-center" >
+                        <div>
+
+                        
+                        {
+                            pages?.map((number) => <button
+                                key={number}
+                                className={page === number ? 'selected' : ''}
+                                onClick={() => setPage(number)}>
+                                {number + 1}
+                            </button>)
+                        }
+                        </div>
+                        <select className='sizeContainer' onChange={event => setSize(event.target.value)}>
+                                <option value="5">5</option>
+                                <option value="10" selected>10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                            </select>
+                    </section> */}
                 </div>
-                <section className="pagination mt-10 flex items-center justify-center" >
-                    {
-                        [...Array(pages).keys()].map(number => <button
-                            key={number}
-                            className={page === number ? 'selected' : ''}
-                            onClick={() => setPage(number)}>
-                            {number + 1}
-                        </button>)
-                    }
-                    <select className='sizeContainer' onChange={event => setSize(event.target.value)}>
-                            <option value="5">5</option>
-                            <option value="10" selected>10</option>
-                            <option value="15">15</option>
-                            <option value="20">20</option>
-                        </select>
-                </section>
-            </div>
-            :
-            <div className='w-full h-screen flex items-center justify-center'><Spin/></div> 
         }
         </>
         
