@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
+import React from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 // import { Link } from 'react-router-dom'
 import { getStoredCart, RemoveFromCart } from '../utils/cart';
@@ -7,18 +6,12 @@ import { getStoredCart, RemoveFromCart } from '../utils/cart';
 
 const CartDrawer = () => {
     const storedCart = getStoredCart();
-    console.log(storedCart);
     const HandleRemove= (item)=>{
         RemoveFromCart(item);
     }
     const total = storedCart?.reduce((n, {price, quantity}) => n + parseInt(price) * parseInt(quantity), 0)
     return (
-        <>
-            {
-            storedCart === '' ?
-            <h1>nadir</h1>
-            :
-            <div className='p-4'>
+        <div className='p-4'>
                     <div className='flex flex-col'>
                         {
                             storedCart?.map((item)=> 
@@ -45,10 +38,7 @@ const CartDrawer = () => {
                             <button className='bg-[#3749bb] h-[33px] px-4 text-white'>Apply</button>
                         </div>
                     </div>
-                </div>
-                
-            }
-        </>
+        </div>
         
     );
 };

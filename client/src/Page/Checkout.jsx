@@ -18,7 +18,7 @@ const ChangeAddress=()=> {
         setAuth(prev=>({...prev, [e.target.name]:e.target.value}))
     }
     const orderInfo = JSON.parse(sessionStorage.getItem('orderInfo'));
-    const total = parseInt(orderInfo.price) + parseInt(auth.delivery === "homeDelivery" ? 60 : 0)
+    const total = parseInt(orderInfo?.price) + parseInt(auth.delivery === "homeDelivery") ? 60 : 0;
     const onSubmit = () => {
         if(auth.payment === "online" ){
             setModal(true);
@@ -144,9 +144,9 @@ const ChangeAddress=()=> {
                                     <th className='text-right'>Total</th>
                                 </tr>
                                 <tr>
-                                    <td>{orderInfo.name}</td>
-                                    <td>{orderInfo.price} </td>
-                                    <td className='amount w-fit'>$ {orderInfo.price}</td>
+                                    <td>{orderInfo?.name}</td>
+                                    <td>{orderInfo?.price} </td>
+                                    <td className='amount w-fit'>$ {orderInfo?.price}</td>
                                 </tr>
                                 <tr>
                                     <td></td>
