@@ -26,7 +26,7 @@ export const login = (email, password) => async (dispatch) => {
             }
         }
 
-        const { data } = await axios.post('http://localhost:5000/api/v1/users/login', { email, password }, config)
+        const { data } = await axios.post('https://startech-server.vercel.app/api/v1/users/login', { email, password }, config)
         dispatch({
             type: LOGIN_SUCCESS,
             payload: data

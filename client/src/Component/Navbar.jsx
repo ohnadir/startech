@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { CgProfile } from 'react-icons/cg';
+import { CgLayoutGrid, CgProfile } from 'react-icons/cg';
 import { BsCartCheckFill} from 'react-icons/bs';
 import { BiSearchAlt2 } from 'react-icons/bi';
 import '../Style/Navbar.css'
@@ -29,6 +29,7 @@ const Navbar = () => {
     const [cartOpen, setCartOpen] = useState(false)
     const [keyword, setKeyword] = useState('');
     const { user, loading } = useSelector(state => state.auth);
+    console.log(user);
     const handleSearch=()=>{
         if(keyword){
             navigate(`/search/${keyword}`)
@@ -53,7 +54,7 @@ const Navbar = () => {
                 <div className="dropdown-content">
                     <ul className='m-0'>
                         <li onClick={()=>navigate('/profile')}>Profile</li>
-                        <li>Profile</li>
+                        {/* <li>{ user &&  user?.user?.fullName()}</li> */}
                         <li onClick={()=>navigate('/login')}>Login</li>
                     </ul>
                     

@@ -4,7 +4,8 @@ import '../Style/Login.css';
 import { HiHome } from 'react-icons/hi';
 import MetaData from '../Component/Meta';
 import axios from 'axios';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { login, clearErrors } from '../actions/userActions';
 const initialAuth = {
   email: '',
   password: ''
@@ -17,9 +18,20 @@ const Register = () => {
     const [auth, setAuth] = useState(initialAuth);
     const [errors, setErrors] = useState(initialAuthErrors);
     const navigate = useNavigate()
+    const dispatch = useDispatch();
     const handleChange = (e) => {
-        setAuth(prev=>({...prev, [e.target.name]:e.target.value}))
+      setAuth(prev=>({...prev, [e.target.name]:e.target.value}))
     }
+    const { isAuthenticated, error, loading } = useSelector(state => state.auth);
+    useEffect(() => {
+      if (isAuthenticated) {
+        navigate('/')
+      }
+      if (error) {
+        dispatch(clearErrors());
+    }
+  
+  }, [dispatch, isAuthenticated, error])
     const onSubmit = async(e) => {
       e.preventDefault()
       
@@ -40,12 +52,7 @@ const Register = () => {
       }
   
       if(!tempErrors.email && !tempErrors.password){
-          const {data, status} = await axios.post('https://startech-server.vercel.app/api/v1/users/login', auth)
-          console.log(data, status);
-          if(status === 200){
-            navigate('/')
-          }
-
+        dispatch(login(auth))
       }
     }
     return (

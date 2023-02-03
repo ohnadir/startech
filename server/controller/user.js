@@ -41,11 +41,7 @@ exports.login = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler('Mismatch authentication', 422))
   }
     
-  sendToken(user, res)
-  res.status(200).json({
-    success: true,
-    message: "Log in successful"
-})
+  sendToken(user, 200, res)
 });
 
 exports.updateUser = catchAsyncErrors(async (req, res, next) => {
