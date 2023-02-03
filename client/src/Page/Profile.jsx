@@ -2,12 +2,7 @@ import React from 'react';
 import '../Style/Profile.css';
 import { CgShoppingBag } from 'react-icons/cg';
 import { FaUser } from 'react-icons/fa';
-import { FaAddressCard } from 'react-icons/fa';
-import { MdLock } from 'react-icons/md';
-import { MdPayments } from 'react-icons/md';
-import { MdOutlineImportantDevices } from 'react-icons/md';
-import { BiHeart } from 'react-icons/bi';
-import { BiStar } from 'react-icons/bi';
+import { MdLock, MdOutlineDashboardCustomize } from 'react-icons/md';
 import { FiLogOut } from 'react-icons/fi';
 import { HiHome } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
@@ -31,18 +26,6 @@ const Home =()=>{
                         <h2 className='m-0'>Nadir Ahmed</h2>
                     </div>
                 </div>
-                <div className='flex gap-6 coinContent'>
-                    <p className='hrBorder hidden sm:block'></p>
-                    <div>
-                        <p className='m-0'>Star Credit</p>
-                        <h1 className='m-0'>0</h1>
-                    </div>
-                    <p className='hrBorder'></p>
-                    <div className=''>
-                        <p className='m-0'>Store Credit</p>
-                        <h1 className='m-0'>0</h1>
-                    </div>
-                </div>
             </div>
         </div>
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
@@ -58,29 +41,10 @@ const Home =()=>{
                 <MdLock className='profileIcon'/>
                 <p>Change Password</p>
             </div>
-            <div onClick={()=>navigate('/address')} className='profileCard w-[250px] mx-auto sm:w-full'>
-                <FaAddressCard className='profileIcon'/>
-                <p>Address</p>
-            </div>
-            <div onClick={()=>navigate('/wish')} className='profileCard w-[250px] mx-auto sm:w-full'>
-                <BiHeart className='profileIcon'/>
-                <p>Wish List</p>
-            </div>
-            <div onClick={()=>navigate('/saved')} className='profileCard w-[250px] mx-auto sm:w-full'>
-                <MdOutlineImportantDevices className='profileIcon'/>
-                <p>Saved PC</p>
-            </div>
-            <div onClick={()=>navigate('/point')} className='profileCard w-[250px] mx-auto sm:w-full'>
-                <BiStar className='profileIcon'/>
-                <p>Start Points</p>
-            </div>
-            <div onClick={()=>navigate('/transaction')} className='profileCard w-[250px] mx-auto sm:w-full'>
-                <MdPayments className='profileIcon'/>
-                <p>Your Transactions</p>
-            </div>
-            <div onClick={()=>navigate('/logout')} className='profileCard w-[250px] mx-auto sm:w-full'>
-                <FiLogOut className='profileIcon'/>
-                <p>Logout</p>
+            
+            <div onClick={()=>navigate('/dashboard')} className='profileCard w-[250px] mx-auto sm:w-full'>
+                <MdOutlineDashboardCustomize className='profileIcon'/>
+                <p>Dashboard</p>
             </div>
         </div>
       </div>

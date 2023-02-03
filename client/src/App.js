@@ -7,8 +7,6 @@ import Login from './Page/Login'
 import Register from './Page/Register';
 import Profile from './Page/Profile'
 import ChangePassword from './Page/ChangePassword';
-import Address from './Page/Address';
-import ChangeAddress from './Page/ChangeAddress';
 import ProductDetails from './Page/ProductDetails';
 import Checkout from './Page/Checkout';
 import Payment from './Component/Modal/Payment';
@@ -32,8 +30,6 @@ function App() {
         <Route path="/" element={<PrivateOutlet />}>
           <Route path='/profile' element={<Profile/>}></Route>
           <Route path='/changePassword' element={<ChangePassword/>}></Route>
-          <Route path='/address' element={<Address/>}></Route>
-          <Route path='/changeAddress' element={<ChangeAddress/>}></Route>
           <Route path='/payment' element={<Payment/>}></Route>
           <Route path='/confirmPayment' element={<ConfirmPayment/>}></Route>
           <Route path='/checkout' element={<Checkout title="Dashboard"/>}></Route>
