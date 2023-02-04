@@ -86,19 +86,24 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next)=> {
 
 exports.getProducts = catchAsyncErrors(async (req, res, next) => {
   const { page, size} = req.query;
+  // resPerPage = size
+  // currentPage = page
 
   const products = await Product.find()
     .sort({ _id: -1 })
     .skip(page * size)
     .limit(size)
     .lean();
-  const count = await Product.estimatedDocumentCount();
+  const productsCount = await Product.estimatedDocumentCount();
+  const filteredProductsCount = products.length;
   res.status(200).json({
     success: true,
     statusCode: 200,
     message:"Fetch Product Successfully",
     products,
-    count
+    productsCount,
+    filteredProductsCount
+
   })
 });
 

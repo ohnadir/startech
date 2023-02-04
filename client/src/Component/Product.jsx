@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../Style/Product.css';
 import { Spin } from 'antd';
 import { useDispatch, useSelector } from 'react-redux'
 import { getProducts } from '../actions/productActions'
+import Pagination from 'react-js-pagination'
 
 const Product = () => {
     // const [products, setProducts] = useState([]);
@@ -12,14 +12,15 @@ const Product = () => {
     const [page, setPage] = useState(0);
     const [size, setSize] = useState(8);
     const dispatch = useDispatch();
-    const { loading, products, error, count } = useSelector(state => state?.products)
+    const { loading, products, error, productsCount, filteredProductsCount } = useSelector(state => state?.products)
     
     useEffect(() => {
         dispatch(getProducts(page, size));
-        setCounts(count);
+        setCounts(productsCount);
     }, [dispatch]);
-    const pages = Math.ceil(counts / size);
-
+    function setCurrentPageNo(pageNumber) {
+        setPage(pageNumber)
+    }
     return (
         <>
         {
@@ -45,18 +46,20 @@ const Product = () => {
                             )
                         }
                     </div>
-                    {/* <section className="pagination mt-10 flex items-center justify-center" >
-                        <div>
-
-                        
-                        {
-                            pages?.map((number) => <button
-                                key={number}
-                                className={page === number ? 'selected' : ''}
-                                onClick={() => setPage(number)}>
-                                {number + 1}
-                            </button>)
-                        }
+                    <section className="pagination" >
+                        <div className="d-flex justify-content-center mt-5">
+                            <Pagination
+                                activePage={page}
+                                itemsCountPerPage={size}
+                                totalItemsCount={productsCount}
+                                onChange={setCurrentPageNo}
+                                nextPageText={'Next'}
+                                prevPageText={'Prev'}
+                                firstPageText={'First'}
+                                lastPageText={'Last'}
+                                itemClass="page-item"
+                                linkClass="page-link"
+                            />
                         </div>
                         <select className='sizeContainer' onChange={event => setSize(event.target.value)}>
                                 <option value="5">5</option>
@@ -64,7 +67,7 @@ const Product = () => {
                                 <option value="15">15</option>
                                 <option value="20">20</option>
                             </select>
-                    </section> */}
+                    </section>
                 </div>
         }
         </>

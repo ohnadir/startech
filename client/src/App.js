@@ -17,6 +17,7 @@ import CompareProduct from './Component/CompareProduct'
 import CategoryProduct from './Page/CategoryProduct';
 import BrandProduct from './Page/BrandProduct';
 import PrivateOutlet from './Component/PrivateOutlet';
+import NotFoundPage from './Page/NotFoundPage';
 function App() {
   return (
     <div className="App ">
@@ -39,6 +40,7 @@ function App() {
         <Route path="/compareProduct" element={<CompareProduct/>} />
         <Route path="/categoryProduct/:keyword" element={<CategoryProduct/>} />
         <Route path="/brandProduct/:keyword" element={<BrandProduct/>} />
+        <Route path='*' element={<NotFoundPage/>}></Route>
       </Routes>
       <ToastContainer/>
     </div>
