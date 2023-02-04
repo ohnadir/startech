@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import '../Style/Login.css';
 import { HiHome } from 'react-icons/hi';
 import MetaData from '../Component/Meta';
@@ -18,14 +18,16 @@ const Register = () => {
     const [auth, setAuth] = useState(initialAuth);
     const [errors, setErrors] = useState(initialAuthErrors);
     const navigate = useNavigate()
+    const location = useLocation();
     const dispatch = useDispatch();
+    let from = location.state?.from?.pathname || "/";
     const handleChange = (e) => {
       setAuth(prev=>({...prev, [e.target.name]:e.target.value}))
     }
     const { isAuthenticated, error, loading } = useSelector(state => state.auth);
     useEffect(() => {
       if (isAuthenticated) {
-        navigate('/')
+        navigate(from, { replace: true });
       }
       if (error) {
         dispatch(clearErrors());

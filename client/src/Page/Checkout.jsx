@@ -9,6 +9,7 @@ import { Alert } from 'antd';
 import Payment from '../Component/Modal/Payment';
 
 import { Modal } from 'antd';
+import { CgLaptop } from 'react-icons/cg';
 
 const ChangeAddress=()=> {
     const [auth, setAuth] = useState('');
@@ -18,7 +19,9 @@ const ChangeAddress=()=> {
         setAuth(prev=>({...prev, [e.target.name]:e.target.value}))
     }
     const orderInfo = JSON.parse(sessionStorage.getItem('orderInfo'));
-    const total = parseInt(orderInfo?.price) + parseInt(auth.delivery === "homeDelivery") ? 60 : 0;
+    console.log(auth)
+    const total = parseInt(orderInfo?.price) + (auth.delivery === "homeDelivery" ? 60 : 0);
+    console.log(total);
     const onSubmit = () => {
         if(auth.payment === "online" ){
             setModal(true);

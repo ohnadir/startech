@@ -27,14 +27,25 @@ function App() {
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register/>} />
         <Route path='/productDetail/:id' element={<ProductDetails/>}></Route>
-
-        <Route path="/" element={<PrivateOutlet />}>
-          <Route path='/profile' element={<Profile/>}></Route>
-          <Route path='/changePassword' element={<ChangePassword/>}></Route>
-          <Route path='/payment' element={<Payment/>}></Route>
-          <Route path='/confirmPayment' element={<ConfirmPayment/>}></Route>
-          <Route path='/checkout' element={<Checkout title="Dashboard"/>}></Route>
+        <Route path='/checkout' element={
+          <ProtectedRoute>
+            <Checkout/>
+          </ProtectedRoute>
+        }>
         </Route>
+
+        <Route path='/payment' element={
+          <ProtectedRoute>
+          <Payment/>
+        </ProtectedRoute>
+        }></Route>
+
+        <Route path='/confirmPayment' element={
+          <ProtectedRoute>
+          <ConfirmPayment/>
+        </ProtectedRoute>
+        }></Route>
+        
 
         <Route path="/search/:keyword" element={<SearchResult/>} />
         <Route path="/compareProduct" element={<CompareProduct/>} />
