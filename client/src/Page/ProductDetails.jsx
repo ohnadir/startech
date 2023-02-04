@@ -10,11 +10,12 @@ import { DiGitCompare } from 'react-icons/di';
 import { MdAssignment } from 'react-icons/md';
 import { Modal, Spin } from 'antd';
 import { AiFillCheckCircle } from "react-icons/ai"
-import { BsCart } from "react-icons/bs"
+import { BsCart, BsCheckLg } from "react-icons/bs"
 import { useParams  } from 'react-router-dom';
 import { addToCart } from '../utils/cart';
 import { useDispatch, useSelector } from 'react-redux'
 import { getProductDetails, clearErrors } from '../actions/productActions'
+import image from "../assets/images.png"
 
 
 
@@ -29,8 +30,8 @@ const ProductDetails=()=> {
     const { id } = useParams();
     const dispatch = useDispatch();
     const { loading, error, product } = useSelector(state => state.productDetails);
-    const [selectedImg, setSelectedImg] = useState();
-    
+    const [selectedImg, setSelectedImg] = useState(image);
+    console.log(product)
     useEffect(() => {
         dispatch(getProductDetails(id))
         if (error) {
@@ -67,7 +68,7 @@ const ProductDetails=()=> {
             {
                 loading ? <div className='w-full h-screen flex items-center justify-center'><Spin/></div>
                 :
-                <div className='max-w-7xl mx-auto px-2'>
+                <div className='max-w-7xl mx-auto px-10'>
                     <MetaData title={'Product Details'} />
                     <div className='headerContainer'>
                         <HiHome onClick={()=>navigate('/')} className='headerLocation'/> 
