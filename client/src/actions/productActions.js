@@ -15,7 +15,7 @@ export const getProducts = (page, size) => async (dispatch) => {
 
         dispatch({ type: ALL_PRODUCTS_REQUEST })
 
-        let link =`http://localhost:5001/api/v1/products?page=${page}&size=${size}`
+        let link =`https://startech-server.vercel.app/api/v1/products?page=${page}&size=${size}`
 
         const { data } = await axios.get(link)
         dispatch({
