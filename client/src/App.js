@@ -6,7 +6,6 @@ import Home from './Page/Home';
 import Login from './Page/Login'
 import Register from './Page/Register';
 import Profile from './Page/Profile'
-import ChangePassword from './Page/ChangePassword';
 import ProductDetails from './Page/ProductDetails';
 import Checkout from './Page/Checkout';
 import Payment from './Component/Modal/Payment';
@@ -16,7 +15,6 @@ import ProtectedRoute from './Component/PrivateRoute'
 import CompareProduct from './Component/CompareProduct'
 import CategoryProduct from './Page/CategoryProduct';
 import BrandProduct from './Page/BrandProduct';
-import PrivateOutlet from './Component/PrivateOutlet';
 import NotFoundPage from './Page/NotFoundPage';
 function App() {
   return (
@@ -27,6 +25,13 @@ function App() {
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register/>} />
         <Route path='/productDetail/:id' element={<ProductDetails/>}></Route>
+
+        <Route path='/profile' element={
+          <ProtectedRoute>
+            <Profile/>
+        </ProtectedRoute>
+        }></Route>
+
         <Route path='/checkout' element={
           <ProtectedRoute>
             <Checkout/>
@@ -36,7 +41,7 @@ function App() {
 
         <Route path='/payment' element={
           <ProtectedRoute>
-          <Payment/>
+            <Payment/>
         </ProtectedRoute>
         }></Route>
 
