@@ -19,9 +19,7 @@ const ChangeAddress=()=> {
         setAuth(prev=>({...prev, [e.target.name]:e.target.value}))
     }
     const orderInfo = JSON.parse(sessionStorage.getItem('orderInfo'));
-    console.log(auth)
     const total = parseInt(orderInfo?.price) + (auth.delivery === "homeDelivery" ? 60 : 0);
-    console.log(total);
     const onSubmit = () => {
         if(auth.payment === "online" ){
             setModal(true);

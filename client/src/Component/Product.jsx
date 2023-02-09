@@ -4,8 +4,6 @@ import '../Style/Product.css';
 import { Spin } from 'antd';
 import { useDispatch, useSelector } from 'react-redux'
 import { getProducts } from '../actions/productActions'
-import Pagination from 'react-js-pagination'
-import ColumnGroup from 'antd/lib/table/ColumnGroup';
 
 const Product = () => {
     // const [products, setProducts] = useState([]);
@@ -14,7 +12,6 @@ const Product = () => {
     const [page, setPage] = useState(0);
     const dispatch = useDispatch();
     const { loading, products, error, count } = useSelector(state => state?.products);
-    // console.log(count)
     
     useEffect(() => {
         dispatch(getProducts(page, size));

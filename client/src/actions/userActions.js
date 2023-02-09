@@ -17,7 +17,6 @@ import {
 // Login
 export const login = (auth) => async (dispatch) => {
     const {email, password} = auth;
-    console.log(auth)
     try {
 
         dispatch({ type: LOGIN_REQUEST })
@@ -31,7 +30,7 @@ export const login = (auth) => async (dispatch) => {
         const { data } = await axios.post('https://startech-server.vercel.app/api/v1/users/login', { email, password }, config)
         dispatch({
             type: LOGIN_SUCCESS,
-            payload: data
+            payload: data.user
         })
 
     } catch (error) {
@@ -52,7 +51,6 @@ export const register = (userData) => async (dispatch) => {
                 'Content-Type': 'application/json'
             }
         }
-
         const { data } = await axios.post('https://startech-server.vercel.app/api/v1/users/signup', userData, config)
         
         dispatch({
@@ -61,7 +59,6 @@ export const register = (userData) => async (dispatch) => {
         })
 
     } catch (error) {
-        console.log(error)
         dispatch({
             type: REGISTER_USER_FAIL,
             payload: error.response.data.message

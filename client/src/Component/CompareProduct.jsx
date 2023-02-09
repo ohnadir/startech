@@ -6,7 +6,6 @@ const CompareProduct = () => {
     const compare = JSON.parse(localStorage.getItem('compareCart'));
     setTimeout(() => {
         localStorage.removeItem('compareCart');
-        console.log("Delayed for 1 minutes.");
         navigate('/')
       }, 3 * 60 * 1000)
     

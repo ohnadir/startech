@@ -123,7 +123,6 @@ exports.searchProduct = catchAsyncErrors(async (req, res, next) => {
   .filter()
 
   let products = await apiFeatures.query;
-  console.log(products)
   if (!products) {
     return next(new ErrorHandler('Product not found', 404));
   }

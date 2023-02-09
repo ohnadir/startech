@@ -3,6 +3,8 @@ const cors = require("cors");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
 const connectDb = require("./config");
+const cookieParser = require('cookie-parser')
+const bodyParser = require('body-parser')
 
 // config dot env file
 dotenv.config();
@@ -14,8 +16,8 @@ const app = express();
 //middleware
 app.use(morgan("dev"));
 app.use(express.json());
-
-
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser())
 app.use(cors());
 
 // all routes
@@ -37,7 +39,7 @@ app.use(errorMiddleware);
 const PORT =  process.env.PORT;
 const HOST = process.env.HOST
 app.get('/', (req, res) => {
-  res.send('Startech Testing connection')
+  res.send('Star tech Testing connection')
 })
 //listen server
 app.listen(PORT, HOST, () => {

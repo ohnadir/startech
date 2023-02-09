@@ -32,13 +32,11 @@ export const getProducts = (page, size) => async (dispatch) => {
 }
 
 export const getProductDetails = (id) => async (dispatch) => {
-    console.log(id)
     try {
 
         dispatch({ type: PRODUCT_DETAILS_REQUEST })
 
         const { data } = await axios.get(`https://startech-server.vercel.app/api/v1/products/${id}`)
-        // console.log(data);
         dispatch({
             type: PRODUCT_DETAILS_SUCCESS,
             payload: data.product

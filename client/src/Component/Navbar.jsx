@@ -29,7 +29,6 @@ const Navbar = () => {
     const [cartOpen, setCartOpen] = useState(false)
     const [keyword, setKeyword] = useState('');
     const { user, loading } = useSelector(state => state.auth);
-    // console.log(user);
     const handleSearch=()=>{
         if(keyword){
             navigate(`/search/${keyword}`)

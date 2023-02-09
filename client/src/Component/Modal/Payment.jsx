@@ -56,7 +56,6 @@ const Payment = ({ auth, setModal, total }) => {
             type: 'card',
             card
         });
-        console.log(paymentMethod);
         // confirm payment 
         const result = await stripe.confirmCardPayment(
             clientSecret,
