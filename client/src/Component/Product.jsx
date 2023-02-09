@@ -21,7 +21,7 @@ const Product = () => {
         setCounts(count);
     }, [ page, size, error]);
     
-    const pages = Number(Math.ceil(counts / size)) || 8;
+    const pages = Number(Math.ceil(counts / size)) || 4;
     const arrayPages = [...Array(pages && pages).keys()];
     return (
         <>

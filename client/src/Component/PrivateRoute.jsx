@@ -6,10 +6,10 @@ import { useSelector } from 'react-redux'
 const ProtectedRoute = ({ children}) => {
     let location = useLocation();
     const { isAuthenticated, loading } = useSelector(state => state.auth)
-    if (loading) {
+    if (loading ) {
         return <Spinner/>
       }
-      if (!isAuthenticated) {
+      if (isAuthenticated) {
         return <Navigate to="/login" state={{ from: location }} replace />;
       }
       
