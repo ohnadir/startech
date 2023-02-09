@@ -27,7 +27,7 @@ export const login = (auth) => async (dispatch) => {
             }
         }
 
-        const { data } = await axios.post('https://startech-server.vercel.app/api/v1/users/login', { email, password }, config)
+        const { data } = await axios.post('http://localhost:5001/api/v1/users/login', { email, password }, config)
         dispatch({
             type: LOGIN_SUCCESS,
             payload: data.user
@@ -69,7 +69,7 @@ export const register = (userData) => async (dispatch) => {
 export const loadUser = () => async(dispatch)=>{
     try{
         dispatch({ type: LOAD_USER_REQUEST })
-        const { data } = await axios.get('/api/v1/me')
+        const { data } = await axios.get('https://startech-server.vercel.app/api/v1/users/me')
         dispatch({
             type: LOAD_USER_SUCCESS,
             payload: data.user
@@ -86,7 +86,7 @@ export const loadUser = () => async(dispatch)=>{
 export const logout = () => async (dispatch) => {
     try {
 
-        await axios.get('/api/v1/logout')
+        await axios.get('https://startech-server.vercel.app/api/v1/users/logout')
 
         dispatch({
             type: LOGOUT_SUCCESS,
