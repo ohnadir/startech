@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import '../Style/Login.css';
 import { HiHome } from 'react-icons/hi';
 import MetaData from '../Component/Meta';
-import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, clearErrors } from '../actions/userActions';
 const initialAuth = {
@@ -14,17 +13,21 @@ const initialAuthErrors = {
   email: '',
   phone:''
 }
-const Register = () => {
+const Login = () => {
     const [auth, setAuth] = useState(initialAuth);
     const [errors, setErrors] = useState(initialAuthErrors);
     const navigate = useNavigate()
     const location = useLocation();
     const dispatch = useDispatch();
+    
     let from = location.state?.from?.pathname || "/";
     const handleChange = (e) => {
       setAuth(prev=>({...prev, [e.target.name]:e.target.value}))
     }
-    const { isAuthenticated, error, loading } = useSelector(state => state.auth);
+    const { isAuthenticated, error, loading, user } = useSelector(state => state.auth);
+    if(user?._id){
+      localStorage.setItem("id", JSON.stringify(user?._id));
+    }
     useEffect(() => {
       if (isAuthenticated) {
         navigate(from, { replace: true });
@@ -99,4 +102,4 @@ const Register = () => {
     );
 };
 
-export default Register;
+export default Login;

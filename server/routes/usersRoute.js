@@ -27,6 +27,6 @@ router.post('/login', login);
 router.patch( '/:id', idValidator, updateUserValidator, validationResult, updateUser);
 router.delete('/:id', idValidator, validationResult, deleteUser);
 router.get('/logout', logout);
-router.get('/me', getUserProfile);
+router.get('/me/:id', getUserProfile);
 
 module.exports = router;

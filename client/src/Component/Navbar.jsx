@@ -10,7 +10,7 @@ import { MdOutlineClose } from 'react-icons/md';
 import CartDrawer from './CartDrawer';
 import { getStoredCart } from '../utils/cart';
 import { useDispatch, useSelector } from 'react-redux'
-
+import { logout } from "../actions/userActions" 
 const Navbar = () => {
 
     // const [navBg, setNavBg] = useState("red");
@@ -28,16 +28,18 @@ const Navbar = () => {
     const [open, setOpen] = useState(false)
     const [cartOpen, setCartOpen] = useState(false)
     const [keyword, setKeyword] = useState('');
-    const { user, loading } = useSelector(state => state.auth);
+    const dispatch = useDispatch()
+    const { isAuthenticated } = useSelector(state => state.auth);
     const handleSearch=()=>{
         if(keyword){
             navigate(`/search/${keyword}`)
         }
     }
     const storedCart = getStoredCart();
-    useEffect(()=>{
-        
-    }, [])
+    const handleLogOut=()=>{
+        localStorage.removeItem("id");
+        dispatch(logout())
+    }
 
     const menuLists = <>
         <button className='text-white block md:hidden' onClick={()=>setOpen(!open)}><BiSearchAlt2 className='text-2xl'/></button>
@@ -54,7 +56,11 @@ const Navbar = () => {
                     <ul className='m-0'>
                         <li onClick={()=>navigate('/profile')}>Profile</li>
                         {/* <li>{ user &&  user?.user?.fullName()}</li> */}
+                        {
+                            isAuthenticated ? <li onClick={handleLogOut}>Logout</li> :
+
                         <li onClick={()=>navigate('/login')}>Login</li>
+                        }
                     </ul>
                     
                         {/* {

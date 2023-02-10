@@ -40,7 +40,12 @@ exports.login = catchAsyncErrors(async (req, res, next) => {
   if (!isPasswordMatched) {
     return next(new ErrorHandler('Mismatch authentication', 422))
   }
-  sendToken(user, 200, res)
+  // localStorage.setItem("id", JSON.stringify(user._id));
+  res.status(200).json({
+    success: true,
+    user
+  })
+  // sendToken(user, 200, res)
 });
 
 exports.updateUser = catchAsyncErrors(async (req, res, next) => {
@@ -150,7 +155,7 @@ exports.getUser = catchAsyncErrors(async (req, res, next)=> {
 });
 
 exports.getUserProfile = catchAsyncErrors(async (req, res, next) => {
-  const user = await User.findById(req.user.id);
+  const user = await User.findById({_id: req.params.id});
 
   res.status(200).json({
       success: true,

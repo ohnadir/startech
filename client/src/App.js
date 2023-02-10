@@ -19,12 +19,16 @@ import NotFoundPage from './Page/NotFoundPage';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { loadUser } from './actions/userActions';
-import store from "./store"
 function App() {
+  const data = localStorage.getItem("id");
+  let id = ''
+  if(data){
+    id = JSON.parse(data);
+  }
   const dispatch = useDispatch()
   useEffect(()=>{
-    store.dispatch(loadUser());
-  },[dispatch])
+    dispatch(loadUser(id));
+  },[])
   return (
     <div className="App ">
       <Navbar/>
