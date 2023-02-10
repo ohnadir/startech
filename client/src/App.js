@@ -16,7 +16,15 @@ import CompareProduct from './Component/CompareProduct'
 import CategoryProduct from './Page/CategoryProduct';
 import BrandProduct from './Page/BrandProduct';
 import NotFoundPage from './Page/NotFoundPage';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { loadUser } from './actions/userActions';
+import store from "./store"
 function App() {
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    store.dispatch(loadUser());
+  },[dispatch])
   return (
     <div className="App ">
       <Navbar/>
