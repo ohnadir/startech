@@ -6,9 +6,7 @@ import { useSelector } from 'react-redux'
 const ProtectedRoute = ({ children}) => {
     let location = useLocation();
     const { isAuthenticated, loading } = useSelector(state => state.auth);
-    console.log(loading);
-    console.log(isAuthenticated);
-    if (loading || loading === undefined) {
+    if (loading ) {
         return <Spinner/>
       }
       if (isAuthenticated) {
