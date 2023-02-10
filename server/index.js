@@ -3,8 +3,6 @@ const cors = require("cors");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
 const connectDb = require("./config");
-const cookieParser = require('cookie-parser')
-const bodyParser = require('body-parser')
 
 // config dot env file
 dotenv.config();
@@ -16,8 +14,6 @@ const app = express();
 //middleware
 app.use(morgan("dev"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser())
 app.use(cors());
 
 // all routes

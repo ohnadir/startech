@@ -24,8 +24,7 @@ export const login = (auth) => async (dispatch) => {
         const config = {
             headers: {
                 'Content-Type': 'application/json'
-            },
-            withCredentials: true,
+            }
         }
 
         const { data } = await axios.post('https://startech-server.vercel.app/api/v1/users/login', { email, password }, config)
