@@ -8,7 +8,7 @@ const ProtectedRoute = ({ children}) => {
     const { isAuthenticated, loading } = useSelector(state => state.auth);
     console.log(loading);
     console.log(isAuthenticated);
-    if (loading ) {
+    if (loading || loading === undefined) {
         return <Spinner/>
       }
       if (isAuthenticated) {
