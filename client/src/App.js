@@ -20,6 +20,10 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { loadUser } from './actions/userActions';
 import Dashboard from './Page/Dashboard';
+import Chart from './Page/Dashboard/Chart';
+import Orders from './Page/Dashboard/Orders';
+import Users from './Page/Dashboard/Users';
+import Products from './Page/Dashboard/Products';
 function App() {
   const data = localStorage.getItem("id");
   let id = ''
@@ -69,6 +73,13 @@ function App() {
         </ProtectedRoute>
         }></Route>
         
+        {/* dashboard */}
+        <Route path='/dashboard' element={<ProtectedRoute><Dashboard/></ProtectedRoute>}>
+          <Route index  element={<Chart isAdmin={true} />}></Route>
+          <Route path="orders"  element={<Orders isAdmin={true} />}></Route>
+          <Route path="users"  element={<Users isAdmin={true} />}></Route>
+          <Route path="products"  element={<Products isAdmin={true} />}></Route>
+        </Route>
 
         <Route path="/search/:keyword" element={<SearchResult/>} />
         <Route path="/compareProduct" element={<CompareProduct/>} />
