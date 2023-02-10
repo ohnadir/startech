@@ -24,10 +24,11 @@ export const login = (auth) => async (dispatch) => {
         const config = {
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            withCredentials: true,
         }
 
-        const { data } = await axios.post('https://startech-server.vercel.app/api/v1/users/login', { email, password }, config)
+        const { data } = await axios.post('http://localhost:5001/api/v1/users/login', { email, password }, config)
         dispatch({
             type: LOGIN_SUCCESS,
             payload: data.user
@@ -69,7 +70,7 @@ export const register = (userData) => async (dispatch) => {
 export const loadUser = () => async(dispatch)=>{
     try{
         dispatch({ type: LOAD_USER_REQUEST })
-        const { data } = await axios.get('https://startech-server.vercel.app/api/v1/users/me')
+        const { data } = await axios.get('http://localhost:5001/api/v1/users/me')
         dispatch({
             type: LOAD_USER_SUCCESS,
             payload: data.user

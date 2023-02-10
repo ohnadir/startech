@@ -40,7 +40,6 @@ exports.login = catchAsyncErrors(async (req, res, next) => {
   if (!isPasswordMatched) {
     return next(new ErrorHandler('Mismatch authentication', 422))
   }
-    
   sendToken(user, 200, res)
 });
 
@@ -151,7 +150,7 @@ exports.getUser = catchAsyncErrors(async (req, res, next)=> {
 });
 
 exports.getUserProfile = catchAsyncErrors(async (req, res, next) => {
-  const user = await User.findById(req.user._id);
+  const user = await User.findById(req.user.id);
 
   res.status(200).json({
       success: true,
