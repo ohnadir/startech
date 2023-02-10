@@ -1,6 +1,5 @@
 const User  = require('../models/user');
 const crypto = require('crypto');
-const sendToken = require('../utils/jwtToken')
 const  catchAsyncErrors = require('../middleware/catchAsyncErrors');
 const ErrorHandler = require('../utils/ErrorHandler');
 
@@ -26,7 +25,10 @@ exports.register = catchAsyncErrors(async (req, res, next) => {
     phone
   });
   await user.save();
-  sendToken(user, 200, res)
+  res.status(200).json({
+    success: true,
+    user
+  })
 });
 exports.login = catchAsyncErrors(async (req, res, next) => {
   const { email, password } = req.body;
@@ -40,12 +42,10 @@ exports.login = catchAsyncErrors(async (req, res, next) => {
   if (!isPasswordMatched) {
     return next(new ErrorHandler('Mismatch authentication', 422))
   }
-  // localStorage.setItem("id", JSON.stringify(user._id));
   res.status(200).json({
     success: true,
     user
   })
-  // sendToken(user, 200, res)
 });
 
 exports.updateUser = catchAsyncErrors(async (req, res, next) => {
