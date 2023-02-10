@@ -19,6 +19,7 @@ import NotFoundPage from './Page/NotFoundPage';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { loadUser } from './actions/userActions';
+import Dashboard from './Page/Dashboard';
 function App() {
   const data = localStorage.getItem("id");
   let id = ''
@@ -41,6 +42,11 @@ function App() {
         <Route path='/profile' element={
           <ProtectedRoute>
             <Profile/>
+        </ProtectedRoute>
+        }></Route>
+        <Route path='/dashboard' element={
+          <ProtectedRoute>
+            <Dashboard/>
         </ProtectedRoute>
         }></Route>
 
