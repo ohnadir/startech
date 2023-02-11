@@ -230,7 +230,7 @@ const ProductDetails=()=> {
                     </div>
                     <div className='pb-12'>
                         <h1 className='text-center font-bold text-2xl'>Related Product</h1>
-                        <RelatedProduct category={product?.category}/>
+                        <RelatedProduct id={product?._id} category={product?.category}/>
                     </div>
                 </div>
             }

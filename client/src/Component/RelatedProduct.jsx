@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 
-const RelatedProduct = ({category}) => {
+const RelatedProduct = ({category, id}) => {
     const [categoryProduct, setCategoryProduct] = useState([]);
     useEffect(() => {
         axios.get(`https://startech-server.vercel.app/api/v1/products/search?category=${category}`)
@@ -9,14 +9,14 @@ const RelatedProduct = ({category}) => {
                 setCategoryProduct(response.data.products)
             })
     }, [category]);
-    console.log(categoryProduct)
+    const filterData = categoryProduct?.filter((item) => item._id !== id);
     return (
         <div className=''>
-            <div className='grid grid-cols-1 sm:grid-cols-2  ms:grid-cols-3 lg:grid-cols-4'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 gap-5 ms:grid-cols-3 lg:grid-cols-4'>
                 {
-                    categoryProduct?.map((product)=><div key={product?._id}>
+                    filterData?.map((product)=><div key={product?._id}>
                         <div className='border shadow-xl p-5'>
-                            <img className='w-[200px]' src={product?.productPictures[0].img} alt="" />
+                            <img className='w-[200px] mx-auto' src={product?.productPictures[0].img} alt="" />
                             <p className='m-0 font-semibold py-1'>{product?.name}</p>
                             <p className='m-0 pb-2'>{product?.desc}</p>
                             <p className='m-0 font-semibold'>Price:- {product?.price}</p>
