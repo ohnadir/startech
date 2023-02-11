@@ -1,17 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react';
+
 
 const Review = ({id, product}) => {
     const [createReview, setCreateReview] = useState(false);
+    
     const [ option, setOption] = useState('')
     const handleChange = (e) => {
         setOption(prev=>({...prev, [e.target.name]:e.target.value}));
     }
-    console.log(id);
+    
     return (
         <div className=''>
             <div className=' flex flex-col md:flex-row gap-2 md:justify-between md:items-center'>
                 <div>
-                    <h1 className='text-black text-xl'>Review ({product.reviews.length})</h1>
+                    <h1 className='text-black text-xl'>Review ({product.reviews?.length})</h1>
                     <p>Get specific details about this product from customers who own it.</p>
                 </div>
                 <div>

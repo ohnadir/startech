@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getProductDetails, clearErrors } from '../actions/productActions'
 import image from "../assets/images.png"
 import Review from '../Component/Review';
+import RelatedProduct from '../Component/RelatedProduct';
 
 
 
@@ -166,9 +167,9 @@ const ProductDetails=()=> {
                         </div>
                     </div>
                     <div className='mt-[30px]'>
-                        <Review id={product._id} product={product} />
+                        <Review id={product?._id} product={product} />
                         {
-                            product?.reviews.length===0 ? <div>
+                            product?.reviews?.length===0 ? <div>
                                 <div className='flex justify-center items-center py-16'>
                                 <div>
                                 
@@ -180,7 +181,7 @@ const ProductDetails=()=> {
                             : 
                             <div className='mt-10'>
                                 {
-                                    product?.reviews.map((item)=><div className='border'>
+                                    product?.reviews?.map((item)=><div className='border'>
                                         <p className='m-0'>{item.userName}</p>
                                         <p className='m-0'>{item.rating}</p>
                                         <p className='m-0'>{item.comment}</p>
@@ -226,6 +227,10 @@ const ProductDetails=()=> {
                         </Modal>
                         
                         }
+                    </div>
+                    <div className='pb-12'>
+                        <h1 className='text-center font-bold text-2xl'>Related Product</h1>
+                        <RelatedProduct category={product?.category}/>
                     </div>
                 </div>
             }
