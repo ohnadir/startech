@@ -32,8 +32,10 @@ function App() {
   }
   const dispatch = useDispatch()
   useEffect(()=>{
-    dispatch(loadUser(id));
-  },[])
+    if(id){
+      dispatch(loadUser(id));
+    }
+  },[dispatch])
   return (
     <div className="App ">
       <Navbar/>

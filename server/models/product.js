@@ -8,10 +8,7 @@ const productSchema = Schema(
     desc: { type: String, required: true},
     price: { type: String, required: true},
     productPictures: [],
-    reviews: [
-      { userId: { type: mongoose.Schema.Types.ObjectId, ref: 'user' } },
-      {review: String}
-    ],
+    reviews: [],
     brand: {
       type: String, 
       required: true, 

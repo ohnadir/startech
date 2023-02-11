@@ -6,7 +6,8 @@ const {
   getProducts,
   getProduct,
   searchProduct,
-  filterProduct
+  filterProduct,
+  createProductReview
 } = require('../controller/product');
 
 
@@ -33,6 +34,7 @@ router.delete('/:id', idValidator, validationResult, deleteProduct);
 
 router.get('/', getProducts);
 router.get('/search', searchProduct);
+router.put('/review/:id', createProductReview);
 
 router.get('/:id', idValidator, validationResult, getProduct);
 

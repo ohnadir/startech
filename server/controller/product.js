@@ -135,62 +135,33 @@ exports.searchProduct = catchAsyncErrors(async (req, res, next) => {
 });
 
 // Create new review   =>   /api/v1/review
-exports.createProductReview = async ({body, req}) => {
-  const response = {
-    code: 200,
-    status: 'Success',
-    message: 'Review create Successfully'
-  };
-
-
-  try {
-    const { rating, comment, productId } = body;
-
-    const review = {
-      user: req.user._id,
-      name: req.user.name,
-      rating: Number(rating),
-      comment
-    }
-
-    const product = await Product.findById(productId);
-    if (!product) {
-      response.code = 402;
-      response.status = 'Failed';
-      response.message = 'No Data found by this ID';
-      return response;    
-    }
-
-    const isReviewed = product.reviews.find(
-      r => r.user.toString() === req.user._id.toString()
-    )
-
-    if (isReviewed) {
-      product.reviews.forEach(review => {
-        if (review.user.toString() === req.user._id.toString()) {
-          review.comment = comment;
-          review.rating = rating;
-        }
-      })
-
-    } else {
-      product.reviews.push(review);
-      product.numOfReviews = product.reviews.length
-    }
-    product.ratings = product.reviews.reduce((acc, item) => item.rating + acc, 0) / product.reviews.length
-
-    await product.save({ validateBeforeSave: false });
-
-    return response;
-
+exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
+  const id = req.params.id;
+  const { rating, comment, name, photo } = req.body;
+  const review = {
+    userName: name,
+    photo: photo,
+    rating: Number(rating),
+    comment
   }
-  catch (error) {
-    response.code = 500;
-    response.status = 'failed';
-    response.message = 'Error. Try again';
-    return response;
+  const product = await Product.findById(id);
+  if (!product) {
+    response.code = 402;
+    response.status = 'Failed';
+    response.message = 'No Data found by this ID';
+    return response;    
   }
-}
+  if(product.reviews){
+    product.reviews.push(review)
+  }
+  await product.save({ validateBeforeSave: false })
+  // console.log(product)
+  res.status(200).json({
+    status: true,
+    statusCode:200,
+    product
+  })
+})
 
 exports.deleteReviewService = async ({ id }) => {
   
