@@ -109,14 +109,14 @@ exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
 exports.getUsers = catchAsyncErrors(async (req, res, next) => {
 
     
-  const users = await User.find({ isDelete: false })
+  const users = await User.find()
   if(!users){
     return next(new ErrorHandler('User font found ', 404))
   }
   res.status(200).json({
     success: true,
     users
-})
+  })
 });
 
 exports.searchUser = catchAsyncErrors(async (req, res, next) => {

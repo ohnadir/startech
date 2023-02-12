@@ -5,7 +5,8 @@ const {
   updateUser,
   deleteUser,
   logout,
-  getUserProfile
+  getUserProfile,
+  getUsers
 
 } = require('../controller/user');
 
@@ -23,6 +24,7 @@ const { isAuthenticatedUser, authorizeRoles } = require('../middleware/auth')
 // authorizeRoles('admin');
 
 router.post('/signup',  register);
+router.get('/',  getUsers);
 router.post('/login', login);
 router.patch( '/:id', idValidator, updateUserValidator, validationResult, updateUser);
 router.delete('/:id', idValidator, validationResult, deleteUser);
