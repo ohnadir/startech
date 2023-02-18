@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import '../Style/Register.css';
 import { HiHome } from 'react-icons/hi';
-import MetaData from '../Component/Meta';
+import SEO from '../Component/SEO';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
@@ -92,7 +92,7 @@ const Register = () => {
   }
     return (
         <div className='max-w-7xl mx-auto px-2'>
-          <MetaData title={'Register'} />
+          <SEO title={'Register'} />
           <div className='flex items-center gap-3 text-[13px] pt-4 pb-[50px]'>
           <HiHome onClick={()=>navigate('/register')} className='text-[#666] cursor-pointer'/> <span>/</span> <span>Account</span> <span>/</span> <span>Register</span>
           </div>

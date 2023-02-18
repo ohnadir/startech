@@ -6,15 +6,15 @@ import Home from './Page/Home';
 import Login from './Page/Login'
 import Register from './Page/Register';
 import Profile from './Page/Profile'
-import ProductDetails from './Page/ProductDetails';
+import ProductDetails from './Page/Product-details';
 import Checkout from './Page/Checkout';
 import Payment from './Component/Modal/Payment';
 import { ToastContainer } from 'react-toastify';
 import ConfirmPayment from './Component/ConfirmPayment';
 import ProtectedRoute from './Component/PrivateRoute'
 import CompareProduct from './Component/CompareProduct'
-import CategoryProduct from './Page/CategoryProduct';
-import BrandProduct from './Page/BrandProduct';
+import CategoryProduct from './Page/Category-product';
+import BrandProduct from './Page/Brand-product';
 import NotFoundPage from './Page/NotFoundPage';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -43,7 +43,7 @@ function App() {
         <Route path="/" exact  element={<Home/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register/>} />
-        <Route path='/productDetail/:id' element={<ProductDetails/>}></Route>
+        <Route path='/product-detail/:id' element={<ProductDetails/>}></Route>
 
         <Route path='/profile' element={
           <ProtectedRoute>

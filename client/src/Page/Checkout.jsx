@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { HiHome } from 'react-icons/hi';
 import District from "../Districts.json";
 import Thana from "../Thana.json";
-import MetaData from '../Component/Meta';
+import SEO from '../Component/SEO';
 import { Alert } from 'antd';
 import Payment from '../Component/Modal/Payment';
 
@@ -28,7 +28,7 @@ const ChangeAddress=()=> {
   return (
     <div className='bg-[#f2f4f8]'>
         <div className='max-w-7xl mx-auto px-2  checkoutContainer'>
-            <MetaData title={'Checkout'} />
+            <SEO title={'Checkout'} />
             <div className='flex items-center gap-3 text-[13px] pt-4 pb-[30px]'>
                 <HiHome onClick={()=>navigate('/')} className='text-[#666] cursor-pointer'/> 
                 <span className='text-[#666]'>/</span> 

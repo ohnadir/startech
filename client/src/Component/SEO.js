@@ -1,12 +1,12 @@
 import React from 'react';
 import { Helmet } from 'react-helmet'
 
-const MetaData = ({title}) => {
+const SEO = ({title}) => {
     return (
         <Helmet>
-            <title>{title}</title>
+            <title> {`${title} - Star tech`}</title>
         </Helmet>
     );
 };
 
-export default MetaData;
+export default SEO;

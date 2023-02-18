@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import '../Style/ProductDetails.css';
 import { HiHome } from 'react-icons/hi'
 import { useNavigate } from 'react-router-dom'
-import MetaData from '../Component/Meta';
+import SEO from '../Component/SEO';
 import { FaFacebookF } from 'react-icons/fa';
 import { FaPinterestP } from 'react-icons/fa';
 import { FaStar } from 'react-icons/fa';
@@ -70,7 +70,7 @@ const ProductDetails=()=> {
                 loading ? <div className='w-full h-screen flex items-center justify-center'><Spin/></div>
                 :
                 <div className='max-w-7xl mx-auto px-10'>
-                    <MetaData title={'Product Details'} />
+                    <SEO title={'Product Details'} />
                     <div className='headerContainer'>
                         <HiHome onClick={()=>navigate('/')} className='headerLocation'/> 
                         <span>/</span> 

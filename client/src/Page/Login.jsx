@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import '../Style/Login.css';
 import { HiHome } from 'react-icons/hi';
-import MetaData from '../Component/Meta';
+import SEO from '../Component/SEO';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, clearErrors } from '../actions/userActions';
 const initialAuth = {
@@ -62,7 +62,7 @@ const Login = () => {
     }
     return (
         <div className='max-w-7xl mx-auto px-2'>
-          <MetaData title={'Login'} />
+          <SEO title={'Login'} />
           <div className='flex items-center gap-3 text-[13px] pt-4 pb-[50px]'>
             <HiHome onClick={()=>navigate('/register')} className='text-[#666] cursor-pointer'/> <span>/</span> <span>Account</span> <span>/</span> <span>Login</span>
           </div>

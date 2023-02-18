@@ -6,7 +6,7 @@ import { MdLock, MdOutlineDashboardCustomize } from 'react-icons/md';
 import { FiLogOut } from 'react-icons/fi';
 import { HiHome } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
-import MetaData from '../Component/Meta';
+import SEO from '../Component/SEO';
 import { useSelector } from 'react-redux'
 
 
@@ -15,7 +15,7 @@ const Home =()=>{
     const { user } = useSelector(state => state.auth);
     return (
       <div className='max-w-7xl mx-auto px-10'>
-        <MetaData title={'Profile'} />
+        <SEO title={'Profile'} />
         <div className='flex items-center gap-3 text-[13px] pt-4 '>
           <HiHome onClick={()=>navigate('/register')} className='text-[#666] cursor-pointer'/> <span>/</span> <span onClick={()=>navigate('/profile')}>Account</span> <span>/</span> <span onClick={()=>navigate('/profile')}>Profile</span>
           </div>

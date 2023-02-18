@@ -30,7 +30,7 @@ const Product = () => {
                     <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5'>
                         {
                             products?.map((product)=>
-                                <Link to={`/productDetail/${product._id}`}>
+                                <Link to={`/product-detail/${product._id}`}>
                                     <div key={product._id} className='bg-white shadow-lg w-[300px] md:w-fit mx-auto rounded-[6px]'>
                                         <div className='px-5 pt-5'>
                                             <img src={product?.productPictures[0]?.img} alt="" />
