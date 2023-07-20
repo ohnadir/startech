@@ -96,7 +96,7 @@ const Register = () => {
           <div className='flex items-center gap-3 text-[13px] pt-4 pb-[50px]'>
           <HiHome onClick={()=>navigate('/register')} className='text-[#666] cursor-pointer'/> <span>/</span> <span>Account</span> <span>/</span> <span>Register</span>
           </div>
-            <div className='flex justify-center items-center'>
+            <div className='flex justify-center items-center h-screen'>
                 <div className='max-w-[400px]'>
                     <div className=''>
                         <h1 className='text-[20px] font-semibold mb-[5px]'>Register Account</h1>
@@ -130,7 +130,7 @@ const Register = () => {
                                 {errors?.phone ? <p className='text-red-600 m-0'>{errors.phone}</p> : null }
                               </div>
                               <div className=''>
-                                  <button onClick={OnSubmit} disabled={loading ? true : false} type="submit" className='registerBtn'>Continue</button>
+                                  <button onClick={OnSubmit}  type="submit" className='registerBtn'>Continue</button>
                               </div>
                           </div>
                         </form>

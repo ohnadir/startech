@@ -34,9 +34,8 @@ const Login = () => {
       }
       if (error) {
         dispatch(clearErrors());
-    }
-  
-  }, [dispatch, isAuthenticated, error])
+      }
+    },[dispatch, error, from, isAuthenticated])
     const onSubmit = async(e) => {
       e.preventDefault()
       

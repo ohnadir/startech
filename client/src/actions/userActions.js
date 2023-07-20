@@ -14,6 +14,7 @@ import {
     CLEAR_ERRORS
 } from '../constants/userConstants';
 
+const link = "https://startech-server.vercel.app";
 // Login
 export const login = (auth) => async (dispatch) => {
     const {email, password} = auth;
@@ -23,11 +24,13 @@ export const login = (auth) => async (dispatch) => {
 
         const config = {
             headers: {
-                'Content-Type': 'application/json'
+                'Accept' : 'application/json',
+                'Content-Type' : 'application/json',
+                'mode' : 'cors'
             }
         }
 
-        const { data } = await axios.post('https://startech-server.vercel.app/api/v1/users/login', { email, password }, config)
+        const { data } = await axios.post(`${link}/api/v1/users/login`, { email, password }, config)
         dispatch({
             type: LOGIN_SUCCESS,
             payload: data.user
@@ -51,7 +54,7 @@ export const register = (userData) => async (dispatch) => {
                 'Content-Type': 'application/json'
             }
         }
-        const { data } = await axios.post('https://startech-server.vercel.app/api/v1/users/signup', userData, config)
+        const { data } = await axios.post(`${link}/api/v1/users/signup`, userData, config)
         
         dispatch({
             type: REGISTER_USER_SUCCESS,
@@ -69,7 +72,7 @@ export const register = (userData) => async (dispatch) => {
 export const loadUser = (id) => async(dispatch)=>{
     try{
         dispatch({ type: LOAD_USER_REQUEST })
-        const { data } = await axios.get(`https://startech-server.vercel.app/api/v1/users/me/${id}`)
+        const { data } = await axios.get(`${link}/api/v1/users/me/${id}`)
         dispatch({
             type: LOAD_USER_SUCCESS,
             payload: data.user
@@ -86,7 +89,7 @@ export const loadUser = (id) => async(dispatch)=>{
 export const logout = () => async (dispatch) => {
     try {
 
-        await axios.get('https://startech-server.vercel.app/api/v1/users/logout')
+        await axios.get(`${link}/api/v1/users/logout`)
 
         dispatch({
             type: LOGOUT_SUCCESS,

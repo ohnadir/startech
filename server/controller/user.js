@@ -2,6 +2,7 @@ const User  = require('../models/user');
 const crypto = require('crypto');
 const  catchAsyncErrors = require('../middleware/catchAsyncErrors');
 const ErrorHandler = require('../utils/ErrorHandler');
+const SendToken = require("../utils/jwtToken")
 
 exports.register = catchAsyncErrors(async (req, res, next) => {
   const { firstName, lastName, password, email, phone } = req.body;
@@ -25,10 +26,11 @@ exports.register = catchAsyncErrors(async (req, res, next) => {
     phone
   });
   await user.save();
-  res.status(200).json({
+  SendToken(user, 200, res)
+  /* res.status(200).json({
     success: true,
     user
-  })
+  }) */
 });
 exports.login = catchAsyncErrors(async (req, res, next) => {
   const { email, password } = req.body;
@@ -42,10 +44,7 @@ exports.login = catchAsyncErrors(async (req, res, next) => {
   if (!isPasswordMatched) {
     return next(new ErrorHandler('Mismatch authentication', 422))
   }
-  res.status(200).json({
-    success: true,
-    user
-  })
+  SendToken(user, 200, res)
 });
 
 exports.updateUser = catchAsyncErrors(async (req, res, next) => {
