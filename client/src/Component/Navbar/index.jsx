@@ -7,53 +7,23 @@ import './Navbar.scss'
 import logo from '../../assets/logo.png';
 import { Drawer } from 'antd';
 import { MdOutlineClose } from 'react-icons/md';
-import CartDrawer from '../CartDrawer';
-import { getStoredCart } from '../../utils/cart';
-import { useDispatch, useSelector } from 'react-redux'
-import { logout } from "../../actions/userActions" 
+import { MdAssignment } from 'react-icons/md';
+import { getStoredCart, RemoveFromCart } from '../../utils/cart';
 const Navbar = () => {
     const navigate = useNavigate();
     const [open, setOpen] = useState(false)
     const [cartOpen, setCartOpen] = useState(false)
     const [keyword, setKeyword] = useState('');
-    const dispatch = useDispatch()
-    const { isAuthenticated } = useSelector(state => state.auth);
     const handleSearch=()=>{
         if(keyword){
             navigate(`/search/${keyword}`)
         }
     }
     const storedCart = getStoredCart();
-    const handleLogOut=()=>{
-        localStorage.removeItem("id");
-        dispatch(logout())
+    const HandleRemove= (item)=>{
+        RemoveFromCart(item);
     }
-
-    const menuLists = <>
-        <button className='text-white block md:hidden' onClick={()=>setOpen(!open)}><BiSearchAlt2 className='text-2xl'/></button>
-        <div className="flex relative">
-            <span onClick={()=>setCartOpen(true)} >
-                <BsCartCheckFill className='cursor-pointer text-2xl text-white' />
-            </span>
-            <span className="absolute top-[-7px] left-[16px] bg-[#ef4a23] text-white rounded-full w-[16px] h-[16px] flex items-center justify-center p-[2px]">{ storedCart ? storedCart?.length : 0}</span>
-        </div>
-        <div>
-            <div className="dropdown">
-                <CgProfile className='dropBtn text-white' />
-                <div className="dropdown-content">
-                    <ul className='m-0'>
-                        <li onClick={()=>navigate('/profile')}>Profile</li>
-                        {/* <li>{ user &&  user?.user?.fullName()}</li> */}
-                        {
-                            isAuthenticated ? <li onClick={handleLogOut}>Logout</li> :
-
-                        <li onClick={()=>navigate('/login')}>Login</li>
-                        }
-                    </ul>
-                </div>
-            </div>
-        </div> 
-    </>
+    const total = storedCart?.reduce((n, {price, quantity}) => n + parseInt(price) * parseInt(quantity), 0)
     return (
         <div className='navbar'>
             <div className='navbar-container'>
@@ -65,7 +35,7 @@ const Navbar = () => {
                     <button onClick={handleSearch}><BiSearchAlt2/></button>
                 </div>
                 <div className='option-container'>
-                    <BiSearchAlt2 onClick={()=>setOpen(!open)} size={26} className=' mt-[5px] cursor-pointer text-white'/>
+                    <BiSearchAlt2 onClick={()=>setOpen(!open)} size={26} className='mobile-search-btn mt-[5px] cursor-pointer text-white'/>
                     <div className="cart-container">
                         <BsCartCheckFill onClick={()=>setCartOpen(true)} className='cursor-pointer text-2xl text-white' />
                         <div className="cart-counter">
@@ -88,19 +58,66 @@ const Navbar = () => {
             {
                 cartOpen && 
                 <Drawer 
-                // className='drawer'
                 bodyStyle={{"padding": "0px"}}
                 headerStyle={{"borderBottom": "0px ", "display": "none"}} 
                 placement="right" 
                 onClose={()=>setCartOpen(false)}  open={cartOpen}>
-                    <div className='drawerHeader drawer-header'>
+                    <div className='drawer-header'>
                         <h1 className=' text-white'>YOUR CART</h1>
-                        <MdOutlineClose className='cartCloseBtn' onClick={()=>setCartOpen(false)} />
+                        <div className='cartCloseBtn'>
+                            <MdOutlineClose  onClick={()=>setCartOpen(false)} />
+                        </div>
                     </div>
-                    <CartDrawer />
+                    <div className='drawer-body'>
+                        {
+                            storedCart?.length === 0
+                            ?
+                            <div className='empty-cart-container'>
+                                <div>
+                                    <div className='empty-cart-icon'>
+                                        <MdAssignment size={48} />
+                                    </div>
+                                    <p className='m-0 pt-2'>No items added in your cart!</p>                                
+                                </div>
+                            </div>
+                            :
+                            <div className='cart-products'>
+                                <div className='cart-products-container'>
+                                    {
+                                        storedCart?.map((item)=> 
+                                            <div key={item.id}>
+                                                <div className='cart-product'>
+                                                    <img src={item.image.img} alt="" />
+                                                    <div className='product-info'>
+                                                        <h1>{item?.name}</h1>
+                                                        <h1>৳ {item?.price} X {item?.quantity}</h1>
+                                                    </div>
+                                                    <button onClick={()=>HandleRemove(item)}><MdOutlineClose /></button>
+                                                </div>
+                                            </div>
+                                        )
+                                    }
+                                </div>
+                                <div className="bottom-bar">
+                                    <div className='promo-code'>
+                                        <input type="text" placeholder='Promo Code' />
+                                        <button>Apply</button>
+                                    </div>
+                                    <div className='total-price'>
+                                        <p className='price-name'>Total:-</p>
+                                        <p className='price'>{total} ৳</p>
+                                    </div>
+                                    <button>
+                                        <div className='overlay'>
+                                            <p>Checkout</p>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                    </div>
                 </Drawer>
             }
-            
         </div>
     );
 };
