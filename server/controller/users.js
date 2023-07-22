@@ -3,7 +3,8 @@ const { registration, login, loadUser, updateProfile, allUser, singleUser, passw
 exports.register = async (req, res) => {
   const { status, code, message, token, user } = await registration({
     body:req.body,
-    ...req.body
+    ...req.body,
+    res:res
   });
   res.status(code).json({ code, status, message, token, user });
 };
@@ -11,7 +12,8 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
   const { status, code, message, token, user } = await login({
     body:req.body,
-    ...req.body
+    ...req.body,
+    res: res
   });
   res.status(code).json({ code, status, message, token, user });
 };
@@ -21,7 +23,7 @@ exports.update = async (req, res) => {
 };
 
 exports.loadUser = async (req, res) => {
-  const { status, code, message, user } = await loadUser({...req.params});
+  const { status, code, message, user } = await loadUser({ req:req});
   res.status(code).json({ code, status, message, user });
 };
 

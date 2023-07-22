@@ -1,4 +1,4 @@
-const sendToken = (user, statusCode, res) => {
+const sendToken = (user, res) => {
     // Create JWT Token  
     const token = user.getJwtToken();
     const options = {
@@ -7,10 +7,6 @@ const sendToken = (user, statusCode, res) => {
         ),
         httpOnly: true
     }
-    res.status(statusCode).cookie("token", token, options).json({
-        success: true,
-        token,
-        user
-    })
+    res.cookie("token", token, options);
 }
 module.exports = sendToken;

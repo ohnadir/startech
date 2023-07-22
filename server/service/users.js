@@ -1,25 +1,36 @@
 const User = require('../models/user');
-const jwt = require('jsonwebtoken');
+const sendToken = require("../utils/jwtToken")
 
-exports.registration = async ({ body, email }) => {
+exports.registration = async ({ body, email, phone, res }) => {
     const response = {
       code: 200,
       status: 'success',
       message: 'Registration successfully'
     };
+
     try {
-        if(email){
-            const isEmailExist = await User.findOne({ email : email });
-            if (isEmailExist) {
-                response.code = 400;
-                response.status = 'failed';
-                response.message = 'Email already taken';
-                return response;
-            }
+        const isEmailExist = await User.findOne({ email : email });
+        if (isEmailExist) {
+            response.code = 400;
+            response.status = 'failed';
+            response.message = 'Email already taken';
+            return response;
         }
+
+        const isPhoneExist = await User.findOne({ phone : phone });
+        if (isPhoneExist) {
+            response.code = 400;
+            response.status = 'failed';
+            response.message = 'Phone Number already taken';
+            return response;
+        }
+
         const user = await User.create(body);
-        response.token = user.getJwtToken();
+        sendToken(user, res)
+
+        response.user = user;
         return response;
+         
     } catch (error) {
         response.code = 500;
         response.status = 'failed';
@@ -27,7 +38,8 @@ exports.registration = async ({ body, email }) => {
         return response;
     }
 };
-exports.login = async ({ email, password }) => {
+
+exports.login = async ({ email, password, res }) => {
     const response = {
       code: 200,
       status: 'success',
@@ -49,10 +61,10 @@ exports.login = async ({ email, password }) => {
             response.message = 'Incorrect credential';
             return response;
         }
-        
-        response.token = user.getJwtToken();
-        response.user= user
-        return response;
+
+        sendToken(user, res)
+        response.user = user;
+        return response
     } catch (error) {
         response.code = 500;
         response.status = 'failed';
@@ -60,6 +72,7 @@ exports.login = async ({ email, password }) => {
         return response;
     }
 };
+
 exports.updateProfile = async ({ name, email, phone, address, id }) => {
     const response = {
       code: 200,
@@ -105,21 +118,16 @@ exports.updateProfile = async ({ name, email, phone, address, id }) => {
         return response;
     }
 };
-exports.loadUser=async({token})=>{
+
+
+exports.loadUser=async({ req })=>{
     const response = {
         code: 200,
         status: 'success',
         message: 'Load user successfully',
     };
     try {
-        if (!token) {
-            response.code = 401;
-            response.status = 'failed';
-            response.message = 'User not found by this token';
-            return response;
-        }
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        const user = await User.findById({_id: decoded.id});
+        const user = await User.findById(req.user.id);
         response.user = user;
         return response;
     } catch (error) {

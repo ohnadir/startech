@@ -15,7 +15,6 @@ import {
     CLEAR_ERRORS
 } from '../constants/userConstants';
 
-import Cookies from "js-cookie"
 const link = "http://localhost:5001";
 // const link = "https://startech-server.vercel.app";
 // Login
@@ -31,8 +30,6 @@ export const login = (auth) => async (dispatch) => {
         }
 
         const { data } = await axios.post(`${link}/api/v1/users/login`, { email, password }, config)
-        console.log(data);
-        // Cookies.set('token', JSON.stringify(data.token), {expires: 7});// Cookies.set('token', JSON.stringify(data.token), {expires: 7});
         dispatch({
             type: LOGIN_SUCCESS,
             payload: data.user
@@ -52,12 +49,12 @@ export const register = (userData) => async (dispatch) => {
         dispatch({ type: REGISTER_USER_REQUEST })
 
         const config = {
-            headers: {
-                'Content-Type': 'application/json'
-            }
+            headers: { 'Content-Type' : 'application/json' },
+            withCredentials: true
         }
+
         const { data } = await axios.post(`${link}/api/v1/users/signup`, userData, config)
-        
+        console.log(data);
         dispatch({
             type: REGISTER_USER_SUCCESS,
             payload: data
