@@ -4,12 +4,12 @@ const morgan = require("morgan");
 const dotenv = require("dotenv");
 const connectDb = require("./config");
 const cookieParser = require("cookie-parser")
+const app = express();
 // config dot env file
 dotenv.config();
 
 //database call
 connectDb();
-const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
@@ -17,30 +17,30 @@ app.use("*", cors({
   origin:true,
   credentials : true
 }));
-
-
 app.use(morgan("dev"));
+
+
 // all routes
-const userRoute = require("./routes/usersRoute");
-const productRoute = require("./routes/productsRoute");  
-const orderRoute = require("./routes/orderRoute");
-const paymentRoute = require("./routes/paymentRoute");
-const errorMiddleware = require('./middleware/errors')  
+const userRoute = require("./routes/users");
+const productRoute = require("./routes/products");  
+const orderRoute = require("./routes/orders");
+const paymentRoute = require("./routes/payments");
 
 // user route 
 app.use("/api/v1/users", userRoute);
 app.use("/api/v1/products", productRoute);
 app.use("/api/v1/orders", orderRoute);
 app.use("/api/v1/payments", paymentRoute);
-// Middleware to handle errors
-app.use(errorMiddleware);
+
 
 //port
 const PORT =  process.env.PORT;
-const HOST = process.env.HOST
+const HOST = process.env.HOST;
+
 app.get('/', (req, res) => {
-  res.send('Star tech Testing connection')
+  res.send('StarTech server Testing connection')
 })
+
 //listen server
 app.listen(PORT, HOST, () => {
   console.log(`Server started on ${HOST}:${PORT}, url http://${HOST}:${PORT}`);

@@ -1,4 +1,4 @@
-const { registration, login, loadUser, updateProfile, allUser, singleUser, password, PutUserInfo } = require("../service/user")
+const { registration, login, loadUser, updateProfile, allUser, singleUser, password, PutUserInfo } = require("../service/users")
 
 exports.register = async (req, res) => {
   const { status, code, message, token, user } = await registration({
