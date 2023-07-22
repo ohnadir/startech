@@ -1,5 +1,5 @@
 const User  = require('../models/user');
-const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
 const  catchAsyncErrors = require('../middleware/catchAsyncErrors');
 const ErrorHandler = require('../utils/ErrorHandler');
 const SendToken = require("../utils/jwtToken")
@@ -27,10 +27,7 @@ exports.register = catchAsyncErrors(async (req, res, next) => {
   });
   await user.save();
   SendToken(user, 200, res)
-  /* res.status(200).json({
-    success: true,
-    user
-  }) */
+
 });
 exports.login = catchAsyncErrors(async (req, res, next) => {
   const { email, password } = req.body;
@@ -154,11 +151,13 @@ exports.getUser = catchAsyncErrors(async (req, res, next)=> {
 });
 
 exports.getUserProfile = catchAsyncErrors(async (req, res, next) => {
-  const user = await User.findById({_id: req.params.id});
-
-  res.status(200).json({
-      success: true,
-      user
+  const { token } = req.cookies
+  // console.log(token + "nadir")
+  jwt.verify(token, process.env.JWT_SECRET, async function (err, decoded){
+    const user = await User.findById(decoded?.id);
+    if(user){
+      res.status(200).json({ success: true, user })
+    }
   })
 })
 

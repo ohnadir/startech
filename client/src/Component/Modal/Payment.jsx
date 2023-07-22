@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import {CardElement, useStripe, useElements} from '@stripe/react-stripe-js';
-import axios from 'axios';
-import '../../Style/Payment.css'
-import { useNavigate } from 'react-router-dom';
+import { makePayment } from '../../actions/payment';
+import { useDispatch, useSelector } from "react-redux"
+import { message } from 'antd';
 const options = {
     style: {
         base: {
@@ -13,32 +13,18 @@ const options = {
         }
     }
 }
-const Payment = ({ auth, setModal, total }) => {
-    const [cardError, setCardError] = useState('');
-    const [success, setSuccess] = useState('');
-    const [processing, setProcessing] = useState(false);
-    const [transactionId, setTransactionId] = useState('');
-    const [clientSecret, setClientSecret] = useState('');
+const Payment = ({ total, setPayment, setModal }) => {
+    const [messageApi, contextHolder ] = message.useMessage();
+    const { client_secret } = useSelector(state=>state.payment)
+    const dispatch = useDispatch();
     const stripe = useStripe();
     const elements = useElements();
-    const navigate = useNavigate();
-    const orderInfo = JSON.parse(sessionStorage.getItem('orderInfo'));
     const paymentData = {
         amount: Math.round(total * 100)
     }
     useEffect(() => {
-        const getItem =async()=>{
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }
-            const {data} = await axios.post('https://startech-server.vercel.app/api/v1/payment/process', paymentData, config)
-            setClientSecret(data.client_secret)
-        }
-        getItem();
-        
-    }, []);
+        dispatch(makePayment(paymentData));
+    }, [ dispatch]);
     
     const handleSubmit = async(event) => {
         event.preventDefault();
@@ -51,73 +37,28 @@ const Payment = ({ auth, setModal, total }) => {
           return;
         }
 
-        const { error, paymentMethod } = await stripe.createPaymentMethod(
-            {
-            type: 'card',
-            card
-        });
         // confirm payment 
-        const result = await stripe.confirmCardPayment(
-            clientSecret,
-            {
-              payment_method: {
-                card: card,
-                billing_details: {
-                    name: auth.name,
-                    email: auth.email,
-                    phone: auth.phone,
-                    address: auth.address
-                },
-                
-              },
-            },
-          );
-        
-        if(result.paymentIntent.status === "succeeded"){
-            const productInfo = {
-                name: orderInfo.name,
-                price: total,
-                quantity: orderInfo.quantity,
-                image: orderInfo.image
-            }
-            const shippingInfo ={
-                name: auth.firstName + auth.lastName,
-                email: auth.email,
-                phone: auth.phone,
-                address: auth.address
-            }
-            const paymentInfo = {
-                id: result.paymentIntent.id,
-                status: result.paymentIntent.status
-            }
-
-        
-        fetch("/order", {
-            method: 'POST',
-            body: JSON.stringify({productInfo, shippingInfo, paymentInfo}),
-            headers: {
-                'content-type': 'application/json'
-                
-            }
-        })
-            .then(res => res.json())
-            .then(data => {
-                event.target.reset();
+        const result = await stripe.confirmCardPayment( client_secret, { payment_method: { card: card }});
+        if(result?.paymentIntent){
+            setPayment(result?.paymentIntent)
+        }
+        if(result?.paymentIntent?.id){
+            messageApi.success("Payment post successfully")
+            setTimeout(() => {
                 setModal(false)
-                localStorage.setItem('transactionId', JSON.stringify(result.paymentIntent.id));
-                localStorage.setItem('orderNumber', JSON.stringify(data.result.orderNumber));
-                navigate('/confirmPayment')
-            })
+            }, 1000);
         }
     };
     return (
-        <div>
-              <form onSubmit={handleSubmit}>
-                <CardElement options={options}/>
-                
-                <button className='bg-zinc-500 mt-5 px-5 text-white rounded-lg' type="submit" disabled={!stripe || !clientSecret}>Pay</button>
-            </form>
-        </div>
+        <>
+            {contextHolder}
+            <div>
+                <form onSubmit={handleSubmit}>
+                    <CardElement options={options}/>
+                    <button className='bg-zinc-500 mt-5 px-5 text-white rounded-[4px]' type="submit" disabled={!stripe || !client_secret}>Pay</button>
+                </form>
+            </div>
+        </>
     )
 }
 

@@ -19,9 +19,11 @@ const addToCart = async(data) =>{
             image : data1.image,
             price : data1.price,
             id: data1.id,
-            quantity : data1.quantity + 1
+            quantity : Number(data1.quantity) + 1,
+            total : ""
 
-        } 
+        }
+        object.total = Number(data1.price) *  Number(object.quantity)
         shoppingCart.push(object);
         localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart));
     } else{
@@ -41,6 +43,40 @@ const getStoredCart = () => {
     } 
     return shoppingCart;
 }
+
+const decreaseQuantity = async(id)=>{
+    const storedCart = localStorage.getItem('shopping-cart');
+    const shoppingCart = JSON.parse(storedCart);
+    const data = await shoppingCart.find((items)=> items.id === id);
+    const product = {
+        name : "",
+        image : "",
+        price : "",
+        id: "",
+        quantity : "",
+        total : ""
+    }
+    if(data.quantity > 1){
+        product.name = data.name;
+        product.image = data.image;
+        product.price = data.price;
+        product.id= data.id;
+        product.quantity = Number(data.quantity) - 1;
+        product.total = Number(data.price) *  Number(product.quantity);
+        if(product.quantity < data.quantity){
+            const data = await shoppingCart.filter((items)=> items.id !== id);
+            await localStorage.setItem('shopping-cart', JSON.stringify(data));
+        }
+        if(product.quantity >=1){
+            addToCart(product)
+        }
+    }
+    if(data.quantity <= 1){
+        const data = await shoppingCart.filter((items)=> items.id !== id);
+        await localStorage.setItem('shopping-cart', JSON.stringify(data));
+    }
+}
+
 const RemoveFromCart = async(item)=>{
     const storedCart = localStorage.getItem('shopping-cart');
     const shoppingCart = JSON.parse(storedCart);
@@ -48,7 +84,6 @@ const RemoveFromCart = async(item)=>{
     if(data){
         await localStorage.setItem('shopping-cart', JSON.stringify(data));
     }
-    
 }
 
 const deleteShoppingCart = () =>{
@@ -59,5 +94,6 @@ export {
     addToCart, 
     RemoveFromCart,
     deleteShoppingCart,
-    getStoredCart
+    getStoredCart,
+    decreaseQuantity
 }

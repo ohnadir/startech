@@ -23,6 +23,10 @@ const Navbar = () => {
     const HandleRemove= (item)=>{
         RemoveFromCart(item);
     }
+    const handleCheckout=()=>{
+        setCartOpen(false)
+        navigate('/checkout')
+    }
     const total = storedCart?.reduce((n, {price, quantity}) => n + parseInt(price) * parseInt(quantity), 0)
     return (
         <div className='navbar'>
@@ -90,9 +94,18 @@ const Navbar = () => {
                                                     <img src={item.image.img} alt="" />
                                                     <div className='product-info'>
                                                         <h1>{item?.name}</h1>
-                                                        <h1>৳ {item?.price} X {item?.quantity}</h1>
+                                                        <div className='flex items-center justify-between w-full mt-2'>
+                                                            <div className='flex'>
+                                                                <h1>৳ {item?.price} X {item?.quantity}</h1>
+                                                            </div>
+                                                            <div className="btn-container flex">
+                                                                <button>-</button>
+                                                                <button>{item?.quantity}</button>
+                                                                <button>+</button>
+                                                            </div>
+                                                            <button className='close-icon' onClick={()=>HandleRemove(item)}><MdOutlineClose /></button>
+                                                        </div>
                                                     </div>
-                                                    <button onClick={()=>HandleRemove(item)}><MdOutlineClose /></button>
                                                 </div>
                                             </div>
                                         )
@@ -107,7 +120,7 @@ const Navbar = () => {
                                         <p className='price-name'>Total:-</p>
                                         <p className='price'>{total} ৳</p>
                                     </div>
-                                    <button>
+                                    <button className='checkout-btn' onClick={handleCheckout}>
                                         <div className='overlay'>
                                             <p>Checkout</p>
                                         </div>

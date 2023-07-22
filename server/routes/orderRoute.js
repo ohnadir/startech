@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const {
-  newOrder,
-  getOrderList
+  newOrder, getOrderList
 } = require('../controller/order');
 router.post('/', newOrder);
 router.get('/', getOrderList);

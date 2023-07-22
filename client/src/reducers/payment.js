@@ -1,35 +1,36 @@
 import {
-    ORDER_REQUEST,
-    ORDER_SUCCESS,
-    ORDER_FAIL,
+    PAYMENT_PROCESS_REQUEST,
+    PAYMENT_PROCESS_SUCCESS,
+    PAYMENT_PROCESS_FAIL,
     CLEAR_ERRORS
-} from "../constants/orderConstants"
+} from "../constants/payment";
 
-export const orderReducer = (state = {}, action) => {
+export const paymentReducer = (state = {}, action) => {
     switch (action.type) {
-        case ORDER_REQUEST:
+        case PAYMENT_PROCESS_REQUEST:
             return {
                 ...state,
                 loading: true
             }
-        case ORDER_SUCCESS:
+
+        case PAYMENT_PROCESS_SUCCESS:
             return {
                 loading: false,
-                order: action.payload.order
+                client_secret: action.payload
             }
-        case ORDER_FAIL:
+        case PAYMENT_PROCESS_FAIL:
             return {
                 loading: false,
                 error: action.payload
             }
-        
+
         case CLEAR_ERRORS:
             return {
                 ...state,
                 error: null
             }
+
         default:
             return state;
     }
-    
-} 
+}

@@ -3,7 +3,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
 const connectDb = require("./config");
-const cookieSession = require("cookie-session");
+const cookieParser = require("cookie-parser")
 // config dot env file
 dotenv.config();
 
@@ -11,15 +11,15 @@ dotenv.config();
 connectDb();
 const app = express();
 
-//middleware
-app.use(morgan("dev"));
 app.use(express.json());
-app.use(cors());
-app.use(cookieSession({
-  name: 'session',
-  maxAge: 24 * 60 * 60 * 1000,
-  keys: ["thenetninjaisawesomeiguess"]
+app.use(cookieParser());
+app.use("*", cors({
+  origin:true,
+  credentials : true
 }));
+
+
+app.use(morgan("dev"));
 // all routes
 const userRoute = require("./routes/usersRoute");
 const productRoute = require("./routes/productsRoute");  

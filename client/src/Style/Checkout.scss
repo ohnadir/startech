@@ -97,10 +97,65 @@
     font-size: 14px;
     padding: 8px 20px;
     border-radius: 4px;
+    &[disabled]{
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
 }
+
 .divider{
     margin-top: 25px;
     width: 100%;
     background-color: #eee;
     height: 2px;
+}
+
+.btn-container{
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    padding: 0 6px; 
+    button{
+        font-size: 13px;
+        /* padding: 4px 12px; */
+        font-weight: 700;
+    }
+}
+.delete-btn{
+    background-color: rgb(254 226 226);
+    color: #ef4a23;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 16px;
+}
+.price-container{
+    margin-top: 10px;
+    .price-item{
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 8px 0;
+        p{
+            padding: 0;
+            margin: 0;
+            font-weight: 600;
+        }
+        .price-count{
+            width: 120px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+            color: #f44336;
+        }
+        &:not(:last-child){
+            border-bottom: 1px solid #ddd;
+        }
+    }
 }

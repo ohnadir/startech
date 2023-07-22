@@ -1,3 +1,4 @@
+
 import axios from 'axios'
 import {
     LOGIN_REQUEST,
@@ -14,7 +15,9 @@ import {
     CLEAR_ERRORS
 } from '../constants/userConstants';
 
-const link = "https://startech-server.vercel.app";
+import Cookies from "js-cookie"
+const link = "http://localhost:5001";
+// const link = "https://startech-server.vercel.app";
 // Login
 export const login = (auth) => async (dispatch) => {
     const {email, password} = auth;
@@ -23,14 +26,13 @@ export const login = (auth) => async (dispatch) => {
         dispatch({ type: LOGIN_REQUEST })
 
         const config = {
-            headers: {
-                'Accept' : 'application/json',
-                'Content-Type' : 'application/json',
-                'mode' : 'cors'
-            }
+            headers: { 'Content-Type' : 'application/json' },
+            withCredentials: true
         }
 
         const { data } = await axios.post(`${link}/api/v1/users/login`, { email, password }, config)
+        console.log(data);
+        // Cookies.set('token', JSON.stringify(data.token), {expires: 7});// Cookies.set('token', JSON.stringify(data.token), {expires: 7});
         dispatch({
             type: LOGIN_SUCCESS,
             payload: data.user
@@ -69,10 +71,14 @@ export const register = (userData) => async (dispatch) => {
     }
 }
 // load user
-export const loadUser = (id) => async(dispatch)=>{
+export const loadUser = () => async(dispatch)=>{
     try{
         dispatch({ type: LOAD_USER_REQUEST })
-        const { data } = await axios.get(`${link}/api/v1/users/me/${id}`)
+        const config = {
+            headers: { 'Content-Type' : 'application/json' },
+            withCredentials: true
+        }
+        const { data } = await axios.get(`${link}/api/v1/users/me`, config)
         dispatch({
             type: LOAD_USER_SUCCESS,
             payload: data.user

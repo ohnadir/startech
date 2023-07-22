@@ -33,7 +33,7 @@ function App() {
   const dispatch = useDispatch()
   useEffect(()=>{
     if(id){
-      dispatch(loadUser(id));
+      dispatch(loadUser());
     }
   },[dispatch])
   return (

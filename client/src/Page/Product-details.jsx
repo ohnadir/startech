@@ -18,16 +18,12 @@ import { getProductDetails, clearErrors } from '../actions/productActions'
 import image from "../assets/images.png"
 import Review from '../Component/Review';
 import RelatedProduct from '../Component/RelatedProduct';
-
-
-
+import { message } from 'antd';
 
 const ProductDetails=()=> {
+    const [messageApi, contextHolder ] = message.useMessage();
     const navigate = useNavigate();
     const [count, setCount] = useState(1);
-    const [review, setReview] = useState([]);
-    const [createReview, setCreateReview] = useState(false);
-    const [auth, setAuth] = useState('');
     const [modalOpen, setModalOpen] = useState(false);
     const { id } = useParams();
     const dispatch = useDispatch();
@@ -38,36 +34,31 @@ const ProductDetails=()=> {
         if (error) {
             dispatch(clearErrors())
         }
-    }, []);
-    const handleChange = (e) => {
-        setAuth(prev=>({...prev, [e.target.name]:e.target.value}))
-    }
-    
-    const handleSubmit=()=>{
-        const data = {
-            name: product?.name,
-            id:product?._id,
-            price: product?.price,
-            quantity : count,
-            image : product?.productPictures[0]
-        }
-        sessionStorage.setItem('orderInfo', JSON.stringify(data))
-        navigate('/checkout')
-    }
+    }, [dispatch, id, error]);
+
     const handleCart=()=>{
         const data = {
-            name: product?.name,
             id:product?._id,
+            name: product?.name,
+            image : product?.productPictures[0],
             price: product?.price,
             quantity : count,
-            image : product?.productPictures[0]
+            total: Number(product?.price) * Number(count)
         }
-        addToCart(data)
+        if(data){
+            messageApi.success("Product added cart");
+            addToCart(data)
+        }
     }
     return (
         <>
+            {contextHolder}
             {
-                loading ? <div className='w-full h-screen flex items-center justify-center'><Spin/></div>
+                loading
+                ? 
+                <div className='w-full h-screen flex items-center justify-center'>
+                    <Spin/>
+                </div>
                 :
                 <div className='max-w-7xl mx-auto px-10'>
                     <SEO title={'Product Details'} />
@@ -219,9 +210,9 @@ const ProductDetails=()=> {
                                         </div>
                                     </div>
                                 </div>
-                                <div className=' '>
+                                <div>
                                     <button className='cartBtn'>View Cart</button>
-                                    <button onClick={handleSubmit} className='orderBtn'>Confirm Order</button>
+                                    <button onClick={()=>navigate('/checkout')} className='orderBtn'>Confirm Order</button>
                                 </div>
                             </div>
                         </Modal>
