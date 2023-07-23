@@ -245,3 +245,24 @@ exports.PutUserInfo = async({ id, phone, address })=>{
         return response;
     }
 }
+
+exports.Logout = async ({ res }) => {
+    const response = {
+      code: 200,
+      status: 'success',
+      message: 'logout successfully',
+    };
+  
+    try {
+        res.cookie('token', null, {
+            expires: new Date(Date.now()),
+            httpOnly: true
+        })
+        return response
+    } catch (error) {
+        response.code = 500;
+        response.status = 'failed';
+        response.message = 'Error. Try again';
+        return response;
+    }
+};

@@ -1,0 +1,103 @@
+.register{
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 32px 0;
+    .header{
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 12px;
+        margin-bottom: 50px;
+        .home-icon{
+            color: #666;
+            cursor: pointer;
+        }
+    }
+    .register-container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        .register-body{
+            width: 400px;
+            height: 100%;
+            .heading{
+                font-size: 20px;
+                font-weight: 600;
+                margin-bottom: 5px;
+            }
+            .input-container{
+                display: grid;
+                grid-template-columns: repeat(1, minmax(0, 1fr));
+                gap: 20px;
+                .input-item{
+                    .star{
+                        color: red;
+                        font-size: 12px;
+                    }
+                    label{
+                        font-size: 13px;
+                        font-weight: bold;
+                    }
+                    input {
+                        padding: 0 15px;
+                        border: 1px solid grey;
+                        outline: none;
+                        width: 100%;
+                        font-family: "Trebuchet MS",sans-serif;
+                        border: 1px solid #ddd;
+                        margin-top: 5px;
+                        height: 42px;
+                    }
+                }
+                .register-btn{
+                    width: 100%;
+                    background-color: #3749bb;
+                    color: white;
+                    display: inline-block;
+                    border: 2px solid #3749bb;
+                    padding: 0 20px;
+                    font-size: 14px;
+                    border-radius: 4px;
+                    height: 42px;
+                }
+            }
+            .footer{
+                margin-top: 30px;
+                p{
+                    padding: 0;
+                    margin: 0;
+                    font-size: 14px;
+                    color: #666;
+                }
+                .hr{
+                    height: 1px;
+                    width: 100px;
+                    background-color: #eee;
+                    color: black;
+                }
+                .login-btn{
+                    border: 1px solid #3749bb;
+                    width: 100%;
+                    font-size: 14px;
+                    color: #ef4a23;
+                    border-radius: 4px;
+                    height: 42px;
+                    transition: 0.3s ease;
+                    &:hover{
+                        background-color: #3749bb;
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width : 1290px) {
+    .register{
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 32px 25px;
+    }
+}

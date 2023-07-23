@@ -7,7 +7,7 @@ import {
     PRODUCT_DETAILS_SUCCESS,
     PRODUCT_DETAILS_FAIL,
     CLEAR_ERRORS
-} from '../constants/productConstants';
+} from '../constants/products';
 
 const baseURL = ("https://startech-server.vercel.app/api/v1/products")
 // const baseURL = ("http://localhost:5001/api/v1/products")
@@ -21,9 +21,9 @@ export const getProducts = (page, size) => async (dispatch) => {
             withCredentials: true
         }
 
-        let link = (`${baseURL}/products?page=${page}&size=${size}`)
+        let link = (`${baseURL}?page=${page}&size=${size}`)
 
-        const { data } = await axios.get(link, config)
+        const { data } = await axios.get(link)
         dispatch({
             type: ALL_PRODUCTS_SUCCESS,
             payload: data

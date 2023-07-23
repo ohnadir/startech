@@ -27,7 +27,7 @@ import {
     PUT_USER_INFO_SUCCESS,
     PUT_USER_INFO_FAIL,
     CLEAR_ERRORS
-} from '../constants/user'
+} from '../constants/users'
 
 const baseURL = ("https://startech-server.vercel.app/api/v1/users")
 // const baseURL = ("http://localhost:5001/api/v1/users")
@@ -42,7 +42,7 @@ export const login = (auth) => async (dispatch) => {
         }
 
         const { data } = await axios.post(`${baseURL}/login`, auth, config)
-        
+        console.log(data);
         dispatch({
             type: LOGIN_SUCCESS,
             payload: data

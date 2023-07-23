@@ -1,18 +1,23 @@
 import React from 'react';
-import '../Style/Profile.css';
+import './Profile.scss';
 import { CgShoppingBag } from 'react-icons/cg';
 import { FaUser } from 'react-icons/fa';
 import { MdLock, MdOutlineDashboardCustomize } from 'react-icons/md';
 import { FiLogOut } from 'react-icons/fi';
 import { HiHome } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
-import SEO from '../Component/SEO';
-import { useSelector } from 'react-redux'
+import SEO from '../../Component/SEO';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from "../../redux/actions/users";
 
 
 const Home =()=>{
     const navigate = useNavigate();
+    const dispatch = useDispatch()
     const { user } = useSelector(state => state.auth);
+    const handleLogout=()=>{
+        dispatch(logout());
+    }
     return (
       <div className='max-w-7xl mx-auto px-10'>
         <SEO title={'Profile'} />
@@ -47,6 +52,10 @@ const Home =()=>{
             <div onClick={()=>navigate('/dashboard')} className='profileCard w-[250px] mx-auto sm:w-full'>
                 <MdOutlineDashboardCustomize className='profileIcon'/>
                 <p>Dashboard</p>
+            </div>
+            <div onClick={handleLogout} className='profileCard w-[250px] mx-auto sm:w-full'>
+                <FiLogOut className='profileIcon'/>
+                <p >Logout</p>
             </div>
         </div>
       </div>

@@ -35,9 +35,9 @@ const Products = () => {
   useEffect(() => {
 
     dispatch(getProducts(page, size));
-    setCounts(count);
     
-  }, [ dispatch, page, size, error, count]);
+    
+  }, []);
     
   const pages = Number(Math.ceil(counts / size)) || 4;
   const arrayPages = [...Array(pages && pages).keys()];

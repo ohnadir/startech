@@ -8,7 +8,7 @@ import Register from './Page/Register';
 import Profile from './Page/Profile'
 import ProductDetails from './Page/Product-details';
 import Checkout from './Page/Checkout';
-import Payment from './Component/Modal/Payment';
+import Payment from './Page/Checkout/Payment';
 import { ToastContainer } from 'react-toastify';
 import ConfirmPayment from './Component/ConfirmPayment';
 import ProtectedRoute from './Component/PrivateRoute'
