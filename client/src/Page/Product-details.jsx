@@ -14,7 +14,7 @@ import { BsCart, BsCheckLg } from "react-icons/bs"
 import { useParams  } from 'react-router-dom';
 import { addToCart } from '../utils/cart';
 import { useDispatch, useSelector } from 'react-redux'
-import { getProductDetails, clearErrors } from '../actions/productActions'
+import { getProductDetails, clearErrors } from '../redux/actions/products'
 import image from "../assets/images.png"
 import Review from '../Component/Review';
 import RelatedProduct from '../Component/RelatedProduct';

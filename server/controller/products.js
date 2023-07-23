@@ -1,6 +1,6 @@
 const { Products, Product, SearchProduct } = require("../service/products");
 exports.products = async (req, res ) => {
-    const { status, code, message, products } = await Products();
+    const { status, code, message, products } = await Products({ ...req.query });
     res.status(code).json({ code, status, message, products });
 };
     

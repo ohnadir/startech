@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../Style/Product.css';
+import './Products.scss';
 import { Spin } from 'antd';
 import { useDispatch, useSelector } from 'react-redux'
-import { getProducts } from '../actions/productActions'
+import { getProducts } from '../../redux/actions/products'
 
 const Product = () => {
-    // const [products, setProducts] = useState([]);
     const [counts, setCounts] = useState();
     const [size, setSize] = useState(8);
     const [page, setPage] = useState(0);
@@ -16,7 +15,7 @@ const Product = () => {
     useEffect(() => {
         dispatch(getProducts(page, size));
         setCounts(count);
-    }, [ page, size, error]);
+    }, [ dispatch, page, size, error, count]);
     
     const pages = Number(Math.ceil(counts / size)) || 4;
     const arrayPages = [...Array(pages && pages).keys()];

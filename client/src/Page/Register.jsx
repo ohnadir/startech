@@ -3,10 +3,8 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import '../Style/Register.css';
 import { HiHome } from 'react-icons/hi';
 import SEO from '../Component/SEO';
-import axios from 'axios';
-import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
-import { register, clearErrors } from '../actions/userActions';
+import { register, clearErrors } from '../redux/actions/users';
 
 
 const initialAuth = {
@@ -27,12 +25,11 @@ const initialAuthErrors = {
 const Register = () => {
   const [auth, setAuth] = useState(initialAuth);
   const [errors, setErrors] = useState(initialAuthErrors);
-  const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
   let from = location.state?.from?.pathname || "/";
-  const { isAuthenticated, error, loading } = useSelector(state => state.auth);
+  const { isAuthenticated, error } = useSelector(state => state.auth);
   const handleChange = (e) => {
     setAuth(prev=>({...prev, [e.target.name]:e.target.value}))
   }
@@ -44,51 +41,50 @@ const Register = () => {
     if (error) {
       dispatch(clearErrors());
   }
-
-}, [dispatch, isAuthenticated, error])
+  }, [dispatch, isAuthenticated, error, navigate, from])
   const OnSubmit = async(e) => {
-    e.preventDefault()
-    
-    let tempErrors = {};
-    if(!auth?.firstName){
-      setErrors((prev)=> ({...prev, firstName: 'First Name is Required'}))
-      tempErrors= {...tempErrors, firstName: 'First Name is Required'}
-    }else{
-      setErrors((prev)=> ({...prev, firstName: ''}))
-      tempErrors= {...tempErrors, firstName: ''}
-    }
-    if(!auth?.lastName){
-      setErrors((prev)=> ({...prev, lastName: 'Last Name is Required'}))
-      tempErrors= {...tempErrors, lastName: 'Last Name is Required'}
-    }else{
-      setErrors((prev)=> ({...prev, lastName: ''}))
-      tempErrors= {...tempErrors, lastName: ''}
-    }
-    if(!auth?.email){
-        setErrors((prev)=> ({...prev, email: 'Email is Required'}))
-        tempErrors= {...tempErrors, email: 'Email is Required'}
-    }else{
-        setErrors((prev)=> ({...prev, email: ''}))
-        tempErrors= {...tempErrors, email: ''}
-    }
-    if(!auth?.password){
-      setErrors((prev)=> ({...prev, password: 'Password is Required'}))
-      tempErrors= {...tempErrors, password: 'Password is Required'}
-    }else{
-      setErrors((prev)=> ({...prev, password: ''}))
-      tempErrors= {...tempErrors, password: ''}
-    }
-    if(!auth?.phone){
-      setErrors((prev)=> ({...prev, phone: 'Phone is Required'}))
-      tempErrors= {...tempErrors, phone: 'Phone is Required'}
-    }else{
-      setErrors((prev)=> ({...prev, phone: ''}))
-      tempErrors= {...tempErrors, phone: ''}
-    }
-    
-    if(!tempErrors.firstName && !tempErrors.lastName && !tempErrors.email && !tempErrors.password && !tempErrors.phone){
-      dispatch(register(auth))
-    }
+      e.preventDefault()
+      
+      let tempErrors = {};
+      if(!auth?.firstName){
+        setErrors((prev)=> ({...prev, firstName: 'First Name is Required'}))
+        tempErrors= {...tempErrors, firstName: 'First Name is Required'}
+      }else{
+        setErrors((prev)=> ({...prev, firstName: ''}))
+        tempErrors= {...tempErrors, firstName: ''}
+      }
+      if(!auth?.lastName){
+        setErrors((prev)=> ({...prev, lastName: 'Last Name is Required'}))
+        tempErrors= {...tempErrors, lastName: 'Last Name is Required'}
+      }else{
+        setErrors((prev)=> ({...prev, lastName: ''}))
+        tempErrors= {...tempErrors, lastName: ''}
+      }
+      if(!auth?.email){
+          setErrors((prev)=> ({...prev, email: 'Email is Required'}))
+          tempErrors= {...tempErrors, email: 'Email is Required'}
+      }else{
+          setErrors((prev)=> ({...prev, email: ''}))
+          tempErrors= {...tempErrors, email: ''}
+      }
+      if(!auth?.password){
+        setErrors((prev)=> ({...prev, password: 'Password is Required'}))
+        tempErrors= {...tempErrors, password: 'Password is Required'}
+      }else{
+        setErrors((prev)=> ({...prev, password: ''}))
+        tempErrors= {...tempErrors, password: ''}
+      }
+      if(!auth?.phone){
+        setErrors((prev)=> ({...prev, phone: 'Phone is Required'}))
+        tempErrors= {...tempErrors, phone: 'Phone is Required'}
+      }else{
+        setErrors((prev)=> ({...prev, phone: ''}))
+        tempErrors= {...tempErrors, phone: ''}
+      }
+      
+      if(!tempErrors.firstName && !tempErrors.lastName && !tempErrors.email && !tempErrors.password && !tempErrors.phone){
+        dispatch(register(auth))
+      }
   }
     return (
         <div className='max-w-7xl mx-auto px-2'>

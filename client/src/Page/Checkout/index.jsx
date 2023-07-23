@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import '../Style/Checkout.scss'
+import './Checkout.scss'
 import { useNavigate } from 'react-router-dom';
 import { HiHome } from 'react-icons/hi';
-import District from "../Districts.json";
-import Thana from "../Thana.json";
-import SEO from '../Component/SEO';
+import District from "../../Districts.json";
+import Thana from "../../Thana.json";
+import SEO from '../../Component/SEO';
 import { Alert, message } from 'antd';
-import Payment from '../Component/Modal/Payment';
-import { getStoredCart } from "../utils/cart"
+import Payment from './Payment';
+import { getStoredCart } from "../../utils/cart"
 import { Modal } from 'antd';
 import { BsTrash } from 'react-icons/bs';
 import { useSelector, useDispatch } from 'react-redux';
-import { newOrder } from "../actions/orderActions"
+import { newOrder } from "../../redux/actions/orders"
 
 const Checkout=()=> {
     const [messageApi, contextHolder ] = message.useMessage();

@@ -6,19 +6,17 @@ import {
     CLEAR_ERRORS
 } from "../constants/payment"
 
-const baseUrl = "https://startech-server.vercel.app/api/v1"
+const baseURL = "https://startech-server.vercel.app/api/v1/payments"
 
 export const  makePayment = (paymentData)=> async(dispatch)=>{
     try {
         dispatch({ type: PAYMENT_PROCESS_REQUEST })
         const config = {
-            headers:{
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`
-            }
+            headers: { 'Content-Type' : 'application/json' },
+            withCredentials: true
         }
-        const { data } = await axios.post(`${baseUrl}/payments/process`, paymentData, config)
+        
+        const { data } = await axios.post(`${baseURL}/process`, paymentData, config)
         dispatch({
             type: PAYMENT_PROCESS_SUCCESS,
             payload: data.client_secret

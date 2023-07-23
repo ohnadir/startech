@@ -18,24 +18,19 @@ import BrandProduct from './Page/Brand-product';
 import NotFoundPage from './Page/NotFoundPage';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { loadUser } from './actions/userActions';
+import { loadUser } from './redux/actions/users';
 import Dashboard from './Page/Dashboard';
 import Chart from './Page/Dashboard/Chart';
 import Orders from './Page/Dashboard/Orders';
 import Users from './Page/Dashboard/Users';
 import Products from './Page/Dashboard/Products';
 function App() {
-  const data = localStorage.getItem("id");
-  let id = ''
-  if(data){
-    id = JSON.parse(data);
-  }
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+
   useEffect(()=>{
-    if(id){
-      dispatch(loadUser());
-    }
-  },[dispatch])
+    dispatch(loadUser());
+  },[dispatch]);
+
   return (
     <div className="App ">
       <Navbar/>

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import {CardElement, useStripe, useElements} from '@stripe/react-stripe-js';
-import { makePayment } from '../../actions/payment';
+import { makePayment } from '../../redux/actions/payment';
 import { useDispatch, useSelector } from "react-redux"
 import { message } from 'antd';
 const options = {

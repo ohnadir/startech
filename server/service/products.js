@@ -1,14 +1,18 @@
 const Product  = require('../models/product');
 const APIFeatures = require('../utils/APIFeatures');
 
-exports.Products = async()=>{
+exports.Products = async({ page, size })=>{
     const response = {
         code: 200,
         status: 'success',
         message: 'Products fetch successfully',
     };
     try {
-        const products = await Product.find({});
+        const pages = parseInt(page);
+        const sizes = parseInt(size);
+        const skip = pages * sizes;
+        const products = await Product.find().skip(skip).limit(sizes).lean();
+        const count = await Product.estimatedDocumentCount();
         if (!products) {
             response.code = 404;
             response.status = 'failed';
@@ -16,6 +20,7 @@ exports.Products = async()=>{
             return response;
         }
         response.products = products
+        response.count = count
         return response;
     } catch (error) {
         response.code = 500;

@@ -10,7 +10,7 @@ import 'antd/dist/antd.min.css'
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 import { Provider } from 'react-redux'
-import store from './store'
+import store from './redux/store'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const stripePromise = loadStripe('pk_test_51MJynOHzN4rqAg27o1nDk5hQeHaX8cuaBkInxAzGMEnEqee4QMyeztVLqyeuAhzgK9ZRdwPAF8uWFrRX2Qj8iuQ9005XC9m0sA');
 
@@ -27,7 +27,4 @@ root.render(
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

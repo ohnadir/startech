@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Table } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
-import { getProducts } from '../../actions/productActions'
+import { getProducts } from '../../redux/actions/products'
 
 const columns = [
   {
@@ -33,9 +33,11 @@ const Products = () => {
   const { products, error, count } = useSelector(state => state?.products);
     
   useEffect(() => {
+
     dispatch(getProducts(page, size));
     setCounts(count);
-  }, [ page, size, error]);
+    
+  }, [ dispatch, page, size, error, count]);
     
   const pages = Number(Math.ceil(counts / size)) || 4;
   const arrayPages = [...Array(pages && pages).keys()];

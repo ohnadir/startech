@@ -1,0 +1,45 @@
+// login constant
+export const LOGIN_REQUEST = 'LOGIN_REQUEST'
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
+export const LOGIN_FAIL = 'LOGIN_FAIL'
+
+// register constant
+export const REGISTER_USER_REQUEST = 'REGISTER_USER_REQUEST'
+export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS'
+export const REGISTER_USER_FAIL = 'REGISTER_USER_FAIL'
+
+// load user constant
+export const LOAD_USER_REQUEST = 'LOAD_USER_REQUEST'
+export const LOAD_USER_SUCCESS = 'LOAD_USER_SUCCESS'
+export const LOAD_USER_FAIL = 'LOAD_USER_FAIL'
+
+// user profile constant
+export const UPDATE_PROFILE_REQUEST = 'UPDATE_PROFILE_REQUEST'
+export const UPDATE_PROFILE_SUCCESS = 'UPDATE_PROFILE_SUCCESS'
+export const UPDATE_PROFILE_FAIL = 'UPDATE_PROFILE_FAIL'
+
+// get all user constant
+export const ALL_USERS_REQUEST = 'ALL_USERS_REQUEST'
+export const ALL_USERS_SUCCESS = 'ALL_USERS_SUCCESS'
+export const ALL_USERS_FAIL = 'ALL_USERS_FAIL'
+
+// put users information constant
+export const PUT_USER_INFO_REQUEST = 'PUT_USER_INFO_REQUEST'
+export const PUT_USER_INFO_SUCCESS = 'PUT_USER_INFO_SUCCESS'
+export const PUT_USER_INFO_FAIL = 'PUT_USER_INFO_FAIL'
+
+// get users details constant
+export const USER_DETAILS_REQUEST = 'USER_DETAILS_REQUEST'
+export const USER_DETAILS_SUCCESS = 'USER_DETAILS_SUCCESS'
+export const USER_DETAILS_FAIL = 'USER_DETAILS_FAIL'
+
+// user change password constant
+export const USER_PASSWORD_CHANGE_REQUEST = 'USER_PASSWORD_CHANGE_REQUEST'
+export const USER_PASSWORD_CHANGE_SUCCESS = 'USER_PASSWORD_CHANGE_SUCCESS'
+export const USER_PASSWORD_CHANGE_FAIL = 'USER_PASSWORD_CHANGE_FAIL'
+
+// logout constant
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
+export const LOGOUT_FAIL = 'LOGOUT_FAIL'
+
+export const CLEAR_ERRORS = 'CLEAR_ERRORS'

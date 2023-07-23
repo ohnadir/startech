@@ -4,7 +4,7 @@ import '../Style/Login.css';
 import { HiHome } from 'react-icons/hi';
 import SEO from '../Component/SEO';
 import { useDispatch, useSelector } from 'react-redux';
-import { login, clearErrors } from '../actions/userActions';
+import { login, clearErrors } from '../redux/actions/users';
 const initialAuth = {
   email: '',
   password: ''
@@ -24,7 +24,7 @@ const Login = () => {
     const handleChange = (e) => {
       setAuth(prev=>({...prev, [e.target.name]:e.target.value}))
     }
-    const { isAuthenticated, error, loading, user } = useSelector(state => state.auth);
+    const { isAuthenticated, error, user } = useSelector(state => state.auth);
     if(user?._id){
       localStorage.setItem("id", JSON.stringify(user?._id));
     }
@@ -35,7 +35,7 @@ const Login = () => {
       if (error) {
         dispatch(clearErrors());
       }
-    },[dispatch, error, from, isAuthenticated])
+    },[dispatch, error, from, isAuthenticated, navigate])
     const onSubmit = async(e) => {
       e.preventDefault()
       
