@@ -1,0 +1,69 @@
+.category{
+    margin: 40px 0;
+    .heading{
+        font-weight: 700;
+        margin-bottom: 2px;
+        padding: 0;
+        text-align: center;
+    }
+    .slogan{
+        text-align: center;
+        margin-bottom: 25px;
+        padding: 0;
+    }
+    .category-container{
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 24px;
+        .category-card{
+            background-color: white;
+            cursor: pointer;
+            border-radius: 10px;
+            padding: 16px 0;
+            box-shadow:  0 1px 1px rgb(0 0 0 / 10%);
+            transition: all 0.3s ease;
+            p{
+                padding: 0;
+                margin-top: 12px;
+                text-align: center;
+                color: black;
+                font-size: 15px;
+                transition: color 0.2s ease;
+            }
+            &:hover p{
+                color:#EF4A23;
+            }
+        }
+    }
+}
+
+@media screen and (min-width : 1024px) {
+    .category{
+        .category-container{
+            grid-template-columns: repeat(8, minmax(0, 1fr));
+        }
+    }
+}
+
+@media screen and (min-width : 768px) and (max-width : 1023px) {
+    .category{
+        .category-container{
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+        }
+    }
+}
+
+@media screen and (min-width : 640px) and (max-width : 767px) {
+    .category{
+        .category-container{
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+    }
+}
+@media screen and (max-width : 448px) {
+    .category{
+        .category-container{
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+}

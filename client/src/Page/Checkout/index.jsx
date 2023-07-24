@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import './Checkout.scss'
 import { useNavigate } from 'react-router-dom';
 import { HiHome } from 'react-icons/hi';
-import District from "../../Districts.json";
-import Thana from "../../Thana.json";
+import District from "../../JSON/Districts.json";
+import Thana from "../../JSON/Thana.json";
 import SEO from '../../Component/SEO';
 import { Alert, message } from 'antd';
 import Payment from './Payment';

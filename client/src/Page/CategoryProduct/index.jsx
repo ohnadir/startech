@@ -4,15 +4,13 @@ import { HiHome } from 'react-icons/hi';
 import { FiFilter } from 'react-icons/fi';
 import { MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowUp } from 'react-icons/md';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import "../Style/CategoryProduct.css";
-import { Drawer } from 'antd';
-import { Slider } from 'antd';
+import "./CategoryProduct.scss";
+import { Drawer, Slider } from 'antd';
 
-const BrandProduct = () => {
+const CategoryProduct = () => {
     const { keyword } = useParams();
     const [searchProduct, setSearchProduct] = useState([]);
     const [open, setOpen] = useState(false);
-    const [sort, setSort] = useState(false);
     const [sortCard, setSortCard] = useState(false)
     const [value, setValue] = useState([0, 100]);
     const [collapse, setCollapse] = useState(true)
@@ -21,20 +19,35 @@ const BrandProduct = () => {
     const onAfterChange = (value) => {
         setValue(value);
     };
+    const handleBrandName = (name)=>{
+        navigate(`/brandProduct/${name}`)
+    }
 
     useEffect(() => {
-        axios.get(`https://startech-server.vercel.app/api/v1/products/search?brand=${keyword}`)
+        axios.get(`https://startech-server.vercel.app/api/v1/products/search?category=${keyword}`)
             .then(function (response) {
                 setSearchProduct(response.data.products)
             })
     }, [keyword]);
+    //  function for duplicate brand name filtering 
+    const name = [];
+    const brandName = searchProduct.filter( (item)=> name.push(item.brand));
+    const newBrandName = name.filter((el, index) => name.indexOf(el) === index);
+    
     return (
         <div className='max-w-7xl mx-auto categoryProductContainer'>
-            <header className='py-5'>
+            <header>
                 <div className='navigate'>
                     <HiHome onClick={()=>navigate('/')} className='text-[#666] cursor-pointer'/> <span>/</span><span>{ keyword }</span>
                 </div>
             </header>
+            <section className='brandName my-5'>
+                <ul className='flex items-center gap-5 w-fit flex-wrap m-0'>
+                    {
+                        newBrandName?.map((item)=> <li onClick={()=>handleBrandName(item)}>{item}</li>)
+                    }
+                </ul>
+            </section>
             <section className="filter lg:hidden">
                 <div className='flex items-center justify-between'>
                     <div className='filterContainer' onClick={()=> setOpen(true)}>
@@ -53,8 +66,8 @@ const BrandProduct = () => {
                                 <div className='sortCard'>
                                     <ul className='m-0'>
                                         <li>Default</li>
-                                        <li>Price (Low > High)</li>
-                                        <li>Price (Hight > Low)</li>
+                                        <li>Price (Low &gt; High)</li>
+                                        <li>Price (Hight &gt; Low)</li>
                                     </ul>
                                 </div>
                             }
@@ -166,8 +179,9 @@ const BrandProduct = () => {
                                 <div className='flex justify-between items-center pt-[15px] px-[15px]'>
                                     <h1 className='m-0    font-semibold'>Availability</h1>
                                     {
-                                        collapse ?
-                                            <MdOutlineKeyboardArrowUp onClick={()=>setCollapse(!collapse)} className='text-[23px] cursor-pointer' /> 
+                                        collapse
+                                        ?
+                                        <MdOutlineKeyboardArrowUp onClick={()=>setCollapse(!collapse)} className='text-[23px] cursor-pointer' /> 
                                         :
                                         <MdOutlineKeyboardArrowDown onClick={()=>setCollapse(!collapse)} className='text-[23px] cursor-pointer' />
 
@@ -201,4 +215,4 @@ const BrandProduct = () => {
     )
 }
 
-export default BrandProduct;
+export default CategoryProduct

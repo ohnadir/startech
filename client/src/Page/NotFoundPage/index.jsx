@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import photo from "../assets/004.jpg"
+import photo from "../../assets/004.jpg"
 
 const NotFoundPage = () => {
   const navigate = useNavigate();
@@ -15,7 +15,6 @@ const NotFoundPage = () => {
                     <button onClick={handleGoToHome} className='bg-cyan-600 rounded-full px-4 py-[4px] text-white'>Back to Home</button>
                 </div>
                 <img className='w-[70%]' src={photo} alt="" />
-                
             </div>
         </div>
     )

@@ -1,0 +1,144 @@
+.footer{
+    background-color: #081621;
+    padding: 40px 0;
+    .footer-container{
+        max-width: 1280px;
+        padding: 0 25px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+        gap: 30px;
+        .footer-item{
+            h1{
+                color: #fff;
+                margin-bottom: 30px;
+                font-size: 14px;
+                font-weight: normal;
+                text-transform: uppercase;
+                letter-spacing: 4px;
+                font-family: "Trebuchet MS",sans-serif;
+                padding: 0;
+            }
+            .support-time{
+                display: flex;
+                gap: 16px;
+                align-items: center;
+                padding: 12px 20px;
+                border: 1px solid rgba(255,255,255,.1);
+                margin-bottom: 25px ;
+                border-radius: 50px;
+                transition: border 0.2s ease;
+                .icon{
+                    color: white;
+                    font-size: 25px;
+                    border-right: 1px solid rgba(255,255,255,.1);
+                    padding-right: 15px;
+                    font-size: 40px;
+                }
+                .open-time, .find-shop{
+                    color: white;
+                    .time-property, .shop{
+                        color: #666;
+                        font-size: 14px;
+                        margin-bottom: 6px;
+                        padding: 0;
+                    }
+                    .phone,  .shop-location{
+                        color: #ef4a23;
+                        padding: 0;
+                        margin: 0;
+                    }
+                }
+                &:hover{
+                    border: 1px solid #ef4a23;
+                }
+            }
+            ul{
+                padding: 0;
+                margin: 0;
+                li {
+                    font-size: 14px;
+                    color: #666;
+                    white-space: nowrap;
+                    margin-bottom: 12px;
+                    cursor: pointer;
+                    padding: 0;
+                    &:hover{
+                        color:  #ef4a23;
+                        text-decoration: underline;
+                    }
+                }
+                .active-color{
+                    color:  #ef4a23;
+                }
+            }
+            .company-name{
+                color: #666;
+                font-size: 14px;
+                margin-bottom: 12px;
+                padding: 0;
+            }
+            .address{
+                color: #666;
+                font-size: 14px;
+                margin-bottom: 12px;
+                line-height: 29px;
+                padding: 0;
+            }
+            .social-icon-container{
+                display: flex;
+                align-items: center;
+                gap: 20px;
+                .social-icon{
+                    color: white;
+                    font-size: 35px;
+                    background-color: #212e38;
+                    // margin:  0 6px;
+                    padding: 7px;
+                    width: 35px;
+                    height: 35px;
+                    border-radius: 50%;
+                    transition: background-color 0.1s ease-in;
+                    cursor: pointer;
+                    &:hover{
+                        background-color: #225b87;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media screen and (min-width : 1290px) {
+    .footer{
+        .footer-container{
+            padding: 0 ;
+        }
+    }
+}
+
+
+@media screen and (min-width : 946px)  {
+    .footer{
+        .footer-container{
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+    }
+}
+
+@media screen and (min-width : 716px) and (max-width : 945px) {
+    .footer{
+        .footer-container{
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+    }
+}
+
+@media screen and (min-width : 496px) and (max-width : 715px) {
+    .footer{
+        .footer-container{
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+}

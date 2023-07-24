@@ -1,12 +1,11 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import '../Style/SearchResult.css'
+import './SearchProduct.scss'
 import { HiHome } from 'react-icons/hi';
 import { Link, useNavigate } from 'react-router-dom';
 import { Spin } from 'antd';
 
-const SearchResult = () => {
+const SearchProduct = () => {
     const { keyword } = useParams();
     const navigate = useNavigate()
     const [searchProduct, setSearchProduct] = useState([]);
@@ -23,7 +22,7 @@ const SearchResult = () => {
                 searchProduct === [] ?
                     <div className='w-full h-screen flex items-center justify-center'><Spin/></div>
                 :
-                    <div className='max-w-7xl mx-auto  searchResult'>
+                    <div className='max-w-7xl mx-auto  SearchProduct'>
                         <div className='p-5'>
                             <div className='navigate'>
                                 <HiHome onClick={()=>navigate('/')} className='text-[#666] cursor-pointer'/> <span>/</span> 
@@ -54,4 +53,4 @@ const SearchResult = () => {
     );
 };
 
-export default SearchResult;
+export default SearchProduct;

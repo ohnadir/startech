@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import '../Style/ProductDetails.css';
+import './ProductDetails.scss';
 import { HiHome } from 'react-icons/hi'
 import { useNavigate } from 'react-router-dom'
-import SEO from '../Component/SEO';
+import SEO from '../../Component/SEO';
 import { FaFacebookF } from 'react-icons/fa';
 import { FaPinterestP } from 'react-icons/fa';
 import { FaStar } from 'react-icons/fa';
@@ -10,14 +10,14 @@ import { DiGitCompare } from 'react-icons/di';
 import { MdAssignment } from 'react-icons/md';
 import { Modal, Spin } from 'antd';
 import { AiFillCheckCircle } from "react-icons/ai"
-import { BsCart, BsCheckLg } from "react-icons/bs"
+import { BsCart } from "react-icons/bs"
 import { useParams  } from 'react-router-dom';
-import { addToCart } from '../utils/cart';
+import { addToCart } from '../../utils/cart';
 import { useDispatch, useSelector } from 'react-redux'
-import { getProductDetails, clearErrors } from '../redux/actions/products'
-import image from "../assets/images.png"
-import Review from '../Component/Review';
-import RelatedProduct from '../Component/RelatedProduct';
+import { getProductDetails, clearErrors } from '../../redux/actions/products'
+import image from "../../assets/images.png"
+import Review from '../../Component/Review';
+import RelatedProduct from '../../Component/RelatedProduct';
 import { message } from 'antd';
 
 const ProductDetails=()=> {

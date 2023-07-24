@@ -1,5 +1,5 @@
 import React from 'react';
-import "../Style/Dashboard.css";
+import "./Dashboard.scss";
 import { Outlet } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineHome, AiOutlineShoppingCart, AiOutlineUser } from 'react-icons/ai';

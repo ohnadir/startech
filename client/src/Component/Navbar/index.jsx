@@ -20,6 +20,7 @@ const Navbar = () => {
         }
     }
     const storedCart = getStoredCart();
+    console.log(storedCart)
     const HandleRemove= (item)=>{
         RemoveFromCart(item);
     }
@@ -74,7 +75,7 @@ const Navbar = () => {
                     </div>
                     <div className='drawer-body'>
                         {
-                            storedCart?.length === 0
+                            storedCart === undefined
                             ?
                             <div className='empty-cart-container'>
                                 <div>
