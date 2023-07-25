@@ -20,12 +20,12 @@ const BrandProduct = () => {
         setValue(value);
     };
 
-    useEffect(() => {
+    /* useEffect(() => {
         axios.get(`https://startech-server.vercel.app/api/v1/products/search?brand=${keyword}`)
             .then(function (response) {
                 setSearchProduct(response.data.products)
             })
-    }, [keyword]);
+    }, [keyword]); */
     return (
         <div className='max-w-7xl mx-auto categoryProductContainer'>
             <header className='py-5'>

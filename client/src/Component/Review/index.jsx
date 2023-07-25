@@ -13,7 +13,7 @@ const Review = ({id, product}) => {
         <div className=''>
             <div className=' flex flex-col md:flex-row gap-2 md:justify-between md:items-center'>
                 <div>
-                    <h1 className='text-black text-xl'>Review ({product.reviews?.length})</h1>
+                    <h1 className='text-black text-xl'>Review ({product?.reviews?.length})</h1>
                     <p>Get specific details about this product from customers who own it.</p>
                 </div>
                 <div>

@@ -23,12 +23,12 @@ const CategoryProduct = () => {
         navigate(`/brandProduct/${name}`)
     }
 
-    useEffect(() => {
+    /* useEffect(() => {
         axios.get(`https://startech-server.vercel.app/api/v1/products/search?category=${keyword}`)
             .then(function (response) {
                 setSearchProduct(response.data.products)
             })
-    }, [keyword]);
+    }, [keyword]); */
     //  function for duplicate brand name filtering 
     const name = [];
     const brandName = searchProduct.filter( (item)=> name.push(item.brand));

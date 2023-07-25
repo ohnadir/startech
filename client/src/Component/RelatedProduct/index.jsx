@@ -1,29 +1,36 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios';
+import React, { useEffect } from 'react'
+import { getProducts } from '../../redux/actions/products';
+import { MdLibraryAdd } from "react-icons/md"
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-const RelatedProduct = ({category, id}) => {
-    const [categoryProduct, setCategoryProduct] = useState([]);
+const RelatedProduct = ({ category }) => {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const { products } = useSelector(state=>state.products);
     useEffect(() => {
-        axios.get(`https://startech-server.vercel.app/api/v1/products/search?category=${category}`)
-            .then(function (response) {
-                setCategoryProduct(response.data.products)
-            })
-    }, [category]);
-    const filterData = categoryProduct?.filter((item) => item._id !== id);
+        dispatch(getProducts())
+    }, [dispatch, category]);
+    const filterProduct = products?.filter((item) => item.category === category);
     return (
-        <div className=''>
-            <div className='grid grid-cols-1 sm:grid-cols-2 gap-5 ms:grid-cols-3 lg:grid-cols-4'>
-                {
-                    filterData?.map((product)=><div key={product?._id}>
-                        <div className='border shadow-xl p-5'>
-                            <img className='w-[200px] mx-auto' src={product?.productPictures[0].img} alt="" />
-                            <p className='m-0 font-semibold py-1'>{product?.name}</p>
-                            <p className='m-0 pb-2'>{product?.desc}</p>
-                            <p className='m-0 font-semibold'>Price:- {product?.price}</p>
-                        </div>
-                    </div>)
-                }
-            </div>
+        <div className='product-container'>
+            {
+                filterProduct?.map((product)=>
+                <div key={product?._id} className='single-product'>
+                    <div className='img'>
+                        <img src={product?.productPictures[0].img} alt="" />
+                    </div>
+                    <div className="info">
+                        <h2 onClick={()=>navigate(product?._id)}>{product?.name}</h2>
+                        <p>Price:- {product?.price} ৳</p>
+                        <button>
+                            <MdLibraryAdd/>
+                            <span>Add to Compare</span>
+                        </button>
+                    </div>
+                </div>
+                )
+            }
         </div>
     )
 }

@@ -1,0 +1,109 @@
+.reviews{
+    .reviews-header{
+        margin-bottom: 20px;
+        h1{
+            padding: 0;
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        p{
+            padding: 0;
+            margin: 0;
+            font-size: 14px;
+            color: #808080;
+        }
+    }
+    .add-reviews{
+        padding-bottom: 20px;
+        border-bottom: 1px solid #808080;
+        .add-review{
+            background-color: transparent;
+            border: 2px solid #3749bb;
+            padding: 8px 20px;
+            max-width: max-content;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            &:hover{
+                background-color: #3749bb;
+                color: white;
+            }
+        }
+        .input-container{
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            input{
+                margin-top: 6px;
+                width: 100%;
+                height: 35px;
+                outline: none;
+                padding: 0 12px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+            }
+            button{
+                background-color: #3749bb;
+                color: white;
+                padding: 8px 20px;
+                max-width: max-content;
+                border-radius: 4px;
+                font-weight: bold;
+                transition: all 0.3s ease;
+                &:hover{
+                    background-color: rgba(55, 73, 187, 0.9);
+                    color: white !important;
+                }
+            }
+        }
+        
+    }
+    .empty-review{
+        height: 30vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .review-icon{
+            padding: 20px;
+            background: rgba(55,73,187,.1);
+            color: #3749bb;
+            border-radius: 50px;
+            width: 88px;
+            height: 88px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+        p{
+            padding-top: 5px;
+            margin: 0;
+        }
+    }
+    .review-container{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        .review{
+            padding: 12px 0;
+            border-bottom: 1px solid #666;
+            p{
+                padding: 6px 0;
+                margin: 0;
+                font-size: 14px;
+                font-weight: 500;
+            }
+            h3{
+                padding: 0;
+                margin: 0;
+                color: #666;
+                .title{
+                    color : #3749bb;
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+}

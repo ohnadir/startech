@@ -9,8 +9,8 @@ import {
     CLEAR_ERRORS
 } from '../constants/products';
 
-const baseURL = ("https://startech-server.vercel.app/api/v1/products")
-// const baseURL = ("http://localhost:5001/api/v1/products")
+// const baseURL = ("https://startech-server.vercel.app/api/v1/products")
+const baseURL = ("http://localhost:5001/api/v1/products")
 
 export const getProducts = (page, size) => async (dispatch) => {
     try {
@@ -39,17 +39,16 @@ export const getProducts = (page, size) => async (dispatch) => {
 
 export const getProductDetails = (id) => async (dispatch) => {
     try {
-
         dispatch({ type: PRODUCT_DETAILS_REQUEST })
         const config = {
             headers: { 'Content-Type' : 'application/json' },
             withCredentials: true
         }
 
-        const { data } = await axios.get(`${baseURL}/${id}`, config)
+        const { data } = await axios.get(`${baseURL}/details/${id}`, config);
         dispatch({
             type: PRODUCT_DETAILS_SUCCESS,
-            payload: data.product
+            payload: data
         })
 
     } catch (error) {

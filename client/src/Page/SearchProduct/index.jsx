@@ -9,13 +9,13 @@ const SearchProduct = () => {
     const { keyword } = useParams();
     const navigate = useNavigate()
     const [searchProduct, setSearchProduct] = useState([]);
-    useEffect(() => {
+    /* useEffect(() => {
         fetch(`https://startech-server.vercel.app/api/v1/products/search?keyword=${keyword}`)
         .then((response) => response.json())
         .then((data) => {
             setSearchProduct(data?.products)
         });
-    }, [keyword]);
+    }, [keyword]); */
     return (
         <>
             {
