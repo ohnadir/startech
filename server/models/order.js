@@ -1,11 +1,12 @@
 const { mongoose } = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
-    productInfo:{},
+    products: [],
     shippingInfo: {},
     paymentStatus: {},
     deliveryMethod:{ type : String },
     paymentMethod:{ type : String },
+    shippingCost:{ type : Number },
     discount:{ type : Number },
     total:{ type : Number },
     userName:{ type : String },

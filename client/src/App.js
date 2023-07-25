@@ -23,6 +23,7 @@ import Orders from './Page/Dashboard/Orders';
 import Users from './Page/Dashboard/Users';
 import Products from './Page/Dashboard/Products';
 import SearchProduct from './Page/SearchProduct';
+import Invoice from './Page/Invoice';
 function App() {
   const dispatch = useDispatch();
 
@@ -60,6 +61,11 @@ function App() {
         <Route path='/payment' element={
           <ProtectedRoute>
             <Payment/>
+        </ProtectedRoute>
+        }></Route>
+        <Route path='/invoice/:id' element={
+          <ProtectedRoute>
+            <Invoice/>
         </ProtectedRoute>
         }></Route>
 

@@ -35,7 +35,7 @@ const Checkout=()=> {
     const total = orders?.reduce((n, {price, quantity}) => n + parseInt(price) * parseInt(quantity), 0)
     const handleSubmit = () => {
         const order = {
-            productInfo: orders,
+            products: orders,
             shippingInfo : {
                 firstName: auth.firstName,
                 lastName: auth.lastName,
@@ -52,12 +52,13 @@ const Checkout=()=> {
                 status : payment?.status 
     
             },
-            deliveryMethod : auth.deliveryMethod,
+            deliveryMethod : auth.delivery,
+            shippingCost : Number(auth.deliveryMethod === "homeDelivery" ? 60 : 0),
             paymentMethod : auth?.payment,
             discount : 0,
             total : total + Number(auth?.delivery === "homeDelivery" ? 60 : 0),
             userEmail : user.email,
-            userName : auth.firstName + auth.lastName
+            userName : auth.firstName + " " + auth.lastName
         }
         dispatch(newOrder(order))
     }
@@ -147,9 +148,8 @@ const Checkout=()=> {
                                         </div>
                                         <h4>Select Payment Method</h4>
                                         <ul>
-                                            <li className='flex items-center gap-3'><input type="radio" onChange={handleChange} name='payment' value="cashOn" /> Cash on Delivery</li>
-                                            
-                                            <li className='flex items-center gap-3'><input type="radio" onChange={handleChange} name='payment' value="online" /> Online Payment</li>
+                                            <li className='flex items-center gap-3'><input type="radio" onChange={handleChange} name='payment' value="Cash" /> Cash on Delivery</li>
+                                            <li className='flex items-center gap-3'><input type="radio" onChange={handleChange} name='payment' value="Online" /> Online Payment</li>
                                         </ul>
                                         <div>
                                             <span className='text-[13px] font-semibold text-[#01132d] '>We Accepted :</span>

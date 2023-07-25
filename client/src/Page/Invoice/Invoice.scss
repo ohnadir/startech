@@ -1,0 +1,112 @@
+.invoice-container{
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 32px 0;
+    // background-color: #3749bb0d;
+
+    .invoice-title{
+        background-color: #ffe8a1;
+        padding: 15px 30px ;
+        margin-bottom: 20px;
+        h1{
+            margin: 0;
+            font-size: 16px;
+        }
+    }
+    .invoice-content{
+        background-color: #eef2ff;
+        padding: 30px;
+    }
+    .invoice-heading{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid white;
+        padding-bottom: 15px;
+        h1{
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0;
+        }
+        p{
+            margin: 0;
+            font-size: 15px;
+        }
+        .brand-logo{
+            img{
+                width: 100px;
+                margin-bottom: 7px;
+            }
+        }
+    }
+    .client-info{
+        padding-top: 15px;
+        display: flex;
+        justify-content: space-between;
+        h1{
+            margin: 0;
+            font-weight: 700;
+        }
+        p{
+            margin: 0;
+            font-size: 14px;
+            font-weight: 600;
+        }
+    }
+    .product-info{
+        background-color: white;
+        padding: 30px;
+        table{
+            width: 100%;
+            text-align: center;
+            th{
+                background-color: #ddd;
+                padding: 6px 0 !important;
+            }
+            td{
+                padding: 6px 0 !important;
+            }
+        }
+    }
+    .order-status{
+        background-color: #ecfdf5;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 30px;
+        h1{
+            margin: 0;
+            font-weight: 700;
+        }
+        p{
+            margin: 0;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .total-price{
+            font-size: 18px;
+            font-weight: 700 !important;
+        }
+    }
+    .continue-btn, .print-btn{
+        padding: 30px;
+        button{
+            background-color: rgb(16, 185, 129);
+            width: fit-content;
+            padding: 8px 20px;
+            color: white;
+            font-weight: 600;
+            border-radius: 4px;
+            transition: background-color 0.1s ease;
+        }
+        button:hover{
+            background-color: rgb(4, 120, 87);
+        }
+    }
+}
+
+@media screen and (max-width: 1279px){
+    .invoice-container{
+        padding: 32px 25px;
+    }
+}
