@@ -21,16 +21,20 @@ const Register = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate(from, { replace: true });
+      messageApi.success("Registration Successful");
+      setTimeout( ()=>{
+        navigate(from, { replace: true });
+      }, 1000)
     }
     if (error) {
+      messageApi.error(error);
       dispatch(clearErrors());
   }
-  }, [dispatch, isAuthenticated, error, navigate, from]);
+  }, [dispatch, isAuthenticated, error, navigate, from, messageApi]);
   
   const OnSubmit = (e) => {
     e.preventDefault()
-    if(!auth.firstName && !auth.lastName && !auth.email && !auth.password && !auth.phone){
+    if(!auth?.firstName || !auth?.lastName || !auth?.email || !auth?.password || !auth?.phone){
       messageApi.error("Invalid Input")
     }else{
       dispatch(register(auth))
@@ -41,13 +45,13 @@ const Register = () => {
       {contextHolder}
         <div className='register'>
           <SEO title={'Register'} />
-          <div className='header'>
+          <div className='register-header'>
           <HiHome onClick={()=>navigate('/register')} className='home-icon'/> <span>/</span> <span>Account</span> <span>/</span> <span>Register</span>
           </div>
             <div className='register-container'>
                 <div className='register-body'>
                     <div>
-                        <h1 className='heading'>Register Account</h1>
+                        <h1 className='register-heading'>Register Account</h1>
                         <div className='input-container'>
                               <div className='flex flex-col md:flex-row gap-5'>
                                 <div className='input-item'>
@@ -65,7 +69,7 @@ const Register = () => {
                               </div>
                               <div className='input-item'>
                                 <label htmlFor="password">Password <span className='star'>*</span></label>
-                                <input onChange={handleChange} name='password' type="text" placeholder='Password' />
+                                <input onChange={handleChange} name='password' type="password" placeholder='Password' />
                               </div>
                               <div className='input-item'>
                                 <label htmlFor="Phone">Phone Number<span className='star'>*</span></label>
@@ -76,14 +80,14 @@ const Register = () => {
                               </div>
                         </div>
                     </div>
-                    <div className='footer'>
+                    <div className='register-footer'>
                       <div className=' flex items-center gap-3'>
                         <div className='hr'></div>
                         <p>Already have an account ?</p>
                         <div className='hr'></div>
                       </div>
-                      <p className=''>If you already have an account with us, please login at the</p>
-                      <Link className='login-btn' to='/login'>Login page.</Link>
+                      <p>If you already have an account with us, please login at the</p>
+                      <button className='login-btn' onClick={()=>navigate('/login')}>Login page.</button>
                     </div>
                 </div>
             </div> 

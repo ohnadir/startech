@@ -4,8 +4,8 @@ const { isAuthenticatedUser, authorizeRoles } = require('../middleware/auth')
 
 router.post('/signup', register);
 router.patch('/update/:id', isAuthenticatedUser, update );
-router.post('/login', login);
-router.post('/logout', logout);
+router.post('/login',  login);
+router.get('/logout', isAuthenticatedUser, logout);
 router.get('/me', isAuthenticatedUser, loadUser);
 router.get('/', authorizeRoles, users);
 router.get('/:id', authorizeRoles, user);

@@ -226,7 +226,7 @@ export const logout = () => async (dispatch) => {
             headers: { 'Content-Type' : 'application/json' },
             withCredentials: true
         }
-        await axios.get(`${baseURL}/logout`, config)
+        await axios.get(`${baseURL}/logout`, config);
         dispatch({
             type: LOGOUT_SUCCESS,
         })

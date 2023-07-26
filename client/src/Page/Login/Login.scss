@@ -1,30 +1,32 @@
 .login{
     max-width: 1280px;
     margin: 0 auto;
-    padding: 32px 0;
-    .header{
+    padding: 25px 25px;
+    border: 1px solid red;
+    .login-header{
         display: flex;
         align-items: center;
         gap: 12px;
-        font-size: 12px;
-        margin-bottom: 50px;
+        font-size: 14px;
+        font-weight: 600;
         .home-icon{
             color: #666;
             cursor: pointer;
         }
     }
     .login-container{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
         .login-body{
-            width: 400px;
-            height: 100%;
-            .heading{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            max-width: 400px;
+            height: calc(100vh - 140px);
+            .login-heading{
                 font-size: 20px;
                 font-weight: 600;
-                margin-bottom: 5px;
+                margin-bottom: 10px;
+                text-align: center;
             }
             .input-container{
                 display: grid;
@@ -46,6 +48,7 @@
                         width: 100%;
                         font-family: "Trebuchet MS",sans-serif;
                         border: 1px solid #ddd;
+                        border-radius: 4px;
                         margin-top: 5px;
                         height: 42px;
                     }
@@ -61,7 +64,7 @@
                     border-radius: 4px;
                     height: 42px;
                 }
-                .footer{
+                .login-footer{
                     display: flex;
                     align-items: center;
                     gap: 12px;
@@ -96,8 +99,6 @@
 
 @media screen and (min-width : 1290px) {
     .login{
-        max-width: 1280px;
-        margin: 0 auto;
-        padding: 32px 25px;
+        padding: 25px 0;
     }
 }

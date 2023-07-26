@@ -22,32 +22,39 @@ const Login = () => {
     
   useEffect(() => {
     if (isAuthenticated) {
-      navigate(from, { replace: true });
+      messageApi.success("Login Successful");
+      setTimeout( ()=>{
+        navigate(from, { replace: true });
+      }, 1000)
     }
-    if (error) {
+    if (error === "Incorrect password" || error === "Incorrect credential") {
+      messageApi.error(error);
       dispatch(clearErrors());
     }
-  },[dispatch, error, from, isAuthenticated, navigate])
+  },[dispatch, error, from, isAuthenticated, navigate, messageApi])
 
   const onSubmit = () => {
-    if(!auth.email || !auth.password){
-      messageApi.error("Input Require")
-    }else{
+    if(!auth?.email){
+      messageApi.error("Email Require")
+    }else if(!auth?.password){
+      messageApi.error("Password Require")
+    }
+    else{
       dispatch(login(auth))
     }
   }
   return (
     <>
       { contextHolder }
-      <div className='max-w-7xl mx-auto px-2 login'>
+      <div className='login'>
         <SEO title={'Login'} />
-        <div className='header'>
+        <div className='login-header'>
           <HiHome onClick={()=>navigate('/register')} className='home-icon'/> <span>/</span> <span>Account</span> <span>/</span> <span>Login</span>
         </div>
         <div className='login-container'>
           <div className='login-body'>
             <div>
-              <h1 className='heading'>Account Login</h1>
+              <h1 className='login-heading'>Account Login</h1>
               <div className='input-container'>
                 <div className='input-item'>
                   <label htmlFor="Email">E-Mail <span className='star'>*</span></label>
@@ -55,12 +62,12 @@ const Login = () => {
                 </div>
                 <div className='input-item'>
                   <label htmlFor="password">Password <span className='star'>*</span></label>
-                  <input onChange={handleChange} name='password' type="text" placeholder='Password' />
+                  <input onChange={handleChange} name='password' type="password" placeholder='Password' />
                 </div>
                 <div >
                   <button onClick={onSubmit} className='login-btn'>Continue</button>
                 </div>
-                <div className='footer'>
+                <div className='login-footer'>
                   <div className='hr'></div>
                   <p className='text-[#666] pText'>Don't have an account?</p>
                   <div className='hr'></div>

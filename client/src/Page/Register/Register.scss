@@ -1,12 +1,13 @@
 .register{
     max-width: 1280px;
     margin: 0 auto;
-    padding: 32px 0;
-    .header{
+    padding:  25px;
+    .register-header{
         display: flex;
         align-items: center;
         gap: 12px;
-        font-size: 12px;
+        font-size: 14px;
+        font-weight: 600;
         margin-bottom: 50px;
         .home-icon{
             color: #666;
@@ -21,10 +22,11 @@
         .register-body{
             width: 400px;
             height: 100%;
-            .heading{
+            .register-heading{
                 font-size: 20px;
                 font-weight: 600;
-                margin-bottom: 5px;
+                margin-bottom: 10px;
+                text-align: center;
             }
             .input-container{
                 display: grid;
@@ -48,6 +50,7 @@
                         border: 1px solid #ddd;
                         margin-top: 5px;
                         height: 42px;
+                        border-radius: 4px;
                     }
                 }
                 .register-btn{
@@ -62,7 +65,7 @@
                     height: 42px;
                 }
             }
-            .footer{
+            .register-footer{
                 margin-top: 30px;
                 p{
                     padding: 0;
@@ -77,16 +80,12 @@
                     color: black;
                 }
                 .login-btn{
-                    border: 1px solid #3749bb;
-                    width: 100%;
                     font-size: 14px;
                     color: #ef4a23;
-                    border-radius: 4px;
-                    height: 42px;
-                    transition: 0.3s ease;
+                    text-decoration: none;
+                    transition: text-decoration 0.3s ease;
                     &:hover{
-                        background-color: #3749bb;
-                        color: white;
+                        text-decoration: underline;
                     }
                 }
             }
@@ -98,6 +97,6 @@
     .register{
         max-width: 1280px;
         margin: 0 auto;
-        padding: 32px 25px;
+        padding: 25px 0;
     }
 }

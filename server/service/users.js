@@ -39,7 +39,7 @@ exports.registration = async ({ body, email, phone, res }) => {
     }
 };
 
-exports.login = async ({ email, password, res }) => {
+exports.Login = async ({ email, password, res }) => {
     const response = {
       code: 200,
       status: 'success',
@@ -58,7 +58,7 @@ exports.login = async ({ email, password, res }) => {
         if (!isPasswordMatched) {
             response.code = 404;
             response.status = 'failed';
-            response.message = 'Incorrect credential';
+            response.message = 'Incorrect password';
             return response;
         }
 
@@ -258,6 +258,7 @@ exports.Logout = async ({ res }) => {
             expires: new Date(Date.now()),
             httpOnly: true
         })
+        console.log("logout")
         return response
     } catch (error) {
         response.code = 500;
