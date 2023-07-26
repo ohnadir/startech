@@ -7,7 +7,7 @@ const CompareProduct = () => {
     setTimeout(() => {
         localStorage.removeItem('compareCart');
         navigate('/')
-      }, 3 * 60 * 1000)
+    }, 3 * 60 * 1000)
     
     return (
         <div className='bg-[#f2f4f8] h-[93.6vh]'>

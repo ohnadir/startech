@@ -53,7 +53,7 @@ const Checkout=()=> {
     
             },
             deliveryMethod : auth.delivery,
-            shippingCost : Number(auth.deliveryMethod === "homeDelivery" ? 60 : 0),
+            shippingCost : Number(auth.delivery === "homeDelivery" ? 60 : 0),
             paymentMethod : auth?.payment,
             discount : 0,
             total : total + Number(auth?.delivery === "homeDelivery" ? 60 : 0),
@@ -68,6 +68,7 @@ const Checkout=()=> {
             setTimeout(() => {
                 localStorage.removeItem("shopping-cart");
                 navigate(`/invoice/${order?._id}`)
+                window.location.reload();
             }, 1000);
         }
     },[order]);

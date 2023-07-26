@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { orderDetails } from "../../redux/actions/orders";
 import { Table } from 'antd';
 import Loader from "../../Component/Loader"
+import SEO from '../../Component/SEO';
 
 
 const columns = [
@@ -39,13 +40,7 @@ const Invoice = () => {
     useEffect(() => {
         dispatch(orderDetails(id));
     }, [id ,dispatch]);
-    
     const componentRef = useRef(null);
-
-    const handleContinue=()=>{
-        navigate('/')
-        window.location.reload();
-    }
     return (
         <>
             {
@@ -54,6 +49,7 @@ const Invoice = () => {
             <Loader/>
             :
             <div className='bg-gray-50 h-full'>
+                <SEO title={'Invoice'} />
                 <div className='invoice-container'>
                     <div className='invoice-title'>
                         <h1>Thank you <span className="font-bold text-[#3749bbT]">{order?.userName}</span>, Your order have been received !</h1>
@@ -98,21 +94,21 @@ const Invoice = () => {
                             </div>
                             <div>
                                 <h1 className='m-0 font-[700]'>SHIPPING COST</h1>
-                                <p className='font-[600] m-0 text-[14px]'>${order?.shippingCost}</p>
+                                <p className='font-[600] m-0 text-[14px]'>৳ {order?.shippingCost}</p>
                             </div>
                             <div>
                                 <h1 className='m-0 font-[700]'>DISCOUNT</h1>
-                                <p className='font-[600] m-0 text-[14px]'>${order?.discount}</p>
+                                <p className='font-[600] m-0 text-[14px]'>৳ {order?.discount}</p>
                             </div>
                             <div>
                                 <h1 className='m-0 font-[700]'>TOTAL AMOUNT</h1>
-                                <p className='text-red-500 text-[18px] font-[700] m-0'>${order?.total}</p>
+                                <p className='text-red-500 text-[18px] font-[700] m-0'>৳ {order?.total}</p>
                             </div>
                         </div>
                     </div>
                     <div className='flex items-center justify-between bg-white'>
                         <div className="continue-btn">
-                            <button onClick={handleContinue}>Continue Order</button>
+                            <button onClick={()=>navigate('/')}>Continue Order</button>
                         </div>
                         <div className="print-btn">
                             <ReactToPrint trigger={() => (<button >Print / Download</button>)}content={() => componentRef.current}/>
