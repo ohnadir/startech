@@ -21,10 +21,7 @@ const Register = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      messageApi.success("Registration Successful");
-      setTimeout( ()=>{
-        navigate(from, { replace: true });
-      }, 1000)
+      navigate(from, { replace: true });
     }
     if (error) {
       messageApi.error(error);

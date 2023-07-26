@@ -101,7 +101,7 @@ export const emailOrder = () => async (dispatch) => {
             withCredentials: true
         }
         
-        const { data } = await axios.get(`${baseURL}`, config);
+        const { data } = await axios.get(`${baseURL}/email`, config);
         dispatch({
             type: EMAIL_ORDER_SUCCESS,
             payload:data

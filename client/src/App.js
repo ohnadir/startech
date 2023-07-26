@@ -24,6 +24,7 @@ import Users from './Page/Dashboard/Users';
 import Products from './Page/Dashboard/Products';
 import SearchProduct from './Page/SearchProduct';
 import Invoice from './Page/Invoice';
+import MyOrder from './Page/Profile/MyOrder/MyOrder';
 function App() {
   const dispatch = useDispatch();
 
@@ -72,6 +73,11 @@ function App() {
         <Route path='/confirmPayment' element={
           <ProtectedRoute>
           <ConfirmPayment/>
+        </ProtectedRoute>
+        }></Route>
+        <Route path='/myOrders' element={
+          <ProtectedRoute>
+          <MyOrder/>
         </ProtectedRoute>
         }></Route>
         

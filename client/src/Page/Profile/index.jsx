@@ -36,7 +36,7 @@ const Home =()=>{
             </div>
         </div>
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
-            <div onClick={()=>navigate('/orders')} className='profileCard w-[250px] mx-auto sm:w-full'>
+            <div onClick={()=>navigate('/myOrders')} className='profileCard w-[250px] mx-auto sm:w-full'>
                 <CgShoppingBag className='profileIcon'/>
                 <p>Orders</p>
             </div>

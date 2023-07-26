@@ -22,10 +22,7 @@ const Login = () => {
     
   useEffect(() => {
     if (isAuthenticated) {
-      messageApi.success("Login Successful");
-      setTimeout( ()=>{
-        navigate(from, { replace: true });
-      }, 1000)
+      navigate(from, { replace: true });
     }
     if (error === "Incorrect password" || error === "Incorrect credential") {
       messageApi.error(error);

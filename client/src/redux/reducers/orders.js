@@ -101,7 +101,7 @@ export const allOrderReducer = (state = {orders : []}, action) => {
     
 }
 
-export const emailOrderReducer = (state = { orders: []}, action) => {
+export const emailOrderReducer = (state = {}, action) => {
     switch (action.type) {
         case EMAIL_ORDER_REQUEST:
             return {
