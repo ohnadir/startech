@@ -73,7 +73,7 @@ exports.Login = async ({ email, password, res }) => {
     }
 };
 
-exports.updateProfile = async ({ name, email, phone, address, id }) => {
+exports.updateProfile = async ({ firstName, lastName , email, phone, req }) => {
     const response = {
       code: 200,
       status: 'success',
@@ -81,6 +81,8 @@ exports.updateProfile = async ({ name, email, phone, address, id }) => {
     };
   
     try {
+        console.log("Done")
+        const id = req.user.id;
         const user = await User.findOne({_id : id});
         if (!user) {
             response.code = 422;
@@ -88,14 +90,13 @@ exports.updateProfile = async ({ name, email, phone, address, id }) => {
             response.message = 'Incorrect credential';
             return response;
         }
-        /* const isPhoneExist = await User.findOne({ phone });
-        console.log(isPhoneExist)
+        /* const isPhoneExist = await User.findOne({ phone : phone });
         if ( isPhoneExist) {
             response.code = 422;
             response.status = 'failed';
             response.message = 'Phone number already taken';
             return response;
-        } */
+        }
 
         const isEmailExist = await User.findOne({ email: email });
         if ( isEmailExist) {
@@ -103,12 +104,11 @@ exports.updateProfile = async ({ name, email, phone, address, id }) => {
             response.status = 'failed';
             response.message = 'Email already taken';
             return response;
-        }
-        user.name = name ? name : user.name;
+        } */
+        user.firstName = firstName ? firstName : user.firstName;
+        user.lastName = lastName ? lastName : user.lastName;
         user.email = email ? email : user.email;
-        user.phone = phone ? phone : user.phone;
-        user.address = address ? address : user.address;
-        
+        user.phone = phone ? phone : user.phone;        
         await user.save();        
         return response;
     } catch (error) {
@@ -186,14 +186,14 @@ exports.singleUser = async({id})=>{
     }
 }
 
-exports.password = async({ id, newPassword, password })=>{
+exports.password = async({ req, newPassword, oldPassword })=>{
     const response = {
         code: 200,
         status: 'success',
         message: 'Change Password successfully',
     };
     try {
-        console.log(newPassword, password)
+        const id= req.user._id
         const user = await User.findOne({ _id: id});
         if (!user) {
             response.code = 404;
@@ -201,7 +201,7 @@ exports.password = async({ id, newPassword, password })=>{
             response.message = 'No User found by this id';
             return response;
         }
-        const isPasswordMatched = await user.comparePassword(password);
+        const isPasswordMatched = await user.comparePassword(oldPassword);
         if (!isPasswordMatched) {
             response.code = 404;
             response.status = 'failed';
@@ -219,32 +219,6 @@ exports.password = async({ id, newPassword, password })=>{
     }
 }
 
-exports.PutUserInfo = async({ id, phone, address })=>{
-    const response = {
-        code: 200,
-        status: 'success',
-        message: 'Update User successfully',
-    };
-    try {
-        const user = await User.findOne({ _id: id});
-        if (!user) {
-            response.code = 404;
-            response.status = 'failed';
-            response.message = 'No User found by this id';
-            return response;
-        }
-        
-        user.phone = phone ? phone : user.phone ;
-        user.address = address ? address : user.address;
-        await user.save();  
-        return response;
-    } catch (error) {
-        response.code = 500;
-        response.status = 'failed';
-        response.message = 'Error. Try again';
-        return response;
-    }
-}
 
 exports.Logout = async ({ res }) => {
     const response = {

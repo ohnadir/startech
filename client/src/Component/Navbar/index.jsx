@@ -1,4 +1,4 @@
-import React, {  useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 import {  useNavigate } from 'react-router-dom';
 import {  CgProfile } from 'react-icons/cg';
 import { BsCartCheckFill} from 'react-icons/bs';
@@ -13,13 +13,18 @@ const Navbar = () => {
     const navigate = useNavigate();
     const [open, setOpen] = useState(false)
     const [cartOpen, setCartOpen] = useState(false)
+    const [storedCart, setStoredCart] = useState()
     const [keyword, setKeyword] = useState('');
     const handleSearch=()=>{
         if(keyword){
             navigate(`/search/${keyword}`)
         }
     }
-    const storedCart = getStoredCart();
+    
+    useEffect(()=>{
+        const data = getStoredCart();
+        setStoredCart(data);
+    }, [])
     console.log(storedCart)
     const HandleRemove= (item)=>{
         RemoveFromCart(item);

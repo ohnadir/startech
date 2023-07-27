@@ -83,12 +83,14 @@ export const register = (userData) => async (dispatch) => {
 // update user
 export const update = (userData) => async (dispatch) => {
     try {
+        console.log(userData);
         dispatch({ type: UPDATE_PROFILE_REQUEST })
         const config = {
             headers: { 'Content-Type' : 'application/json' },
             withCredentials: true
         }
         const { data } = await axios.patch(`${baseURL}/update`, userData, config)
+        console.log(data);
         dispatch({
             type: UPDATE_PROFILE_SUCCESS,
             payload: data

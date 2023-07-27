@@ -2,7 +2,7 @@ import React from 'react';
 import './Profile.scss';
 import { CgShoppingBag } from 'react-icons/cg';
 import { FaUser } from 'react-icons/fa';
-import { MdLock, MdOutlineDashboardCustomize } from 'react-icons/md';
+import { MdLock } from 'react-icons/md';
 import { FiLogOut } from 'react-icons/fi';
 import { HiHome } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
@@ -47,11 +47,6 @@ const Home =()=>{
             <div onClick={()=>navigate('/changePassword')} className='profileCard w-[250px] mx-auto sm:w-full'>
                 <MdLock className='profileIcon'/>
                 <p>Change Password</p>
-            </div>
-            
-            <div onClick={()=>navigate('/dashboard')} className='profileCard w-[250px] mx-auto sm:w-full'>
-                <MdOutlineDashboardCustomize className='profileIcon'/>
-                <p>Dashboard</p>
             </div>
             <div onClick={handleLogout} className='profileCard w-[250px] mx-auto sm:w-full'>
                 <FiLogOut className='profileIcon'/>

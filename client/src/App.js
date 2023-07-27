@@ -17,14 +17,10 @@ import NotFoundPage from './Page/NotFoundPage';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { loadUser } from './redux/actions/users';
-import Dashboard from './Page/Dashboard';
-import Chart from './Page/Dashboard/Chart';
-import Orders from './Page/Dashboard/Orders';
-import Users from './Page/Dashboard/Users';
-import Products from './Page/Dashboard/Products';
 import SearchProduct from './Page/SearchProduct';
 import Invoice from './Page/Invoice';
 import MyOrder from './Page/Profile/MyOrder/MyOrder';
+import ChangePassword from './Page/Profile/ChangePassword';
 function App() {
   const dispatch = useDispatch();
 
@@ -46,12 +42,7 @@ function App() {
             <Profile/>
         </ProtectedRoute>
         }></Route>
-        <Route path='/dashboard' element={
-          <ProtectedRoute>
-            <Dashboard/>
-        </ProtectedRoute>
-        }></Route>
-
+      
         <Route path='/checkout' element={
           <ProtectedRoute>
             <Checkout/>
@@ -75,20 +66,18 @@ function App() {
           <ConfirmPayment/>
         </ProtectedRoute>
         }></Route>
+
         <Route path='/myOrders' element={
           <ProtectedRoute>
           <MyOrder/>
         </ProtectedRoute>
         }></Route>
         
-        {/* dashboard */}
-        <Route path='/dashboard' element={<ProtectedRoute><Dashboard/></ProtectedRoute>}>
-          <Route index  element={<Chart isAdmin={true} />}></Route>
-          <Route path="orders"  element={<Orders isAdmin={true} />}></Route>
-          <Route path="users"  element={<Users isAdmin={true} />}></Route>
-          <Route path="products"  element={<Products isAdmin={true} />}></Route>
-        </Route>
-
+        <Route path='/changePassword' element={
+          <ProtectedRoute>
+          <ChangePassword/>
+        </ProtectedRoute>
+        }></Route>
         <Route path="/search/:keyword" element={<SearchProduct/>} />
         <Route path="/compareProduct" element={<CompareProduct/>} />
         <Route path="/categoryProduct/:keyword" element={<CategoryProduct/>} />

@@ -18,7 +18,8 @@ exports.login = async (req, res) => {
   res.status(code).json({ code, status, message, token, user });
 };
 exports.update = async (req, res) => {
-  const { status, code, message } = await updateProfile({ ...req.body, id:req.params.id });
+  console.log("data")
+  const { status, code, message } = await updateProfile({ ...req.body, req: req });
   res.status(code).json({ code, status, message });
 };
 
@@ -38,12 +39,7 @@ exports.user = async (req, res ) => {
 };
 
 exports.changePassword = async (req, res ) => {
-  const { status, code, message } = await password({ ...req.body, id:req.params.id});
-  res.status(code).json({ code, status, message });
-};
-
-exports.putUserInfo = async (req, res ) => {
-  const { status, code, message } = await PutUserInfo({ ...req.body, id:req.params.id});
+  const { status, code, message } = await password({ ...req.body, req:req});
   res.status(code).json({ code, status, message });
 };
 
