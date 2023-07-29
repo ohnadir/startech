@@ -29,8 +29,8 @@ import {
     CLEAR_ERRORS
 } from '../constants/users'
 
-// const baseURL = ("https://startech-server.vercel.app/api/v1/users")
-const baseURL = ("http://localhost:5001/api/v1/users")
+const baseURL = ("https://startech-server.vercel.app/api/v1/users")
+// const baseURL = ("http://localhost:5001/api/v1/users")
 
 // Login
 export const login = (auth) => async (dispatch) => {

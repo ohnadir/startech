@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { HiHome } from 'react-icons/hi';
 import { FiFilter } from 'react-icons/fi';
 import { MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowUp } from 'react-icons/md';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import "./CategoryProduct.scss";
 import { Drawer, Slider } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,7 +16,6 @@ const CategoryProduct = () => {
     const [sortCard, setSortCard] = useState(false)
     const [value, setValue] = useState([0, 100]);
     const [collapse, setCollapse] = useState(true)
-    const navigate = useNavigate()
     const dispatch = useDispatch()
     const { products, loading } = useSelector(state=> state.searchProduct);
     const keyword = ''
