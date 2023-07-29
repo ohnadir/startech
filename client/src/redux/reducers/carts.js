@@ -5,8 +5,6 @@ import {
     REMOVE_ITEM_CART
 } from '../constants/carts'
 
-const data =JSON.parse(localStorage.getItem('shopping-cart'))
-
 export const cartReducer = (state = { cartItems: []}, action) => {
     switch (action.type) {
         case GET_CART:

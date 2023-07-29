@@ -6,6 +6,9 @@ import {
     PRODUCT_DETAILS_REQUEST,
     PRODUCT_DETAILS_SUCCESS,
     PRODUCT_DETAILS_FAIL,
+    SEARCH_PRODUCT_REQUEST,
+    SEARCH_PRODUCT_SUCCESS,
+    SEARCH_PRODUCT_FAIL,
     CLEAR_ERRORS
 } from '../constants/products';
 
@@ -23,7 +26,7 @@ export const getProducts = (page, size) => async (dispatch) => {
 
         let link = (`${baseURL}?page=${page}&size=${size}`)
 
-        const { data } = await axios.get(link)
+        const { data } = await axios.get(link, config)
         dispatch({
             type: ALL_PRODUCTS_SUCCESS,
             payload: data
@@ -36,6 +39,37 @@ export const getProducts = (page, size) => async (dispatch) => {
         })
     }
 }
+
+
+export const getFilterProducts = (keyword = '', category ) => async (dispatch) => {
+    try {
+
+        dispatch({ type: SEARCH_PRODUCT_REQUEST })
+        const config = {
+            headers: { 'Content-Type' : 'application/json' },
+            withCredentials: true
+        }
+        let data; 
+        if(keyword){
+            data = await axios.get(`${baseURL}/search?keyword=${keyword} `, config)
+        }
+        if(category){
+            data = await axios.get(`${baseURL}/search?keyword=${keyword}&category=${category}`, config)
+        }
+        console.log(data);
+        dispatch({
+            type: SEARCH_PRODUCT_SUCCESS,
+            payload: data.data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: SEARCH_PRODUCT_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
 
 export const getProductDetails = (id) => async (dispatch) => {
     try {

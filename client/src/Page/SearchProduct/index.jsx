@@ -1,28 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './SearchProduct.scss'
 import { HiHome } from 'react-icons/hi';
 import { Link, useNavigate } from 'react-router-dom';
-import { Spin } from 'antd';
+import { getFilterProducts } from "../../redux/actions/products"
+import { useDispatch, useSelector } from "react-redux"
+import Loader from '../../Component/Loader';
+import SEO from '../../Component/SEO';
 
 const SearchProduct = () => {
     const { keyword } = useParams();
     const navigate = useNavigate()
-    const [searchProduct, setSearchProduct] = useState([]);
-    /* useEffect(() => {
-        fetch(`https://startech-server.vercel.app/api/v1/products/search?keyword=${keyword}`)
-        .then((response) => response.json())
-        .then((data) => {
-            setSearchProduct(data?.products)
-        });
-    }, [keyword]); */
+    const dispatch = useDispatch()
+    const { products, loading } = useSelector(state=> state.searchProduct);
+    useEffect(() => {
+        dispatch(getFilterProducts(keyword))
+    }, [ dispatch, keyword ]);
     return (
         <>
             {
-                searchProduct === [] ?
-                    <div className='w-full h-screen flex items-center justify-center'><Spin/></div>
+                loading
+                ?
+                <Loader/>
                 :
                     <div className='max-w-7xl mx-auto  SearchProduct'>
+                        <SEO title={"Search Product"} />
                         <div className='p-5'>
                             <div className='navigate'>
                                 <HiHome onClick={()=>navigate('/')} className='text-[#666] cursor-pointer'/> <span>/</span> 
@@ -31,7 +33,7 @@ const SearchProduct = () => {
                             <h1 className='p-4 font-semibold searchHeader m-0 my-5'>Search - {keyword}</h1>
                             <div className='grid grid-flow-col-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5'>
                                 {
-                                    searchProduct?.map(product =>
+                                    products?.map(product =>
                                         <Link to={`/productDetail/${product._id}`}>
                                             <div key={product._id} className="searchProduct">
                                                 <div className='p-4'>

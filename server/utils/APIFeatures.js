@@ -4,10 +4,10 @@ class APIFeatures {
         this.queryString = queryString;
     }
     search() {
-        const q = this.queryString.keyword;
+        const keyword = this.queryString.keyword;
         let query = {};
-        if (q !== 'undefined' || q !== undefined || q) {
-            let regex = new RegExp(q, 'i');
+        if (keyword !== 'undefined' || keyword !== undefined || keyword) {
+            let regex = new RegExp(keyword, 'i');
             query = {
             ...query,
             $or: [{ name: regex }]
@@ -26,7 +26,6 @@ class APIFeatures {
 
         // Advance filter for price, ratings etc
         let queryStr = JSON.stringify(queryCopy)
-        queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g, match => `$${match}`)
 
 
         this.query = this.query.find(JSON.parse(queryStr));

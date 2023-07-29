@@ -80,7 +80,7 @@ function App() {
         }></Route>
         <Route path="/search/:keyword" element={<SearchProduct/>} />
         <Route path="/compareProduct" element={<CompareProduct/>} />
-        <Route path="/categoryProduct/:keyword" element={<CategoryProduct/>} />
+        <Route path="/categoryProduct/:category" element={<CategoryProduct/>} />
         <Route path="/brandProduct/:keyword" element={<BrandProduct/>} />
         <Route path='*' element={<NotFoundPage/>}></Route>
       </Routes>

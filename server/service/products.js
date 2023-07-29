@@ -61,9 +61,11 @@ exports.SearchProduct= async ({ q }) => {
     };
   
     try {
+        console.log(q)
         const apiFeatures = new APIFeatures(Product.find(), q).search().filter()
   
-        const data = await apiFeatures.query
+        const data = await apiFeatures.query;
+        console.log(data);
         if (data.length === 0) {
             response.code = 404;
             response.status = 'failed';
