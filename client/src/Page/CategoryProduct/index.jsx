@@ -27,9 +27,6 @@ const CategoryProduct = () => {
     const onAfterChange = (value) => {
         setValue(value);
     };
-    const handleBrandName = (name)=>{
-        navigate(`/brandProduct/${name}`)
-    }
 
     //  function for duplicate brand name filtering 
     const name = [];
@@ -58,8 +55,8 @@ const CategoryProduct = () => {
                         <ul>
                             {
                                 newBrandName?.map((item, index)=> 
-                                    <Link style={{color: "black"}} key={item._id} to={`/brandProduct/${item}` }>
-                                        <li key={index} onClick={()=>handleBrandName(item)}>{item}</li>
+                                    <Link style={{color: "black"}} key={index} to={`/brandProduct/${item}` }>
+                                        <li>{item}</li>
                                     </Link>
                                 )
                             }
@@ -151,7 +148,7 @@ const CategoryProduct = () => {
                             {
                                 products?.map((product)=>
                                     <Link key={product._id} to={`/productDetails/${product._id}` }>
-                                        <div className='category-product'>
+                                        <div className='single-product'>
                                             <div className='img-container'>
                                                 <img src={product?.productPictures[0].img} alt="" />
                                             </div>

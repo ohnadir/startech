@@ -4,65 +4,76 @@ import { HiHome } from 'react-icons/hi';
 import { FiFilter } from 'react-icons/fi';
 import { MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowUp } from 'react-icons/md';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import "../CategoryProduct/CategoryProduct.scss";
+import "./BrandProduct.scss";
 import { Drawer, Slider } from 'antd';
+import SEO from '../../Component/SEO';
+import { useDispatch, useSelector } from 'react-redux';
+import { getFilterProducts } from "../../redux/actions/products"
 
 const BrandProduct = () => {
-    const { keyword } = useParams();
+    const { brand } = useParams();
     const [searchProduct, setSearchProduct] = useState([]);
     const [open, setOpen] = useState(false);
     const [sortCard, setSortCard] = useState(false)
     const [value, setValue] = useState([0, 100]);
     const [collapse, setCollapse] = useState(true)
-    const navigate = useNavigate();
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const { products, loading } = useSelector(state=> state.searchProduct);
+    const keyword = ''
+    const category = ''
+    useEffect(() => {
+        dispatch(getFilterProducts(keyword, category, brand))
+    }, [ dispatch, brand ]);
 
     const onAfterChange = (value) => {
         setValue(value);
     };
-
-    /* useEffect(() => {
-        axios.get(`https://startech-server.vercel.app/api/v1/products/search?brand=${keyword}`)
-            .then(function (response) {
-                setSearchProduct(response.data.products)
-            })
-    }, [keyword]); */
     return (
-        <div className='max-w-7xl mx-auto categoryProductContainer'>
-            <header className='py-5'>
-                <div className='navigate'>
-                    <HiHome onClick={()=>navigate('/')} className='text-[#666] cursor-pointer'/> <span>/</span><span>{ keyword }</span>
-                </div>
+        <div className='brand-product'>
+            <SEO title={"Brand Product"} />
+            <header className='brand-product-header'>
+                <Link style={{color: "black"}}  to='/'>
+                    <HiHome className='home-icon'/>
+                </Link>
+                <span>/</span>
+                <span>Brand Product</span>
+                <span>/</span>
+                <span className='capitalize'>{ brand }</span>
             </header>
-            <section className="filter lg:hidden">
-                <div className='flex items-center justify-between'>
-                    <div className='filterContainer' onClick={()=> setOpen(true)}>
-                        <FiFilter className='text-[18px] font-bold' />
-                        <p className='m-0'>Filter</p>
+            <section className="filter-container">
+                <div className='filter' onClick={()=> setOpen(true)}>
+                    <FiFilter className='text-[18px] font-bold' />
+                    <p className='m-0'>Filter</p>
+                </div>
+                <div className='sort'>
+                    <p className='sort-title'>Sort By:</p>
+                    <div className='sort-container' onClick={()=>setSortCard(!sortCard)}>
+                        <p>Default</p>
+                        {
+                            sortCard
+                            ?
+                            <MdOutlineKeyboardArrowDown className='icon'/>
+                            :
+                            <MdOutlineKeyboardArrowUp className='icon'/>
+                        }
                     </div>
-                    <div className='flex items-center gap-2'>
-                        <p className='m-0'>Sort By:</p>
-                        <div className='relative'>
-                            <div className='sortContainer' onClick={()=>setSortCard(!sortCard)}>
-                                <p className='m-0 text-[13px] font-semibold'>Default</p>
-                                <MdOutlineKeyboardArrowDown className='text-[20px] ml-5'/>
-                            </div>
-                            {
-                               sortCard &&
-                                <div className='sortCard'>
-                                    <ul className='m-0'>
-                                        <li>Default</li>
-                                        <li>Price (Low &gt; High)</li>
-                                        <li>Price (Hight &gt; Low)</li>
-                                    </ul>
-                                </div>
-                            }
-                            
+                    {
+                        sortCard
+                        &&
+                        <div className='price-sort'>
+                            <ul>
+                                <li>Default</li>
+                                <li>Price (Low &gt; High)</li>
+                                <li>Price (Hight &gt; Low)</li>
+                            </ul>
                         </div>
-                    </div>
+                    }
                 </div>
             </section>
-            <section className='product flex gap-5'>
-                <div className='w-[20%] m-0 p-0 hidden lg:block'>
+
+            <section className='products'>
+                <aside className='border'>
                     <div className='drawer p-[10px] lg:p-0'>
                         <div className="rangeContainer">
                             <h1 className='m-0 px-[15px] pt-[15px] text-lg font-semibold'>Price Range</h1>
@@ -89,7 +100,6 @@ const BrandProduct = () => {
                                             <MdOutlineKeyboardArrowUp onClick={()=>setCollapse(!collapse)} className='text-[23px] cursor-pointer' /> 
                                         :
                                         <MdOutlineKeyboardArrowDown onClick={()=>setCollapse(!collapse)} className='text-[23px] cursor-pointer' />
-
                                     }
                             </div>
                             <div className='filterDivider'></div>
@@ -111,18 +121,18 @@ const BrandProduct = () => {
                                 </div>
                             }
                         </div>
-                        </div>
                     </div>
-                <div className='grid grid-cols-1 w-full lg:w-[80%] sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5'>
+                </aside>
+                <div className='products-container'>
                     {
-                        searchProduct?.map((product)=>
-                            <Link to={`/productDetail/${product._id}` }>
-                                <div key={product._id}  className='w-[300px] md:w-fit mx-auto singleProduct'>
-                                    <div className='px-5 pt-5'>
+                        products?.map((product)=>
+                            <Link key={product._id} to={`/productDetails/${product._id}` }>
+                                <div className='single-product'>
+                                    <div className='img-container'>
                                         <img src={product?.productPictures[0].img} alt="" />
                                     </div>
                                     <div className='divider'></div>
-                                    <div className='p-5 flex flex-col justify-between'>
+                                    <div className='mt-4 flex px-3 flex-col justify-between'>
                                         <h3 className='text-[15px] font-[400]'>{product.name}</h3>
                                         <p className='text-[#ef4a23] text-[17px] font-[600]'>{product?.price} ৳</p>
                                     </div>
@@ -131,7 +141,6 @@ const BrandProduct = () => {
                         )
                     }
                 </div>
-                
             </section>
             
             <section className='drawer'>

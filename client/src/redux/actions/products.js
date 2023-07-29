@@ -41,7 +41,7 @@ export const getProducts = (page, size) => async (dispatch) => {
 }
 
 
-export const getFilterProducts = (keyword = '', category ) => async (dispatch) => {
+export const getFilterProducts = (keyword = '', category, brand ) => async (dispatch) => {
     try {
 
         dispatch({ type: SEARCH_PRODUCT_REQUEST })
@@ -55,6 +55,9 @@ export const getFilterProducts = (keyword = '', category ) => async (dispatch) =
         }
         if(category){
             data = await axios.get(`${baseURL}/search?keyword=${keyword}&category=${category}`, config)
+        }
+        if(brand){
+            data = await axios.get(`${baseURL}/search?brand=${brand}`, config)
         }
         console.log(data);
         dispatch({

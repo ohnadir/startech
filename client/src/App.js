@@ -81,7 +81,7 @@ function App() {
         <Route path="/search/:keyword" element={<SearchProduct/>} />
         <Route path="/compareProduct" element={<CompareProduct/>} />
         <Route path="/categoryProduct/:category" element={<CategoryProduct/>} />
-        <Route path="/brandProduct/:keyword" element={<BrandProduct/>} />
+        <Route path="/brandProduct/:brand" element={<BrandProduct/>} />
         <Route path='*' element={<NotFoundPage/>}></Route>
       </Routes>
       <ToastContainer/>
