@@ -8,12 +8,15 @@ import logo from '../../assets/logo.png';
 import { Drawer } from 'antd';
 import { MdOutlineClose } from 'react-icons/md';
 import { MdAssignment } from 'react-icons/md';
-import { getStoredCart, RemoveFromCart } from '../../utils/cart';
+import { decreaseCartQuantity, addItemToCart, removeItemFromCart, getCart } from "../../redux/actions/carts"
+import { useDispatch, useSelector } from "react-redux"
+
 const Navbar = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch()
+    const { cartItems } = useSelector(state => state.cart);
     const [open, setOpen] = useState(false)
     const [cartOpen, setCartOpen] = useState(false)
-    const [storedCart, setStoredCart] = useState()
     const [keyword, setKeyword] = useState('');
     const handleSearch=()=>{
         if(keyword){
@@ -22,18 +25,25 @@ const Navbar = () => {
     }
     
     useEffect(()=>{
-        const data = getStoredCart();
-        setStoredCart(data);
-    }, [])
-    console.log(storedCart)
-    const HandleRemove= (item)=>{
-        RemoveFromCart(item);
+        dispatch(getCart());
+    }, [ dispatch])
+
+
+    const HandleRemove= (id)=>{
+        dispatch(removeItemFromCart(id))
     }
+    const handleDecreaseQuantity= (id)=>{
+        dispatch(decreaseCartQuantity(id));
+    }
+    const handleIncreaseQuantity= (data)=>{
+        dispatch(addItemToCart(data));
+    }
+
     const handleCheckout=()=>{
         setCartOpen(false)
         navigate('/checkout')
     }
-    const total = storedCart?.reduce((n, {price, quantity}) => n + parseInt(price) * parseInt(quantity), 0)
+    const total = cartItems?.reduce((n, {price, quantity}) => n + parseInt(price) * parseInt(quantity), 0)
     return (
         <div className='navbar'>
             <div className='navbar-container'>
@@ -49,7 +59,7 @@ const Navbar = () => {
                     <div className="cart-container">
                         <BsCartCheckFill onClick={()=>setCartOpen(true)} className='cursor-pointer text-2xl text-white' />
                         <div className="cart-counter">
-                            <p> { storedCart ? storedCart?.length : 0 } </p>
+                            <p> { cartItems ? cartItems?.length : 0 } </p>
                         </div>
                     </div>
                     <CgProfile onClick={()=>navigate('/profile')} size={28} className='cursor-pointer text-white' />
@@ -80,7 +90,7 @@ const Navbar = () => {
                     </div>
                     <div className='drawer-body'>
                         {
-                            storedCart === undefined
+                            cartItems?.length === 0
                             ?
                             <div className='empty-cart-container'>
                                 <div>
@@ -94,10 +104,10 @@ const Navbar = () => {
                             <div className='cart-products'>
                                 <div className='cart-products-container'>
                                     {
-                                        storedCart?.map((item)=> 
+                                        cartItems?.map((item)=> 
                                             <div key={item.id}>
                                                 <div className='cart-product'>
-                                                    <img src={item.image.img} alt="" />
+                                                    <img src={item.image} alt="" />
                                                     <div className='product-info'>
                                                         <h1>{item?.name}</h1>
                                                         <div className='flex items-center justify-between w-full mt-2'>
@@ -105,11 +115,11 @@ const Navbar = () => {
                                                                 <h1>৳ {item?.price} X {item?.quantity}</h1>
                                                             </div>
                                                             <div className="btn-container flex">
-                                                                <button>-</button>
+                                                                <button onClick={()=>handleDecreaseQuantity(item?.id)}>-</button>
                                                                 <button>{item?.quantity}</button>
-                                                                <button>+</button>
+                                                                <button onClick={()=>handleIncreaseQuantity(item)}>+</button>
                                                             </div>
-                                                            <button className='close-icon' onClick={()=>HandleRemove(item)}><MdOutlineClose /></button>
+                                                            <button className='close-icon' onClick={()=>HandleRemove(item.id)}><MdOutlineClose /></button>
                                                         </div>
                                                     </div>
                                                 </div>

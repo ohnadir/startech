@@ -14,6 +14,7 @@ import { useParams  } from 'react-router-dom';
 import { addToCart } from '../../utils/cart';
 import { useDispatch, useSelector } from 'react-redux'
 import { getProductDetails, clearErrors } from '../../redux/actions/products'
+import { addItemToCart } from '../../redux/actions/carts'
 import image from "../../assets/images.png"
 import RelatedProduct from '../../Component/RelatedProduct';
 import { message } from 'antd';
@@ -32,7 +33,9 @@ const ProductDetails=()=> {
     const { id } = useParams();
     const dispatch = useDispatch();
     const { loading, error, product } = useSelector(state => state.productDetails);
-    const [selectedImg, setSelectedImg] = useState(image);
+
+    const { cartItems } = useSelector(state => state.cart);
+    const [selectedImg, setSelectedImg] = useState(product?.productPictures[0]?.img);
 
     useEffect(() => {
         dispatch(getProductDetails(id))
@@ -45,17 +48,16 @@ const ProductDetails=()=> {
         const data = {
             id:product?._id,
             name: product?.name,
-            image : product?.productPictures[0],
+            image : product?.productPictures[0].img,
             price: product?.price,
             quantity : count,
             total: Number(product?.price) * Number(count)
         }
         if(data){
             messageApi.info("Product added cart");
-            addToCart(data)
+            dispatch(addItemToCart(data))
         }
     }
-    
     return (
         <>
             {contextHolder}
