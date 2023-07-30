@@ -18,6 +18,8 @@ app.use(cors({
   credentials : true,
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
 }));
+
+app.use(express.urlencoded({ extended:true})) 
 app.use(morgan("dev"));
 
 
