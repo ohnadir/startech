@@ -41,8 +41,7 @@ export const login = (auth) => async (dispatch) => {
             withCredentials: true
         }
 
-        const { data } = await axios.post('api/v1/users/login', auth, config)
-        console.log(data);
+        const { data } = await axios.post(`${baseURL}/login`, auth, config)
         dispatch({
             type: LOGIN_SUCCESS,
             payload: data
