@@ -37,7 +37,9 @@ export const login = (auth) => async (dispatch) => {
     try {
         dispatch({ type: LOGIN_REQUEST })
         const config = {
-            headers: { 'Content-Type' : 'application/json' },
+            headers: {
+                'Content-Type' : 'application/json'
+            },
             withCredentials: true
         }
 

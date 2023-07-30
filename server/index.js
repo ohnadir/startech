@@ -19,6 +19,8 @@ app.use(cors({
   optionSuccessStatus: 200,
   methods : ["GET", "POST", "PUT", "PATCH", "DELETE"]
 }));
+
+app.use( express.urlencoded({extended:true}) ) 
 app.use(morgan("dev"));
 
 
