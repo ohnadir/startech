@@ -13,9 +13,10 @@ connectDb();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use("*", cors({
+app.use(cors({
   origin: ['https://startech-server.vercel.app'],
-  credentials : true
+  credentials : true,
+  methods : ["GET", "POST", "PUT", "PATCH", "DELETE"]
 }));
 app.use(morgan("dev"));
 
