@@ -29,8 +29,8 @@ import {
     CLEAR_ERRORS
 } from '../constants/users'
 
-const baseURL = ("https://startech-server.vercel.app/api/v1/users")
-// const baseURL = ("http://localhost:5001/api/v1/users")
+// const baseURL = ("https://startech-server.vercel.app/api/v1/users")
+const baseURL = ("http://localhost:5001/api/v1/users")
 
 // Login
 export const login = (auth) => async (dispatch) => {
@@ -38,8 +38,10 @@ export const login = (auth) => async (dispatch) => {
         dispatch({ type: LOGIN_REQUEST })
         const config = {
             headers: {
-                'Access-Control-Allow-Origin' : "https://startech-server.vercel.app",
                 "Access-Control-Allow-Credentials" : "true",
+                "Access-Control-Allow-Origin" : "*",
+                "Access-Control-Allow-Methods" : "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+                "Access-Control-Allow-Headers" : "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
                 'Content-Type' : 'application/json'
             },
             withCredentials: true
@@ -162,6 +164,10 @@ export const loadUser = () => async (dispatch) => {
         dispatch({ type: LOAD_USER_REQUEST })
         const config = {
             headers: { 
+                "Access-Control-Allow-Credentials" : "true",
+                "Access-Control-Allow-Origin" : "*",
+                "Access-Control-Allow-Methods" : "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+                "Access-Control-Allow-Headers" : "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
                 'Content-Type' : 'application/json'
              },
             withCredentials: true
