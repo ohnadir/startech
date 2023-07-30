@@ -37,7 +37,11 @@ export const login = (auth) => async (dispatch) => {
     try {
         dispatch({ type: LOGIN_REQUEST })
         const config = {
-            headers: {'Content-Type' : 'application/json'},
+            headers: {
+                'Access-Control-Allow-Origin' : "https://startech-server.vercel.app",
+                "Access-Control-Allow-Credentials" : "true",
+                'Content-Type' : 'application/json'
+            },
             withCredentials: true
         }
 
@@ -157,7 +161,9 @@ export const loadUser = () => async (dispatch) => {
 
         dispatch({ type: LOAD_USER_REQUEST })
         const config = {
-            headers: { 'Content-Type' : 'application/json' },
+            headers: { 
+                'Content-Type' : 'application/json'
+             },
             withCredentials: true
         }
         const { data } = await axios.get(`${baseURL}/me`, config)
