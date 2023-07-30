@@ -37,13 +37,11 @@ export const login = (auth) => async (dispatch) => {
     try {
         dispatch({ type: LOGIN_REQUEST })
         const config = {
-            headers: {
-                'Content-Type' : 'application/json'
-            },
+            headers: {'Content-Type' : 'application/json'},
             withCredentials: true
         }
 
-        const { data } = await axios.post(`${baseURL}/login`, auth, config)
+        const { data } = await axios.post('api/v1/users/login', auth, config)
         console.log(data);
         dispatch({
             type: LOGIN_SUCCESS,
