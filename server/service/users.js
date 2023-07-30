@@ -61,7 +61,7 @@ exports.Login = async ({ email, password, res }) => {
             response.message = 'Incorrect password';
             return response;
         }
-
+        console.log(user.getToken())
         sendToken(user, res)
         response.user = user;
         return response
