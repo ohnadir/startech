@@ -155,14 +155,15 @@ export const singleUser = (id) => async (dispatch) => {
 
 
 // Load user
-export const loadUser = () => async (dispatch) => {
+export const loadUser = (token) => async (dispatch) => {
 
     // console.log(JSON.parse(Cookies.get('token')))
     try {
         dispatch({ type: LOAD_USER_REQUEST })
         const config = {
             headers: {'Content-Type' : 'application/json'},
-            withCredentials: true
+            withCredentials: true,
+            "token" : token
         }
         const { data } = await axios.get(`${baseURL}/me`, config)
         dispatch({

@@ -25,11 +25,10 @@ import Cookies from 'js-cookie'
 function App() {
   const dispatch = useDispatch();
 
+  const token =  Cookies.get('token');
   useEffect(()=>{
-    dispatch(loadUser());
-  },[dispatch]);
-  const token =  Cookies.get('token')
-  console.log(token);
+    dispatch(loadUser(token));
+  },[dispatch, token]);
   return (
     <div>
       <Navbar/>
