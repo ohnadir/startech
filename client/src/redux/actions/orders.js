@@ -15,8 +15,8 @@ import {
     CLEAR_ERRORS
 } from "../constants/orders";
 
-const baseURL = "https://startech-server.vercel.app/api/v1/orders";
-// const baseURL = "http://localhost:5001/api/v1/orders";
+// const baseURL = "https://startech-server.vercel.app/api/v1/orders";
+const baseURL = "http://localhost:5001/api/v1/orders";
 
 export const newOrder = (order) => async (dispatch) => {
     try {

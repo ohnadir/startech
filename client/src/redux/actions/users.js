@@ -29,8 +29,9 @@ import {
     CLEAR_ERRORS
 } from '../constants/users'
 
-const baseURL = ("https://startech-server.vercel.app/api/v1/users")
-// const baseURL = ("http://localhost:5001/api/v1/users")
+import Cookies from 'js-cookie'
+// const baseURL = ("https://startech-server.vercel.app/api/v1/users")
+const baseURL = ("http://localhost:5001/api/v1/users")
 
 // Login
 export const login = (auth) => async (dispatch) => {
@@ -41,7 +42,8 @@ export const login = (auth) => async (dispatch) => {
             withCredentials: true
         }
 
-        const { data } = await axios.post(`${baseURL}/login`, auth, config)
+        const { data } = await axios.post(`${baseURL}/login`, auth, config);
+        Cookies.set('token', data.token, { expires: 7 })
         dispatch({
             type: LOGIN_SUCCESS,
             payload: data
@@ -50,7 +52,7 @@ export const login = (auth) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: LOGIN_FAIL,
-            payload: error.response.data.message
+            payload: error?.response?.data?.message
         })
     }
 }
@@ -66,6 +68,7 @@ export const register = (userData) => async (dispatch) => {
         }
 
         const { data } = await axios.post(`${baseURL}/signup`, userData, config)
+        Cookies.set('token', data.token, { expires: 7 })
         dispatch({
             type: REGISTER_USER_SUCCESS,
             payload: data
@@ -82,14 +85,12 @@ export const register = (userData) => async (dispatch) => {
 // update user
 export const update = (userData) => async (dispatch) => {
     try {
-        console.log(userData);
         dispatch({ type: UPDATE_PROFILE_REQUEST })
         const config = {
             headers: { 'Content-Type' : 'application/json' },
             withCredentials: true
         }
         const { data } = await axios.patch(`${baseURL}/update`, userData, config)
-        console.log(data);
         dispatch({
             type: UPDATE_PROFILE_SUCCESS,
             payload: data
@@ -234,6 +235,7 @@ export const logout = () => async (dispatch) => {
             withCredentials: true
         }
         await axios.get(`${baseURL}/logout`, config);
+        Cookies.remove('token')
         dispatch({
             type: LOGOUT_SUCCESS,
         })

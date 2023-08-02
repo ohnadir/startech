@@ -26,8 +26,7 @@ exports.registration = async ({ body, email, phone, res }) => {
         }
 
         const user = await User.create(body);
-        sendToken(user, res)
-
+        response.token = user.getJwtToken();
         response.user = user;
         return response;
          
@@ -47,6 +46,7 @@ exports.Login = async ({ email, password, res }) => {
     };
   
     try {
+        console.log(email, password)
         const user = await User.findOne({email : email});
         if (!user) {
             response.code = 404;
@@ -61,7 +61,8 @@ exports.Login = async ({ email, password, res }) => {
             response.message = 'Incorrect password';
             return response;
         }
-        sendToken(user, res)
+        // sendToken(user, res)
+        response.token = user.getJwtToken();
         response.user = user;
         return response
     } catch (error) {
