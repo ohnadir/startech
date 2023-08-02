@@ -13,11 +13,7 @@ connectDb();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({
-  origin: '*',
-  credentials : true,
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-}));
+app.use(cors());
 
 app.use(express.urlencoded({ extended:true})) 
 app.use(morgan("dev"));

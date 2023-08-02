@@ -87,7 +87,7 @@ export const update = (userData) => async (dispatch) => {
     try {
         dispatch({ type: UPDATE_PROFILE_REQUEST })
         const config = {
-            headers: { 'Content-Type' : 'application/json' },
+            headers: {'Content-Type' : 'application/json'},
             withCredentials: true
         }
         const { data } = await axios.patch(`${baseURL}/update`, userData, config)
@@ -109,7 +109,7 @@ export const allUser = () => async (dispatch) => {
     try {
         dispatch({ type: ALL_USERS_REQUEST })
         const config = {
-            headers: { 'Content-Type' : 'application/json' },
+            headers: {'Content-Type' : 'application/json'},
             withCredentials: true
         }
         const { data } = await axios.get(`${baseURL}`, config)
@@ -132,7 +132,7 @@ export const singleUser = (id) => async (dispatch) => {
     try {
         dispatch({ type: USER_DETAILS_REQUEST })
         const config = {
-            headers: { 'Content-Type' : 'application/json' },
+            headers: {'Content-Type' : 'application/json'},
             withCredentials: true
         }
         const { data } = await axios.get(`${baseURL}/${id}`, config)
@@ -158,13 +158,7 @@ export const loadUser = () => async (dispatch) => {
 
         dispatch({ type: LOAD_USER_REQUEST })
         const config = {
-            headers: { 
-                "Access-Control-Allow-Credentials" : "true",
-                "Access-Control-Allow-Origin" : "*",
-                "Access-Control-Allow-Methods" : "GET,OPTIONS,PATCH,DELETE,POST,PUT",
-                "Access-Control-Allow-Headers" : "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
-                'Content-Type' : 'application/json'
-             },
+            headers: {'Content-Type' : 'application/json'},
             withCredentials: true
         }
         const { data } = await axios.get(`${baseURL}/me`, config)
