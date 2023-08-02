@@ -11,6 +11,7 @@ import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 import { Provider } from 'react-redux'
 import store from './redux/store'
+import { CookiesProvider } from 'react-cookie';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const stripePromise = loadStripe('pk_test_51MJynOHzN4rqAg27o1nDk5hQeHaX8cuaBkInxAzGMEnEqee4QMyeztVLqyeuAhzgK9ZRdwPAF8uWFrRX2Qj8iuQ9005XC9m0sA');
 
@@ -20,7 +21,9 @@ root.render(
     <BrowserRouter>
     <Provider store={store} >
       <Elements stripe={stripePromise}>
-        <App />
+        <CookiesProvider>
+          <App />
+        </CookiesProvider>
       </Elements>
       </Provider>
     </BrowserRouter>

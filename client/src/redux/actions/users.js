@@ -1,3 +1,4 @@
+
 import axios from 'axios'
 import {
     LOGIN_REQUEST,
@@ -29,10 +30,9 @@ import {
     CLEAR_ERRORS
 } from '../constants/users'
 
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
 const baseURL = ("https://startech-server.vercel.app/api/v1/users")
 // const baseURL = ("http://localhost:5001/api/v1/users")
-
 // Login
 export const login = (auth) => async (dispatch) => {
     try {
@@ -88,7 +88,8 @@ export const update = (userData) => async (dispatch) => {
         dispatch({ type: UPDATE_PROFILE_REQUEST })
         const config = {
             headers: {'Content-Type' : 'application/json'},
-            withCredentials: true
+            withCredentials: true,
+            'token':  Cookies.get('token')
         }
         const { data } = await axios.patch(`${baseURL}/update`, userData, config)
         dispatch({
@@ -110,7 +111,8 @@ export const allUser = () => async (dispatch) => {
         dispatch({ type: ALL_USERS_REQUEST })
         const config = {
             headers: {'Content-Type' : 'application/json'},
-            withCredentials: true
+            withCredentials: true,
+            'token': Cookies.get('token')
         }
         const { data } = await axios.get(`${baseURL}`, config)
         
@@ -133,7 +135,8 @@ export const singleUser = (id) => async (dispatch) => {
         dispatch({ type: USER_DETAILS_REQUEST })
         const config = {
             headers: {'Content-Type' : 'application/json'},
-            withCredentials: true
+            withCredentials: true,
+            'token': Cookies.get('token')
         }
         const { data } = await axios.get(`${baseURL}/${id}`, config)
         
@@ -154,8 +157,8 @@ export const singleUser = (id) => async (dispatch) => {
 // Load user
 export const loadUser = () => async (dispatch) => {
 
+    // console.log(JSON.parse(Cookies.get('token')))
     try {
-
         dispatch({ type: LOAD_USER_REQUEST })
         const config = {
             headers: {'Content-Type' : 'application/json'},
@@ -182,7 +185,8 @@ export const changePassword = ( userData) => async (dispatch) => {
         dispatch({ type: USER_PASSWORD_CHANGE_REQUEST })
         const config = {
             headers: { 'Content-Type' : 'application/json' },
-            withCredentials: true
+            withCredentials: true,
+            'token': Cookies.get('token')
         }
         const { data } = await axios.patch(`${baseURL}/change`, userData, config)
         
@@ -204,7 +208,8 @@ export const putUserInfo = ( userData) => async (dispatch) => {
         dispatch({ type: PUT_USER_INFO_REQUEST })
         const config = {
             headers: { 'Content-Type' : 'application/json' },
-            withCredentials: true
+            withCredentials: true,
+            'token': Cookies.get('token')
         }
         const { data } = await axios.put(`${baseURL}/info`, userData, config)
         
@@ -226,7 +231,8 @@ export const logout = () => async (dispatch) => {
 
         const config = {
             headers: { 'Content-Type' : 'application/json' },
-            withCredentials: true
+            withCredentials: true,
+            'token': Cookies.get('token')
         }
         await axios.get(`${baseURL}/logout`, config);
         Cookies.remove('token')

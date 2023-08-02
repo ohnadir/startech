@@ -4,7 +4,8 @@ const jwt = require('jsonwebtoken');
 // Checks if user is authenticated or not 
 exports.isAuthenticatedUser = async (req, res, next) => {
 
-    const { token } = req.cookies;
+    const token = req.cookies.token;
+    console.log(token)
     if (!token) {
         return res.status(401).send({message: 'UnAuthorized access'})
     }
