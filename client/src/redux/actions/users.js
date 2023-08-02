@@ -30,8 +30,8 @@ import {
 } from '../constants/users'
 
 import Cookies from 'js-cookie'
-// const baseURL = ("https://startech-server.vercel.app/api/v1/users")
-const baseURL = ("http://localhost:5001/api/v1/users")
+const baseURL = ("https://startech-server.vercel.app/api/v1/users")
+// const baseURL = ("http://localhost:5001/api/v1/users")
 
 // Login
 export const login = (auth) => async (dispatch) => {
@@ -43,7 +43,7 @@ export const login = (auth) => async (dispatch) => {
         }
 
         const { data } = await axios.post(`${baseURL}/login`, auth, config);
-        // Cookies.set('token', data.token, { expires: 7 })
+        Cookies.set('token', data.token, { expires: 7 })
         dispatch({
             type: LOGIN_SUCCESS,
             payload: data
