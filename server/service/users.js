@@ -61,7 +61,7 @@ exports.Login = async ({ email, password, res }) => {
             response.message = 'Incorrect password';
             return response;
         }
-        // sendToken(user, res)
+        sendToken(user, res)
         response.token = user.getJwtToken();
         response.user = user;
         return response

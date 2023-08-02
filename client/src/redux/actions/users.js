@@ -43,7 +43,7 @@ export const login = (auth) => async (dispatch) => {
         }
 
         const { data } = await axios.post(`${baseURL}/login`, auth, config);
-        Cookies.set('token', data.token, { expires: 7 })
+        // Cookies.set('token', data.token, { expires: 7 })
         dispatch({
             type: LOGIN_SUCCESS,
             payload: data
