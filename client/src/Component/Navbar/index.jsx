@@ -43,7 +43,8 @@ const Navbar = () => {
         setCartOpen(false)
         navigate('/checkout')
     }
-    const total = cartItems?.reduce((n, {price, quantity}) => n + parseInt(price) * parseInt(quantity), 0)
+    const total = 100
+    // const total = cartItems?.reduce((n, {price, quantity}) => n + parseInt(price) * parseInt(quantity), 0)
     return (
         <div className='navbar'>
             <div className='navbar-container'>
@@ -90,7 +91,7 @@ const Navbar = () => {
                     </div>
                     <div className='drawer-body'>
                         {
-                            cartItems?.length === 0
+                            !cartItems
                             ?
                             <div className='empty-cart-container'>
                                 <div>

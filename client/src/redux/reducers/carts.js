@@ -14,7 +14,7 @@ export const cartReducer = (state = { cartItems: []}, action) => {
             }
         case ADD_TO_CART:
             const item = action.payload;
-            const isItemExist = state.cartItems.find(i => i.id === item.id)
+            const isItemExist = state.cartItems?.find(i => i.id === item.id)
             if (isItemExist) {
                 const object = {
                     id: isItemExist.id,
@@ -26,7 +26,6 @@ export const cartReducer = (state = { cartItems: []}, action) => {
         
                 }
                 object.total = Number(isItemExist.price) *  Number(object.quantity)
-                console.log(object)
                 return {
                     ...state,
                     cartItems: [...state.cartItems.filter(i => i.id !== isItemExist.id), object]
@@ -45,7 +44,7 @@ export const cartReducer = (state = { cartItems: []}, action) => {
             }
 
         case DECREASE_QUANTITY_CART:
-            const isExist = state.cartItems.find(i => i.id === action.payload)
+            const isExist = state.cartItems?.find(i => i.id === action.payload)
             if (isExist.quantity >= 1) {
                 const object = {
                     id: isExist.id,

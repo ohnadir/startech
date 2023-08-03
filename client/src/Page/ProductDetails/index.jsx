@@ -11,11 +11,9 @@ import { Modal} from 'antd';
 import { AiFillCheckCircle } from "react-icons/ai"
 import { BsCart } from "react-icons/bs"
 import { useParams  } from 'react-router-dom';
-import { addToCart } from '../../utils/cart';
 import { useDispatch, useSelector } from 'react-redux'
 import { getProductDetails, clearErrors } from '../../redux/actions/products'
 import { addItemToCart } from '../../redux/actions/carts'
-import image from "../../assets/images.png"
 import RelatedProduct from '../../Component/RelatedProduct';
 import { message } from 'antd';
 import Loader from "../../Component/Loader"
@@ -34,7 +32,6 @@ const ProductDetails=()=> {
     const dispatch = useDispatch();
     const { loading, error, product } = useSelector(state => state.productDetails);
 
-    const { cartItems } = useSelector(state => state.cart);
     const [selectedImg, setSelectedImg] = useState(product?.productPictures[0]?.img);
 
     useEffect(() => {

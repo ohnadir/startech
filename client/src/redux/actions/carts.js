@@ -41,7 +41,7 @@ export const decreaseCartQuantity = (id) => async (dispatch, getState) => {
     localStorage.setItem('shopping-cart', JSON.stringify(getState().cart.cartItems))
 }
 
-export const getCart = () => async (dispatch, getState) => {
+export const getCart = () => async (dispatch) => {
     dispatch({
         type: GET_CART,
         payload : JSON.parse(localStorage.getItem('shopping-cart'))
