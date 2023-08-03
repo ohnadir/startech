@@ -1,4 +1,3 @@
-
 import axios from 'axios'
 import {
     LOGIN_REQUEST,
@@ -30,20 +29,26 @@ import {
     CLEAR_ERRORS
 } from '../constants/users'
 
-import Cookies from 'js-cookie';
 const baseURL = ("https://startech-server.vercel.app/api/v1/users")
-// const baseURL = ("http://localhost:5001/api/v1/users")
+
+
 // Login
 export const login = (auth) => async (dispatch) => {
     try {
         dispatch({ type: LOGIN_REQUEST })
         const config = {
-            headers: {'Content-Type' : 'application/json'},
-            withCredentials: true
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
         }
 
         const { data } = await axios.post(`${baseURL}/login`, auth, config);
-        Cookies.set('token', data.token, { expires: 7 })
+
+        if(data.token){
+            localStorage.setItem("token", JSON.stringify(data.token));
+        }
+
         dispatch({
             type: LOGIN_SUCCESS,
             payload: data
@@ -63,12 +68,18 @@ export const register = (userData) => async (dispatch) => {
         dispatch({ type: REGISTER_USER_REQUEST })
 
         const config = {
-            headers: { 'Content-Type' : 'application/json' },
-            withCredentials: true
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
         }
 
         const { data } = await axios.post(`${baseURL}/signup`, userData, config)
-        Cookies.set('token', data.token, { expires: 7 })
+
+        if(data.token){
+            localStorage.setItem("token", JSON.stringify(data.token));
+        }
+
         dispatch({
             type: REGISTER_USER_SUCCESS,
             payload: data
@@ -87,9 +98,11 @@ export const update = (userData) => async (dispatch) => {
     try {
         dispatch({ type: UPDATE_PROFILE_REQUEST })
         const config = {
-            headers: {'Content-Type' : 'application/json'},
-            withCredentials: true,
-            'token':  Cookies.get('token')
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`
+            }
         }
         const { data } = await axios.patch(`${baseURL}/update`, userData, config)
         dispatch({
@@ -110,9 +123,11 @@ export const allUser = () => async (dispatch) => {
     try {
         dispatch({ type: ALL_USERS_REQUEST })
         const config = {
-            headers: {'Content-Type' : 'application/json'},
-            withCredentials: true,
-            'token': Cookies.get('token')
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`
+            }
         }
         const { data } = await axios.get(`${baseURL}`, config)
         
@@ -134,9 +149,11 @@ export const singleUser = (id) => async (dispatch) => {
     try {
         dispatch({ type: USER_DETAILS_REQUEST })
         const config = {
-            headers: {'Content-Type' : 'application/json'},
-            withCredentials: true,
-            'token': Cookies.get('token')
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`
+            }
         }
         const { data } = await axios.get(`${baseURL}/${id}`, config)
         
@@ -155,16 +172,18 @@ export const singleUser = (id) => async (dispatch) => {
 
 
 // Load user
-export const loadUser = (token) => async (dispatch) => {
+export const loadUser = () => async (dispatch) => {
 
-    // console.log(JSON.parse(Cookies.get('token')))
     try {
         dispatch({ type: LOAD_USER_REQUEST })
         const config = {
-            headers: {'Content-Type' : 'application/json'},
-            withCredentials: true,
-            "token" : token
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`
+            }
         }
+
         const { data } = await axios.get(`${baseURL}/me`, config)
         dispatch({
             type: LOAD_USER_SUCCESS,
@@ -185,9 +204,11 @@ export const changePassword = ( userData) => async (dispatch) => {
     try {
         dispatch({ type: USER_PASSWORD_CHANGE_REQUEST })
         const config = {
-            headers: { 'Content-Type' : 'application/json' },
-            withCredentials: true,
-            'token': Cookies.get('token')
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`
+            }
         }
         const { data } = await axios.patch(`${baseURL}/change`, userData, config)
         
@@ -208,9 +229,11 @@ export const putUserInfo = ( userData) => async (dispatch) => {
     try {
         dispatch({ type: PUT_USER_INFO_REQUEST })
         const config = {
-            headers: { 'Content-Type' : 'application/json' },
-            withCredentials: true,
-            'token': Cookies.get('token')
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`
+            }
         }
         const { data } = await axios.put(`${baseURL}/info`, userData, config)
         
@@ -231,12 +254,13 @@ export const logout = () => async (dispatch) => {
     try {
 
         const config = {
-            headers: { 'Content-Type' : 'application/json' },
-            withCredentials: true,
-            'token': Cookies.get('token')
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
         }
         await axios.get(`${baseURL}/logout`, config);
-        Cookies.remove('token')
+        localStorage.removeItem("token");
         dispatch({
             type: LOGOUT_SUCCESS,
         })

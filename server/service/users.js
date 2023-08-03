@@ -1,7 +1,6 @@
 const User = require('../models/user');
-const sendToken = require("../utils/jwtToken")
 
-exports.registration = async ({ body, email, phone, res }) => {
+exports.registration = async ({ body, email, phone }) => {
     const response = {
       code: 200,
       status: 'success',
@@ -46,7 +45,6 @@ exports.Login = async ({ email, password, res }) => {
     };
   
     try {
-        console.log(email, password)
         const user = await User.findOne({email : email});
         if (!user) {
             response.code = 404;
@@ -61,7 +59,7 @@ exports.Login = async ({ email, password, res }) => {
             response.message = 'Incorrect password';
             return response;
         }
-        sendToken(user, res)
+
         response.token = user.getJwtToken();
         response.user = user;
         return response
@@ -81,9 +79,7 @@ exports.updateProfile = async ({ firstName, lastName , email, phone, req }) => {
     };
   
     try {
-        console.log("Done")
-        const id = req.user.id;
-        const user = await User.findOne({_id : id});
+        const user = await User.findOne({_id : req.user.id});
         if (!user) {
             response.code = 422;
             response.status = 'failed';
@@ -193,8 +189,7 @@ exports.password = async({ req, newPassword, oldPassword })=>{
         message: 'Change Password successfully',
     };
     try {
-        const id= req.user._id
-        const user = await User.findOne({ _id: id});
+        const user = await User.findOne({ _id: req.user.id});
         if (!user) {
             response.code = 404;
             response.status = 'failed';

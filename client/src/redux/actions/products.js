@@ -13,15 +13,16 @@ import {
 } from '../constants/products';
 
 const baseURL = ("https://startech-server.vercel.app/api/v1/products")
-// const baseURL = ("http://localhost:5001/api/v1/products")
 
 export const getProducts = (page, size) => async (dispatch) => {
     try {
 
         dispatch({ type: ALL_PRODUCTS_REQUEST })
         const config = {
-            headers: { 'Content-Type' : 'application/json' },
-            withCredentials: true
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
         }
 
         let link = (`${baseURL}?page=${page}&size=${size}`)
@@ -46,8 +47,10 @@ export const getFilterProducts = (keyword = '', category, brand ) => async (disp
 
         dispatch({ type: SEARCH_PRODUCT_REQUEST })
         const config = {
-            headers: { 'Content-Type' : 'application/json' },
-            withCredentials: true
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
         }
         let data; 
         if(keyword){
@@ -78,8 +81,10 @@ export const getProductDetails = (id) => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_DETAILS_REQUEST })
         const config = {
-            headers: { 'Content-Type' : 'application/json' },
-            withCredentials: true
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
         }
 
         const { data } = await axios.get(`${baseURL}/details/${id}`, config);

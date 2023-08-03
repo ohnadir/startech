@@ -16,7 +16,6 @@ import {
 } from "../constants/orders";
 
 const baseURL = "https://startech-server.vercel.app/api/v1/orders";
-// const baseURL = "http://localhost:5001/api/v1/orders";
 
 export const newOrder = (order) => async (dispatch) => {
     try {
@@ -24,8 +23,11 @@ export const newOrder = (order) => async (dispatch) => {
             type: ORDER_REQUEST
         })
         const config = {
-            headers: { 'Content-Type' : 'application/json' },
-            withCredentials: true
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`
+            }
         }
 
         const { data } = await axios.post(`${baseURL}`, order, config);
@@ -48,8 +50,11 @@ export const orderList = () => async (dispatch) => {
             type:ORDERS_REQUEST
         })
         const config = {
-            headers: { 'Content-Type' : 'application/json' },
-            withCredentials: true
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`
+            }
         }
 
         const { data } = await axios.get(`${baseURL}`, config);
@@ -72,10 +77,12 @@ export const orderDetails = (id) => async (dispatch) => {
             type: ORDER_DETAILS_REQUEST
         })
         const config = {
-            headers: { 'Content-Type' : 'application/json' },
-            withCredentials: true
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`
+            }
         }
-
         const { data } = await axios.get(`${baseURL}/details/${id}`, config);
         dispatch({
             type: ORDER_DETAILS_SUCCESS,
@@ -97,8 +104,11 @@ export const emailOrder = () => async (dispatch) => {
             type: EMAIL_ORDER_REQUEST
         })
         const config = {
-            headers: { 'Content-Type' : 'application/json' },
-            withCredentials: true
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`
+            }
         }
         
         const { data } = await axios.get(`${baseURL}/email`, config);

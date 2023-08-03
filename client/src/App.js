@@ -21,14 +21,13 @@ import SearchProduct from './Page/SearchProduct';
 import Invoice from './Page/Invoice';
 import MyOrder from './Page/Profile/MyOrder/MyOrder';
 import ChangePassword from './Page/Profile/ChangePassword';
-import Cookies from 'js-cookie'
 function App() {
   const dispatch = useDispatch();
 
-  const token =  Cookies.get('token');
   useEffect(()=>{
-    dispatch(loadUser(token));
-  },[dispatch, token]);
+    dispatch(loadUser());
+    
+  },[ dispatch ]);
   return (
     <div>
       <Navbar/>

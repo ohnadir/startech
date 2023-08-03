@@ -12,8 +12,10 @@ export const  makePayment = (paymentData)=> async(dispatch)=>{
     try {
         dispatch({ type: PAYMENT_PROCESS_REQUEST })
         const config = {
-            headers: { 'Content-Type' : 'application/json' },
-            withCredentials: true
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
         }
         
         const { data } = await axios.post(`${baseURL}/process`, paymentData, config)

@@ -3,8 +3,8 @@ const cors = require("cors");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
 const connectDb = require("./config");
-const cookieParser = require("cookie-parser")
 const app = express();
+
 // config dot env file
 dotenv.config();
 
@@ -12,14 +12,7 @@ dotenv.config();
 connectDb();
 
 app.use(express.json());
-app.use(cookieParser());
-app.use(cors({
-  origin: "https://startech-nu.vercel.app",
-  // origin: "http://localhost:3000",
-  credentials : true,
-  methods: ["GET", "POST", "PUT", "DELETE"],
-}));
-
+app.use(cors());
 app.use(morgan("dev"));
 
 

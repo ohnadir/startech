@@ -4,7 +4,8 @@ const jwt = require('jsonwebtoken');
 // Checks if user is authenticated or not 
 exports.isAuthenticatedUser = async (req, res, next) => {
 
-    const token = req.headers.token;
+    const authHeader = req.headers.authorization
+    const token = authHeader.split(' ')[1];
     console.log(token)
     if (!token) {
         return res.status(401).send({message: 'UnAuthorized access'})
@@ -21,7 +22,8 @@ exports.isAuthenticatedUser = async (req, res, next) => {
 // Handling users roles
 exports.authorizeRoles = (req, res, next) => {
     
-    const { token } = req.cookies;
+    const authHeader = req.headers.authorization
+    const token = authHeader.split(' ')[1];
     if (!token) {
         return res.status(401).send({message: 'UnAuthorized access'})
     }
